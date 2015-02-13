@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		E01871D91A8E1216004C617C /* Foundation+Ordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871D81A8E1216004C617C /* Foundation+Ordering.swift */; };
 		E01871DA1A8E1216004C617C /* Foundation+Ordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871D81A8E1216004C617C /* Foundation+Ordering.swift */; };
-		E01871DC1A8E141C004C617C /* Tuple+Compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DB1A8E141C004C617C /* Tuple+Compare.swift */; };
-		E01871DD1A8E141C004C617C /* Tuple+Compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DB1A8E141C004C617C /* Tuple+Compare.swift */; };
-		E01871DF1A8E149D004C617C /* Sequence+Compare_.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DE1A8E149D004C617C /* Sequence+Compare_.swift */; };
-		E01871E01A8E149D004C617C /* Sequence+Compare_.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DE1A8E149D004C617C /* Sequence+Compare_.swift */; };
-		E01871E21A8E14B7004C617C /* Optional+Compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871E11A8E14B7004C617C /* Optional+Compare.swift */; };
-		E01871E31A8E14B7004C617C /* Optional+Compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871E11A8E14B7004C617C /* Optional+Compare.swift */; };
+		E01871DC1A8E141C004C617C /* Tuple+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */; };
+		E01871DD1A8E141C004C617C /* Tuple+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */; };
+		E01871DF1A8E149D004C617C /* SequenceType+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */; };
+		E01871E01A8E149D004C617C /* SequenceType+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */; };
+		E01871E21A8E14B7004C617C /* Optional+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871E11A8E14B7004C617C /* Optional+Orderable.swift */; };
+		E01871E31A8E14B7004C617C /* Optional+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871E11A8E14B7004C617C /* Optional+Orderable.swift */; };
 		E08799651A8E0C9900369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E087996C1A8E0C9900369B48 /* AllsortsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E087996B1A8E0C9900369B48 /* AllsortsTests.swift */; };
 		E08799891A8E0DA000369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E087997D1A8E0D1900369B48 /* Allsorts.framework */; };
@@ -35,6 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E01871E71A8E1A4E004C617C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E08799501A8E0C9800369B48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E08799921A8E0DF000369B48;
+			remoteInfo = "Allsorts Demo";
+		};
 		E08799661A8E0C9900369B48 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E08799501A8E0C9800369B48 /* Project object */;
@@ -53,9 +60,9 @@
 
 /* Begin PBXFileReference section */
 		E01871D81A8E1216004C617C /* Foundation+Ordering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Ordering.swift"; sourceTree = "<group>"; };
-		E01871DB1A8E141C004C617C /* Tuple+Compare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tuple+Compare.swift"; sourceTree = "<group>"; };
-		E01871DE1A8E149D004C617C /* Sequence+Compare_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Compare_.swift"; sourceTree = "<group>"; };
-		E01871E11A8E14B7004C617C /* Optional+Compare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Compare.swift"; sourceTree = "<group>"; };
+		E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tuple+Orderable.swift"; sourceTree = "<group>"; };
+		E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Orderable.swift"; sourceTree = "<group>"; };
+		E01871E11A8E14B7004C617C /* Optional+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Orderable.swift"; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E087995E1A8E0C9800369B48 /* Allsorts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Allsorts.h; sourceTree = "<group>"; };
@@ -118,24 +125,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E01871E41A8E17D1004C617C /* Swift extensions */ = {
+		E01871E41A8E17D1004C617C /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				E01871E11A8E14B7004C617C /* Optional+Compare.swift */,
-				E01871DE1A8E149D004C617C /* Sequence+Compare_.swift */,
+				E01871E11A8E14B7004C617C /* Optional+Orderable.swift */,
+				E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */,
 				E08799BC1A8E0F2D00369B48 /* Swift+Orderable.swift */,
-				E01871DB1A8E141C004C617C /* Tuple+Compare.swift */,
+				E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */,
 			);
-			name = "Swift extensions";
+			name = Swift;
 			sourceTree = "<group>";
 		};
-		E01871E51A8E17E2004C617C /* Foundation extensions */ = {
+		E01871E51A8E17E2004C617C /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
 				E08799BF1A8E0F3F00369B48 /* Foundation+Orderable.swift */,
 				E01871D81A8E1216004C617C /* Foundation+Ordering.swift */,
 			);
-			name = "Foundation extensions";
+			name = Foundation;
+			sourceTree = "<group>";
+		};
+		E01871E61A8E1822004C617C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E01871E51A8E17E2004C617C /* Foundation */,
+				E01871E41A8E17D1004C617C /* Swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		E087994F1A8E0C9800369B48 = {
@@ -163,12 +179,11 @@
 		E087995B1A8E0C9800369B48 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				E01871E61A8E1822004C617C /* Extensions */,
 				E087995E1A8E0C9800369B48 /* Allsorts.h */,
-				E01871E51A8E17E2004C617C /* Foundation extensions */,
 				E087995D1A8E0C9800369B48 /* Info.plist */,
 				E08799B91A8E0F1300369B48 /* Orderable.swift */,
 				E08799B61A8E0F0500369B48 /* Ordering.swift */,
-				E01871E41A8E17D1004C617C /* Swift extensions */,
 			);
 			name = Source;
 			path = Allsorts;
@@ -248,6 +263,7 @@
 			);
 			dependencies = (
 				E08799671A8E0C9900369B48 /* PBXTargetDependency */,
+				E01871E81A8E1A4E004C617C /* PBXTargetDependency */,
 			);
 			name = "Allsorts iOS Tests";
 			productName = AllsortsTests;
@@ -321,6 +337,7 @@
 					};
 					E08799631A8E0C9900369B48 = {
 						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = E08799921A8E0DF000369B48;
 					};
 					E08799821A8E0DA000369B48 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -401,10 +418,10 @@
 				E08799BA1A8E0F1300369B48 /* Orderable.swift in Sources */,
 				E08799B71A8E0F0500369B48 /* Ordering.swift in Sources */,
 				E08799BD1A8E0F2D00369B48 /* Swift+Orderable.swift in Sources */,
-				E01871DC1A8E141C004C617C /* Tuple+Compare.swift in Sources */,
+				E01871DC1A8E141C004C617C /* Tuple+Orderable.swift in Sources */,
 				E08799C01A8E0F3F00369B48 /* Foundation+Orderable.swift in Sources */,
-				E01871E21A8E14B7004C617C /* Optional+Compare.swift in Sources */,
-				E01871DF1A8E149D004C617C /* Sequence+Compare_.swift in Sources */,
+				E01871E21A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
+				E01871DF1A8E149D004C617C /* SequenceType+Orderable.swift in Sources */,
 				E01871D91A8E1216004C617C /* Foundation+Ordering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,10 +441,10 @@
 				E08799BB1A8E0F1300369B48 /* Orderable.swift in Sources */,
 				E08799B81A8E0F0500369B48 /* Ordering.swift in Sources */,
 				E08799BE1A8E0F2D00369B48 /* Swift+Orderable.swift in Sources */,
-				E01871DD1A8E141C004C617C /* Tuple+Compare.swift in Sources */,
+				E01871DD1A8E141C004C617C /* Tuple+Orderable.swift in Sources */,
 				E08799C11A8E0F3F00369B48 /* Foundation+Orderable.swift in Sources */,
-				E01871E31A8E14B7004C617C /* Optional+Compare.swift in Sources */,
-				E01871E01A8E149D004C617C /* Sequence+Compare_.swift in Sources */,
+				E01871E31A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
+				E01871E01A8E149D004C617C /* SequenceType+Orderable.swift in Sources */,
 				E01871DA1A8E1216004C617C /* Foundation+Ordering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,6 +469,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E01871E81A8E1A4E004C617C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E08799921A8E0DF000369B48 /* Allsorts Demo */;
+			targetProxy = E01871E71A8E1A4E004C617C /* PBXContainerItemProxy */;
+		};
 		E08799671A8E0C9900369B48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E08799581A8E0C9800369B48 /* Allsorts iOS */;
@@ -616,6 +638,7 @@
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AllsortsTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allsorts Demo.app/Allsorts Demo";
 			};
 			name = Debug;
 		};
@@ -629,6 +652,7 @@
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AllsortsTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allsorts Demo.app/Allsorts Demo";
 			};
 			name = Release;
 		};
