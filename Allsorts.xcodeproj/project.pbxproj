@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E01871D91A8E1216004C617C /* Ordering_Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871D81A8E1216004C617C /* Ordering_Foundation.swift */; };
+		E01871DA1A8E1216004C617C /* Ordering_Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871D81A8E1216004C617C /* Ordering_Foundation.swift */; };
 		E08799651A8E0C9900369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E087996C1A8E0C9900369B48 /* AllsortsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E087996B1A8E0C9900369B48 /* AllsortsTests.swift */; };
 		E08799891A8E0DA000369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E087997D1A8E0D1900369B48 /* Allsorts.framework */; };
@@ -16,6 +18,14 @@
 		E087999F1A8E0DF000369B48 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E087999E1A8E0DF000369B48 /* Images.xcassets */; };
 		E08799A21A8E0DF000369B48 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E08799A01A8E0DF000369B48 /* LaunchScreen.xib */; };
 		E08799B51A8E0E4B00369B48 /* AllsortsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E087996B1A8E0C9900369B48 /* AllsortsTests.swift */; };
+		E08799B71A8E0F0500369B48 /* Ordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799B61A8E0F0500369B48 /* Ordering.swift */; };
+		E08799B81A8E0F0500369B48 /* Ordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799B61A8E0F0500369B48 /* Ordering.swift */; };
+		E08799BA1A8E0F1300369B48 /* Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799B91A8E0F1300369B48 /* Orderable.swift */; };
+		E08799BB1A8E0F1300369B48 /* Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799B91A8E0F1300369B48 /* Orderable.swift */; };
+		E08799BD1A8E0F2D00369B48 /* Orderable_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BC1A8E0F2D00369B48 /* Orderable_Swift.swift */; };
+		E08799BE1A8E0F2D00369B48 /* Orderable_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BC1A8E0F2D00369B48 /* Orderable_Swift.swift */; };
+		E08799C01A8E0F3F00369B48 /* Orderable_Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BF1A8E0F3F00369B48 /* Orderable_Foundation.swift */; };
+		E08799C11A8E0F3F00369B48 /* Orderable_Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BF1A8E0F3F00369B48 /* Orderable_Foundation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E01871D81A8E1216004C617C /* Ordering_Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordering_Foundation.swift; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E087995E1A8E0C9800369B48 /* Allsorts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Allsorts.h; sourceTree = "<group>"; };
@@ -51,6 +62,10 @@
 		E087999C1A8E0DF000369B48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E087999E1A8E0DF000369B48 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E08799A11A8E0DF000369B48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		E08799B61A8E0F0500369B48 /* Ordering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordering.swift; sourceTree = "<group>"; };
+		E08799B91A8E0F1300369B48 /* Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orderable.swift; sourceTree = "<group>"; };
+		E08799BC1A8E0F2D00369B48 /* Orderable_Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orderable_Swift.swift; sourceTree = "<group>"; };
+		E08799BF1A8E0F3F00369B48 /* Orderable_Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orderable_Foundation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +136,11 @@
 			children = (
 				E087995E1A8E0C9800369B48 /* Allsorts.h */,
 				E087995D1A8E0C9800369B48 /* Info.plist */,
+				E08799B61A8E0F0500369B48 /* Ordering.swift */,
+				E01871D81A8E1216004C617C /* Ordering_Foundation.swift */,
+				E08799B91A8E0F1300369B48 /* Orderable.swift */,
+				E08799BC1A8E0F2D00369B48 /* Orderable_Swift.swift */,
+				E08799BF1A8E0F3F00369B48 /* Orderable_Foundation.swift */,
 			);
 			name = Source;
 			path = Allsorts;
@@ -350,6 +370,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E08799BA1A8E0F1300369B48 /* Orderable.swift in Sources */,
+				E08799B71A8E0F0500369B48 /* Ordering.swift in Sources */,
+				E08799BD1A8E0F2D00369B48 /* Orderable_Swift.swift in Sources */,
+				E08799C01A8E0F3F00369B48 /* Orderable_Foundation.swift in Sources */,
+				E01871D91A8E1216004C617C /* Ordering_Foundation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +390,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E08799BB1A8E0F1300369B48 /* Orderable.swift in Sources */,
+				E08799B81A8E0F0500369B48 /* Ordering.swift in Sources */,
+				E08799BE1A8E0F2D00369B48 /* Orderable_Swift.swift in Sources */,
+				E08799C11A8E0F3F00369B48 /* Orderable_Foundation.swift in Sources */,
+				E01871DA1A8E1216004C617C /* Ordering_Foundation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +538,7 @@
 		E08799701A8E0C9900369B48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -517,12 +548,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = Allsorts;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E08799711A8E0C9900369B48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -568,6 +601,7 @@
 		E087997B1A8E0D1900369B48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -577,12 +611,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = Allsorts;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E087997C1A8E0D1900369B48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -677,6 +713,7 @@
 				E08799711A8E0C9900369B48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E08799721A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "Allsorts iOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -685,6 +722,7 @@
 				E08799741A8E0C9900369B48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E087997A1A8E0D1900369B48 /* Build configuration list for PBXNativeTarget "Allsorts Mac" */ = {
 			isa = XCConfigurationList;
@@ -702,6 +740,7 @@
 				E087998E1A8E0DA000369B48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E08799AF1A8E0DF100369B48 /* Build configuration list for PBXNativeTarget "Allsorts Demo" */ = {
 			isa = XCConfigurationList;
@@ -710,6 +749,7 @@
 				E08799B11A8E0DF100369B48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
