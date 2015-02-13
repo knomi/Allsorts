@@ -7,7 +7,7 @@
 
 // MARK: Numbers
 
-extension Float : Orderable {}
+extension Float  : Orderable {}
 
 extension Double : Orderable {}
 

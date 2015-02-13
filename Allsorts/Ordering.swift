@@ -28,6 +28,7 @@ public enum Ordering : Int {
     public static func compare<T : Comparable>(left: T, _ right: T) -> Ordering {
         return left < right ? .LT : left == right ? .EQ : .GT
     }
+
 }
 
 /// Evaluate the lexicographic ordering of two comparison expressions. If `lhs`
