@@ -204,11 +204,11 @@
 		E087995B1A8E0C9800369B48 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E01871E61A8E1822004C617C /* Extensions */,
 				E087995E1A8E0C9800369B48 /* Allsorts.h */,
 				E087995D1A8E0C9800369B48 /* Info.plist */,
 				E08799B91A8E0F1300369B48 /* Orderable.swift */,
 				E08799B61A8E0F0500369B48 /* Ordering.swift */,
+				E01871E61A8E1822004C617C /* Extensions */,
 			);
 			name = Source;
 			path = Allsorts;
