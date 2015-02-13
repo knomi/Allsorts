@@ -399,10 +399,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E08799581A8E0C9800369B48 /* Allsorts iOS */,
-				E08799631A8E0C9900369B48 /* Allsorts iOS Tests */,
 				E08799751A8E0D1900369B48 /* Allsorts Mac */,
 				E08799821A8E0DA000369B48 /* Allsorts Mac Tests */,
+				E08799581A8E0C9800369B48 /* Allsorts iOS */,
+				E08799631A8E0C9900369B48 /* Allsorts iOS Tests */,
 				E08799921A8E0DF000369B48 /* Allsorts Demo */,
 			);
 		};
@@ -574,7 +574,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -620,7 +619,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -654,6 +652,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = Allsorts;
+				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -671,6 +670,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = Allsorts;
+				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -689,6 +689,7 @@
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AllsortsTests;
+				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allsorts Demo.app/Allsorts Demo";
 			};
 			name = Debug;
@@ -703,6 +704,7 @@
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AllsortsTests;
+				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allsorts Demo.app/Allsorts Demo";
 			};
 			name = Release;
@@ -715,10 +717,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = Allsorts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = Allsorts;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -732,10 +736,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = Allsorts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = Allsorts;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -789,6 +795,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = Main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
 			};
 			name = Debug;
 		};
@@ -800,6 +807,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = Main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
 			};
 			name = Release;
 		};
