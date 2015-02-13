@@ -9,6 +9,16 @@
 import XCTest
 import Allsorts
 
+private struct Record<K : Orderable, V> : Orderable {
+    var key: K
+    var value: V
+    init(_ k: K, _ v: V) { key = k; value = v }
+}
+
+private func <=> <K, V>(a: Record<K, V>, b: Record<K, V>) -> Ordering {
+    return a.key <=> b.key
+}
+
 class AllsortsTests: XCTestCase {
     
     func testOrdering() {
@@ -54,6 +64,37 @@ class AllsortsTests: XCTestCase {
         XCTAssertEqual(Ordering.compare("bar",  "bar"), Ordering.EQ)
         XCTAssertEqual(Ordering.compare("barr", "bar"), Ordering.GT)
         XCTAssertEqual(Ordering.compare("foo",  "bar"), Ordering.GT)
+    }
+    
+    func testOrderable() {
+        XCTAssertEqual(Record(1, "foo") <=> Record(2, "bar"), Ordering.LT)
+        XCTAssertEqual(Record(2, "foo") <=> Record(2, "bar"), Ordering.EQ)
+        XCTAssertEqual(Record(3, "foo") <=> Record(2, "bar"), Ordering.GT)
+    }
+    
+    func testOrderableIsComparable() {
+        XCTAssert(Record(1, "foo") <  Record(2, "bar"))
+        XCTAssert(Record(1, "foo") <= Record(2, "bar"))
+        XCTAssert(Record(1, "foo") != Record(2, "bar"))
+        
+        XCTAssert(Record(2, "foo") <= Record(2, "bar"))
+        XCTAssert(Record(2, "foo") == Record(2, "bar"))
+        XCTAssert(Record(2, "foo") >= Record(2, "bar"))
+        
+        XCTAssert(Record(3, "foo") != Record(2, "bar"))
+        XCTAssert(Record(3, "foo") >= Record(2, "bar"))
+        XCTAssert(Record(3, "foo") >  Record(2, "bar"))
+    }
+    
+    func testOrderableSwift() {
+        XCTAssertEqual("ba"  <=> "bar", Ordering.LT)
+        XCTAssertEqual("bar" <=> "bar", Ordering.EQ)
+        XCTAssertEqual("foo" <=> "bar", Ordering.GT)
+        
+        XCTAssertEqual(-Double.infinity <=>  Double.infinity, Ordering.LT)
+        XCTAssertEqual(-Double.infinity <=> -Double.infinity, Ordering.EQ)
+        XCTAssertEqual( Double.infinity <=> -Double.infinity, Ordering.GT)
+        XCTAssertEqual(1.2 <=> 1, Ordering.GT)
     }
     
 }
