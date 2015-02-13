@@ -11,9 +11,11 @@ infix operator <=> {
     precedence 131 // one higher than ==, !=, <, >, <= and >=
 }
 
-public protocol Orderable {
+public protocol _Orderable {
     func <=> (lhs: Self, rhs: Self) -> Ordering
 }
+
+public protocol Orderable : Comparable, _Orderable {}
 
 public func <=> <T : Comparable>(lhs: T, rhs: T) -> Ordering {
     if lhs < rhs { return .LT }
@@ -29,37 +31,9 @@ public func == <T : Orderable>(lhs: T, rhs: T) -> Bool {
     }
 }
 
-public func != <T : Orderable>(lhs: T, rhs: T) -> Bool {
-    switch lhs <=> rhs {
-    case .EQ: return false
-    default:  return true
-    }
-}
-
 public func < <T : Orderable>(lhs: T, rhs: T) -> Bool {
     switch lhs <=> rhs {
     case .LT: return true
     default:  return false
-    }
-}
-
-public func > <T : Orderable>(lhs: T, rhs: T) -> Bool {
-    switch lhs <=> rhs {
-    case .GT: return true
-    default:  return false
-    }
-}
-
-public func <= <T : Orderable>(lhs: T, rhs: T) -> Bool {
-    switch lhs <=> rhs {
-    case .GT: return false
-    default:  return true
-    }
-}
-
-public func >= <T : Orderable>(lhs: T, rhs: T) -> Bool {
-    switch lhs <=> rhs {
-    case .LT: return false
-    default:  return true
     }
 }
