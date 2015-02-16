@@ -40,30 +40,7 @@ extension UnicodeScalar : Orderable {}
 /// Case-sensitive, locale-insensitive three-way comparison between two
 /// `String`\ s. Currently uses `NSString.compare` as an implementation detail.
 public func <=> (left: String, right: String) -> Ordering {
-    return Ordering(rawValue: left.compare(right).rawValue)
+    return Ordering.create(left.compare(right).rawValue)
 }
 
 extension String : Orderable {}
-
-// MARK: Useful `<=>` overloads
-
-/// Compare `left` to an interval of right-hand side values, `rightInterval`.
-///
-/// Values within `rightInterval` are considered equal (`Orderable.EQ`), and
-/// values less than `rightInterval.start` and greater than or equal to
-/// `rightInterval.end` are considered `Orderable.LT` and `Orderable.GT`,
-/// respectively.
-public func <=> <T>(left: T, rightInterval: HalfOpenInterval<T>) -> Ordering {
-    return left < rightInterval.start ? .LT
-         : left < rightInterval.end ? .EQ : .GT
-}
-
-/// Compare `left` to an interval of right-hand side values, `rightInterval`.
-///
-/// Values within `rightInterval` are considered equal (`Orderable.EQ`), and
-/// values less than `rightInterval.start` and greater than `rightInterval.end`
-/// are considered `Orderable.LT` and `Orderable.GT`, respectively.
-public func <=> <T>(left: T, rightInterval: ClosedInterval<T>) -> Ordering {
-    return left < rightInterval.start ? .LT
-         : left > rightInterval.end ? .GT : .EQ
-}

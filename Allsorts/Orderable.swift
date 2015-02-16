@@ -22,7 +22,7 @@ public protocol _Orderable {
 /// Any `Comparable` can be made `Orderable` by simply declaring protocol
 /// conformance in an extension, but some types (like `Swift.String`) may have a
 /// more efficient implementation for `<=>`.
-public protocol Orderable : _Orderable, Comparable {}
+public typealias Orderable = protocol<_Orderable, Comparable>
 
 /// Default implementation for making `Comparable` types `Orderable`.
 public func <=> <T : Comparable>(left: T, right: T) -> Ordering {

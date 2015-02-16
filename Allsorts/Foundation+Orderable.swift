@@ -15,32 +15,33 @@ extension NSNumber        : Orderable {}
 extension NSString        : Orderable {}
 extension NSUUID          : Orderable {}
 
-/// Lexicographical three-way comparison between two `NSData` unsigned byte arrays.
+/// Lexicographical three-way comparison between two `NSData` treated as arrays
+/// of unsigned bytes.
 public func <=>(left: NSData, right: NSData) -> Ordering {
-        let c = memcmp(left.bytes, right.bytes, UInt(min(left.length, right.length)))
-        if c < 0 { return .LT }
-        if c > 0 { return .GT }
-        return Ordering.compare(left.length, right.length)
+    let c = memcmp(left.bytes, right.bytes, UInt(min(left.length, right.length)))
+    if c < 0 { return .LT }
+    if c > 0 { return .GT }
+    return Ordering.compare(left.length, right.length)
 }
 
 /// Three-way comparison between two `NSDate` values.
 public func <=>(left: NSDate, right: NSDate) -> Ordering {
-    return Ordering(left.compare(right))
+    return Ordering.create(left.compare(right).rawValue)
 }
 
 /// Lexicographical three-way comparison between two `NSIndexPath` values.
 public func <=>(left: NSIndexPath, right: NSIndexPath) -> Ordering {
-    return Ordering(left.compare(right))
+    return Ordering.create(left.compare(right).rawValue)
 }
 
 /// Three-way comparison between two `NSNumber` values.
 public func <=>(left: NSNumber, right: NSNumber) -> Ordering {
-    return Ordering(left.compare(right))
+    return Ordering.create(left.compare(right).rawValue)
 }
 
 /// Lexicographical three-way comparison between two `NSString` values.
 public func <=>(left: NSString, right: NSString) -> Ordering {
-    return Ordering(left.compare(right))
+    return Ordering.create((left as String).compare(right as String).rawValue)
 }
 
 /// Lexicographical three-way comparison between two `NSUUID` values.

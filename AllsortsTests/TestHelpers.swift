@@ -11,8 +11,8 @@ import XCTest
 // MARK: - Assertions
 
 
-func AssertContains<T : Comparable>(interval: @autoclosure () -> HalfOpenInterval<T>,
-                                    expression: @autoclosure () -> T,
+func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterval<T>,
+                                    @autoclosure expression: () -> T,
                                     _ message: String = "",
                                     file: String = __FILE__,
                                     line: UInt = __LINE__)
@@ -24,8 +24,8 @@ func AssertContains<T : Comparable>(interval: @autoclosure () -> HalfOpenInterva
     XCTAssert(ivl.contains(expr), msg, file: file, line: line)
 }
 
-func AssertContains<T : Comparable>(interval: @autoclosure () -> ClosedInterval<T>,
-                                    expression: @autoclosure () -> T,
+func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedInterval<T>,
+                                    @autoclosure expression: () -> T,
                                     _ message: String = "",
                                     file: String = __FILE__,
                                     line: UInt = __LINE__)
