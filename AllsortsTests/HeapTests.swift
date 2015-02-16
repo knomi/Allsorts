@@ -19,9 +19,9 @@ class HeapTests : XCTestCase {
             XCTAssertEqual(output, sorted(input), "Given input: \(input)")
         }
         test([1, 4, 4, 1, 3, 0, 4, 3])
-//        for _ in 0 ..< 5 {
-//            test(randomInput(maxCount: 10, maxValue: 5))
-//        }
+        for _ in 0 ..< 100 {
+            test(randomInput(maxCount: 50, maxValue: 30))
+        }
     }
 
 }

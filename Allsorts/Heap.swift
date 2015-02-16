@@ -5,18 +5,16 @@
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
-import Foundation
-
 /// Push `value` into the min-heap `xs`, as defined by the less-than
 /// comparison `comp`.
-public func pushHeap<T>(inout xs: [T], value: T, comp: (T, T) -> Bool) {
+public func pushHeap<T>(inout xs: [T], value: T, compare: (T, T) -> Bool) {
     xs.append(value)
-    pushHeapBack(&xs, comp)
+    siftUp(&xs, xs.startIndex, xs.endIndex, compare, xs.count)
 }
  
 /// Push `value` into the min-heap `xs`, as defined by `<`.
 public func pushHeap<T: Comparable>(inout xs: [T], value: T) {
-    pushHeap(&xs, value) {$0 < $1}
+    pushHeap(&xs, value) {a, b in a < b}
 }
  
 /// Pop the min-element from the min-heap `xs`, as defined by the
@@ -24,14 +22,14 @@ public func pushHeap<T: Comparable>(inout xs: [T], value: T) {
 public func popHeap<T>(inout xs: [T], comp: (T, T) -> Bool) -> T {
     precondition(!xs.isEmpty, "cannot pop an empty heap")
     swap(&xs[0], &xs[xs.endIndex - 1])
+    siftDown(&xs, xs.startIndex, xs.endIndex, comp, xs.count - 1, xs.startIndex)
     let result = xs.removeLast()
-    pushHeapFront(&xs, comp)
     return result
 }
  
 /// Pop the min-element from the min-heap `xs`, as defined by `<`.
 public func popHeap<T: Comparable>(inout xs: [T]) -> T {
-    return popHeap(&xs) {$0 < $1}
+    return popHeap(&xs) {a, b in a < b}
 }
 
 
@@ -40,50 +38,77 @@ public func popHeap<T: Comparable>(inout xs: [T]) -> T {
 
 // Ported from https://llvm.org/svn/llvm-project/libcxx/trunk/include/algorithm
 // (Flipped `comp` though to make `xs` into a min-heap.)
-private func pushHeapFront<T>(inout xs: [T], comp: (T, T) -> Bool) {
-    let n = xs.count
-    if n <= 1 {
+func siftDown<T>(inout xs: [T],
+                 var first: Int,
+                 var last: Int,
+                 compare: (T, T) -> Bool,
+                 var len: Int,
+                 var start: Int)
+{
+    // left-child of start is at 2 * start + 1
+    // right-child of start is at 2 * start + 2
+    var child = start - first
+
+    if (len < 2 || (len - 2) / 2 < child) {
         return
     }
-    var p = 0
-    var pp = 0
-    var c = 2
-    var cp = pp + c
-    if c == n || comp(xs[cp - 1], xs[cp]) {
-        --c
-        --cp
+
+    child = 2 * child + 1;
+    var child_i = first + child
+
+    if child + 1 < len && compare(xs[child_i + 1], xs[child_i]) {
+        // right-child exists and is greater than left-child
+        ++child_i
+        ++child
     }
-    if comp(xs[cp], xs[pp]) {
-        let t = xs[pp]
-        do {
-            xs[pp] = xs[cp]
-            pp = cp
-            p = c
-            c = 2 * (p + 1)
-            if c > n {
-                break
-            }
-            cp = c
-            if c == n || comp(xs[cp - 1], xs[cp]) {
-                --c
-                --cp
-            }
-        } while comp(t, xs[cp])
-        xs[pp] = t
+
+    // check if we are in heap-order
+    if compare(xs[start], xs[child_i]) {
+        // we are, start is larger than it's largest child
+        return
     }
+
+    let top = xs[start]
+    do {
+        // we are not in heap-order, swap the parent with it's largest child
+        xs[start] = xs[child_i]
+        start = child_i;
+
+        if ((len - 2) / 2 < child) {
+            break
+        }
+
+        // recompute the child based off of the updated parent
+        child = 2 * child + 1
+        child_i = first + child
+
+        if child + 1 < len && compare(xs[child_i + 1], xs[child_i]) {
+            // right-child exists and is greater than left-child
+            ++child_i
+            ++child
+        }
+
+        // check if we are in heap-order
+    } while (!compare(top, xs[child_i]))
+    xs[start] = top
 }
- 
+
+
 // Ported from https://llvm.org/svn/llvm-project/libcxx/trunk/include/algorithm
 // (Flipped `comp` though to make `xs` into a min-heap.)
-private func pushHeapBack<T>(inout xs: [T], comp: (T, T) -> Bool) {
-    if xs.count <= 1 {
+private func siftUp<T>(inout xs: [T],
+                       var first: Int,
+                       var last: Int,
+                       compare: (T, T) -> Bool,
+                       var len: Int)
+{
+    if len <= 1 {
         return
     }
-    var first = 0
-    var last = xs.count - 1
-    var len = (xs.count - 2) / 2
-    var index = first + len;
-    if (comp(xs[last], xs[index])) {
+    len = (len - 2) / 2
+    var index = first + len
+    last -= 1
+    if (compare(xs[last], xs[index])) {
         let t = xs[last]
         do {
             xs[last] = xs[index]
@@ -93,7 +118,7 @@ private func pushHeapBack<T>(inout xs: [T], comp: (T, T) -> Bool) {
             }
             len = (len - 1) / 2
             index = first + len
-        } while (comp(t, xs[index]))
+        } while (compare(t, xs[index]))
         xs[last] = t
     }
 }
