@@ -1,5 +1,5 @@
 //
-//  Compare_Tuple.swift
+//  Tuple+Orderable.swift
 //  Allsorts
 //
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
@@ -12,10 +12,10 @@
 /// it is impossible to extend a tuple to implement a protocol.
 public func <=> <A : Orderable,
                  B : Orderable>
-    (lhs: (A, B), rhs: (A, B)) -> Ordering
+    (left: (A, B), right: (A, B)) -> Ordering
 {
-    return lhs.0 <=> rhs.0
-        || lhs.1 <=> rhs.1
+    return left.0 <=> right.0
+        || left.1 <=> right.1
 }
 
 /// Lexicographical three-way comparison between two 3-tuples.
@@ -26,12 +26,12 @@ public func <=> <A : Orderable,
 public func <=> <A : Orderable,
                  B : Orderable,
                  C : Orderable>
-    (lhs: (A, B, C),
-     rhs: (A, B, C)) -> Ordering
+    (left: (A, B, C),
+     right: (A, B, C)) -> Ordering
 {
-    return lhs.0 <=> rhs.0
-        || lhs.1 <=> rhs.1
-        || lhs.2 <=> rhs.2
+    return left.0 <=> right.0
+        || left.1 <=> right.1
+        || left.2 <=> right.2
 }
 
 /// Lexicographical three-way comparison between two 4-tuples.
@@ -43,13 +43,13 @@ public func <=> <A : Orderable,
                  B : Orderable,
                  C : Orderable,
                  D : Orderable>
-    (lhs: (A, B, C, D),
-     rhs: (A, B, C, D)) -> Ordering
+    (left: (A, B, C, D),
+     right: (A, B, C, D)) -> Ordering
 {
-    return lhs.0 <=> rhs.0
-        || lhs.1 <=> rhs.1
-        || lhs.2 <=> rhs.2
-        || lhs.3 <=> rhs.3
+    return left.0 <=> right.0
+        || left.1 <=> right.1
+        || left.2 <=> right.2
+        || left.3 <=> right.3
 }
 
 /// Lexicographical three-way comparison between two 5-tuples.
@@ -62,14 +62,14 @@ public func <=> <A : Orderable,
                  C : Orderable,
                  D : Orderable,
                  E : Orderable>
-    (lhs: (A, B, C, D, E),
-     rhs: (A, B, C, D, E)) -> Ordering
+    (left: (A, B, C, D, E),
+     right: (A, B, C, D, E)) -> Ordering
 {
-    return lhs.0 <=> rhs.0
-        || lhs.1 <=> rhs.1
-        || lhs.2 <=> rhs.2
-        || lhs.3 <=> rhs.3
-        || lhs.4 <=> rhs.4
+    return left.0 <=> right.0
+        || left.1 <=> right.1
+        || left.2 <=> right.2
+        || left.3 <=> right.3
+        || left.4 <=> right.4
 }
 
 // Five shall be enough for now.

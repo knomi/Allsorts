@@ -1,5 +1,5 @@
 //
-//  Ordering_Foundation.swift
+//  Foundation+Ordering.swift
 //  Allsorts
 //
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.

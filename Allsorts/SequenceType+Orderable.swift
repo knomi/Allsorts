@@ -19,10 +19,10 @@
 /// ```
 
 public func <=> <S : SequenceType where S.Generator.Element : Orderable>
-    (lhs: S, rhs: S) -> Ordering
+    (left: S, right: S) -> Ordering
 {
-    var gl = lhs.generate()
-    var gr = rhs.generate()
+    var gl = left.generate()
+    var gr = right.generate()
     while true {
         switch (gl.next(), gr.next()) {
         case     (.None,    .Some   ): return .LT
@@ -51,10 +51,10 @@ public func <=> <S : SequenceType where S.Generator.Element : Orderable>
 public func <=> <S : SequenceType where
                  S.Generator.Element : SequenceType,
                  S.Generator.Element.Generator.Element : Orderable>
-    (lhs: S, rhs: S) -> Ordering
+    (left: S, right: S) -> Ordering
 {
-    var gl = lhs.generate()
-    var gr = rhs.generate()
+    var gl = left.generate()
+    var gr = right.generate()
     while true {
         switch (gl.next(), gr.next()) {
         case     (.None,    .Some   ): return .LT
@@ -84,10 +84,10 @@ public func <=> <S : SequenceType where
                  S.Generator.Element : SequenceType,
                  S.Generator.Element.Generator.Element : SequenceType,
                  S.Generator.Element.Generator.Element.Generator.Element : Orderable>
-    (lhs: S, rhs: S) -> Ordering
+    (left: S, right: S) -> Ordering
 {
-    var gl = lhs.generate()
-    var gr = rhs.generate()
+    var gl = left.generate()
+    var gr = right.generate()
     while true {
         switch (gl.next(), gr.next()) {
         case     (.None,    .Some   ): return .LT

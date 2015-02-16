@@ -48,7 +48,37 @@ In addition, Allsorts overloads the `<=>` operator for:
 
 - tuples of 2 to 5 `Orderable`s (sorry, no nested tuples; too much boilerplate involved),
 - `Optional<T>` where `T` is an `Orderable`; by convention, `nil` sorts last (because… who cares seeing `(NULL)` sorted first?), and
-- sequences of `Orderable`s, or sequences of such, or sequences of such (3 nestings).
+- sequences of `Orderable`s, up to three nestings (think `[[[T]]]` where `T` conforms to `Orderable`).
+
+Comparators
+-----------
+
+For composing comparators, you can use the following combinator functions:
+
+```swift
+public func || (left: Ordering, right: @autoclosure () -> Ordering) -> Ordering
+```
+
+The `||` operator can be used to simplify the definition of lexicographical comparisons. Similarly to `bool1 || bool2` or `expr1 ?? expr2`, it lazily evaluates the right-hand side comparison expression `right`, only returning its value if `left` is `.EQ`:
+
+```swift
+let names: [(first: String, last: String, year: Int)] =
+    [("Thom",   "Yorke",     1968),
+     ("Jonny",  "Greenwood", 1971),
+     ("Colin",  "Greenwood", 1969),
+     ("Ed",     "O'Brien",   1968),
+     ("Philip", "Selway",    1967)]
+sorted(names) {a, b in a.last <=> b.last || a.first <=> b.first}
+```
+
+```swift
+public func comparingTo<T : Comparable>(right: T) -> T -> Ordering
+public func comparingTo<T : Orderable> (right: T) -> T -> Ordering
+```
+
+```swift
+public func reversing<Args>(compare: Args -> Ordering) -> Args -> Ordering
+```
 
 Binary search
 -------------

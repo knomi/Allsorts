@@ -31,12 +31,12 @@ public enum Ordering : Int {
 
 }
 
-/// Evaluate the lexicographic ordering of two comparison expressions. If `lhs`
-/// evaluates not-equal, return its result. Else, evaluate and return `rhs`.
-public func || (lhs: Ordering, rhs: @autoclosure () -> Ordering) -> Ordering {
-    switch lhs {
+/// Evaluate the lexicographic ordering of two comparison expressions. If `left`
+/// evaluates not-equal, return its result. Else, evaluate and return `right`.
+public func || (left: Ordering, right: @autoclosure () -> Ordering) -> Ordering {
+    switch left {
     case .LT: return .LT
-    case .EQ: return rhs()
+    case .EQ: return right()
     case .GT: return .GT
     }
 }

@@ -18,8 +18,8 @@
 /// ```
 /// extension Optional<T : Orderable> : Orderable {}
 /// ```
-public func <=> <T : Orderable>(lhs: T?, rhs: T?) -> Ordering {
-    switch (lhs, rhs) {
+public func <=> <T : Orderable>(left: T?, right: T?) -> Ordering {
+    switch (left, right) {
     case     (.Some,    .None   ): return .LT
     case     (.None,    .None   ): return .EQ
     case     (.None,    .Some   ): return .GT

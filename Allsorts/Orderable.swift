@@ -13,7 +13,7 @@ infix operator <=> {
 
 /// Implementation detail for the `Orderable` protocol.
 public protocol _Orderable {
-    func <=> (lhs: Self, rhs: Self) -> Ordering
+    func <=> (left: Self, right: Self) -> Ordering
 }
 
 /// A type that can be efficiently three-way compared with another value of its

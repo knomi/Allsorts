@@ -39,8 +39,8 @@ extension UnicodeScalar : Orderable {}
 
 /// Case-sensitive, locale-insensitive three-way comparison between two
 /// `String`\ s. Currently uses `NSString.compare` as an implementation detail.
-public func <=> (lhs: String, rhs: String) -> Ordering {
-    return Ordering(rawValue: lhs.compare(rhs).rawValue)
+public func <=> (left: String, right: String) -> Ordering {
+    return Ordering(rawValue: left.compare(right).rawValue)
 }
 
 extension String : Orderable {}
