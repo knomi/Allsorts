@@ -98,9 +98,19 @@ public enum Ordering : Int {
         }
     }
 
+    /// Create a "by-key" comparator that returns the `Ordering` result of
+    /// `key(left) <=> key(right)`. To compose many "by-key" comparators, use
+    /// the `<|>` operator as in:
     ///
-    public static func by<T, A : Orderable>(a: T -> A) -> (T, T) -> Ordering {
-        return {x, y in a(x) <=> a(y)}
+    /// ```swift
+    /// sorted(people, Ordering.by {$0.lastName} <|> Ordering.by {$0.firstName})
+    /// ```
+    ///
+    /// See also: `sorted`, `stableSorted`, `<|>`
+    public static func by<T, K : Orderable>(key: T -> K) -> (T, T) -> Ordering {
+        return {left, right in
+            key(left) <=> key(right)
+        }
     }
 }
 
@@ -114,7 +124,22 @@ public func || (left: Ordering, right: @autoclosure () -> Ordering) -> Ordering 
     }
 }
 
-public func || <Args>(left: Args -> Ordering, right: Args -> Ordering) -> Args -> Ordering {
+/// Lexicographical comparator composing operator. Symbol chosen because of its
+/// similarity to the OR operator: returns the inequality in the left operand,
+/// or else the result of the right-hand side.
+infix operator <|> {
+    associativity right
+    precedence 121 // one higher than `&&`, and lower than `==` etc.
+}
+
+/// Compose two comparators lexicographically: the function short-circuits if
+/// the `left` comparator evaluates different than `Ordering.EQ`. Otherwise,
+/// evaluates and returns the result of the `right` comparator.
+///
+/// **Remark:** This operator is useful together with the use of `Ordering.by`.
+///
+/// **See also:** `Ordering.by`. `sorted`, `stableSorted`
+public func <|> <Args>(left: Args -> Ordering, right: Args -> Ordering) -> Args -> Ordering {
     return {args in
         left(args) || right(args)
     }

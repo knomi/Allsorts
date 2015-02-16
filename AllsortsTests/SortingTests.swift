@@ -21,7 +21,7 @@ class SortingTests: XCTestCase {
             ["Colin", "Ed", "Jonny", "Philip", "Thom"])
         XCTAssertEqual(
             sorted(musicians, Ordering.by {$0.last}
-                           || Ordering.by {$0.year}).map {$0.first},
+                          <|> Ordering.by {$0.year}).map {$0.first},
             ["Colin", "Jonny", "Ed", "Philip", "Thom"])
     }
 
@@ -31,15 +31,15 @@ class SortingTests: XCTestCase {
             ["Philip", "Thom", "Ed", "Colin", "Jonny"])
         XCTAssertEqual(
             stableSorted(musicians, Ordering.by {$0.year}
-                                 || Ordering.by {$0.last}
-                                 || Ordering.by {$0.first}).map {$0.first},
+                                <|> Ordering.by {$0.last}
+                                <|> Ordering.by {$0.first}).map {$0.first},
             ["Philip", "Ed", "Thom", "Colin", "Jonny"])
         XCTAssertEqual(
             stableSorted(musicians, Ordering.by({$0.last})).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
             stableSorted(musicians, Ordering.by {$0.last}
-                                 || Ordering.by {$0.first}).map {$0.first},
+                                <|> Ordering.by {$0.first}).map {$0.first},
             ["Colin", "Jonny", "Ed", "Philip", "Thom"])
     }
 
