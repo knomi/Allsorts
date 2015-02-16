@@ -72,12 +72,16 @@ sorted(names) {a, b in a.last <=> b.last || a.first <=> b.first}
 ```
 
 ```swift
-public func comparingTo<T : Comparable>(right: T) -> T -> Ordering
-public func comparingTo<T : Orderable> (right: T) -> T -> Ordering
+extension Ordering {
+    static func Ordering.to<T : Comparable>(right: T) -> T -> Ordering
+    static func Ordering.to<T : Orderable> (right: T) -> T -> Ordering
+}
 ```
 
 ```swift
-public func reversing<Args>(compare: Args -> Ordering) -> Args -> Ordering
+extension Ordering {
+    static func reverse<Args>(compare: Args -> Ordering) -> Args -> Ordering
+}
 ```
 
 Binary search
@@ -90,29 +94,29 @@ A binary search finds an index in a sorted random access container in `O(log N)`
 let xs: [Double] = [10,  20, 20,  30, 30, 30,  40, 40, 40, 40]
 
 // `binarySearch` returns an arbitrary sort-preserving insertion index
-let i29: Int = binarySearch(xs, comparingTo(29)) // returns 3
-let i30: Int = binarySearch(xs, comparingTo(30)) // returns 3, 4, or 5
-let i31: Int = binarySearch(xs, comparingTo(31)) // returns 6
+let i29: Int = binarySearch(xs, Ordering.to(29)) // returns 3
+let i30: Int = binarySearch(xs, Ordering.to(30)) // returns 3, 4, or 5
+let i31: Int = binarySearch(xs, Ordering.to(31)) // returns 6
 
 // `binaryFind` returns an index of an equal element, or `nil` if none
-let j29: Int? = binaryFind(xs, comparingTo(29)) // returns nil
-let j30: Int? = binaryFind(xs, comparingTo(30)) // returns 3, 4, or 5 (as Int?)
-let j31: Int? = binaryFind(xs, comparingTo(31)) // returns nil
+let j29: Int? = binaryFind(xs, Ordering.to(29)) // returns nil
+let j30: Int? = binaryFind(xs, Ordering.to(30)) // returns 3, 4, or 5 (as Int?)
+let j31: Int? = binaryFind(xs, Ordering.to(31)) // returns nil
 
 /// `lowerBound` returns the lowest sort-preserving insertion index
-let l29: Int = lowerBound(xs, comparingTo(29)) // returns 3
-let l30: Int = lowerBound(xs, comparingTo(30)) // returns 3
-let l31: Int = lowerBound(xs, comparingTo(31)) // returns 6
+let l29: Int = lowerBound(xs, Ordering.to(29)) // returns 3
+let l30: Int = lowerBound(xs, Ordering.to(30)) // returns 3
+let l31: Int = lowerBound(xs, Ordering.to(31)) // returns 6
 
 /// `upperBound` returns the lowest sort-preserving insertion index
-let u29: Int = upperBound(xs, comparingTo(29)) // returns 3
-let u30: Int = upperBound(xs, comparingTo(30)) // returns 6
-let u31: Int = upperBound(xs, comparingTo(31)) // returns 6
+let u29: Int = upperBound(xs, Ordering.to(29)) // returns 3
+let u30: Int = upperBound(xs, Ordering.to(30)) // returns 6
+let u31: Int = upperBound(xs, Ordering.to(31)) // returns 6
 
 /// `equalRange` returns range of equal elements
-let r29: Range<Int> = equalRange(xs, comparingTo(29)) // returns 3 ..< 3
-let r30: Range<Int> = equalRange(xs, comparingTo(30)) // returns 3 ..< 6
-let r31: Range<Int> = equalRange(xs, comparingTo(31)) // returns 6 ..< 6
+let r29: Range<Int> = equalRange(xs, Ordering.to(29)) // returns 3 ..< 3
+let r30: Range<Int> = equalRange(xs, Ordering.to(30)) // returns 3 ..< 6
+let r31: Range<Int> = equalRange(xs, Ordering.to(31)) // returns 6 ..< 6
 ```
 
 All of the above functions are actually convenience wrappers for the following four functions on `RandomAccessIndexType`s, which all find their result using a logarithmic number of `ord(i)` lookups in `range`:

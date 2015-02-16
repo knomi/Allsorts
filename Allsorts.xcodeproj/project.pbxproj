@@ -18,8 +18,6 @@
 		E01871E91A8E1AB2004C617C /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E01871EC1A8E1AE5004C617C /* Allsorts.framework in Resources */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E01871EE1A8E1B50004C617C /* Allsorts.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E01871F01A8E1E21004C617C /* Comparing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871EF1A8E1E21004C617C /* Comparing.swift */; };
-		E01871F11A8E1E21004C617C /* Comparing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871EF1A8E1E21004C617C /* Comparing.swift */; };
 		E01871F31A8E20CF004C617C /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871F21A8E20CF004C617C /* Detail.swift */; };
 		E01871F41A8E20CF004C617C /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871F21A8E20CF004C617C /* Detail.swift */; };
 		E01871F61A8E232C004C617C /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871F51A8E232C004C617C /* BinarySearch.swift */; };
@@ -103,7 +101,6 @@
 		E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tuple+Orderable.swift"; sourceTree = "<group>"; };
 		E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Orderable.swift"; sourceTree = "<group>"; };
 		E01871E11A8E14B7004C617C /* Optional+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Orderable.swift"; sourceTree = "<group>"; };
-		E01871EF1A8E1E21004C617C /* Comparing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparing.swift; sourceTree = "<group>"; };
 		E01871F21A8E20CF004C617C /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		E01871F51A8E232C004C617C /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		E01871F81A8E4B6E004C617C /* version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = version.sh; sourceTree = "<group>"; };
@@ -111,6 +108,7 @@
 		E01871FE1A91EA15004C617C /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		E01872051A91F1D2004C617C /* BinarySearchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchTests.swift; sourceTree = "<group>"; };
 		E01872081A91F2BA004C617C /* OrderingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderingTests.swift; sourceTree = "<group>"; };
+		E018720B1A92076B004C617C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E087995E1A8E0C9800369B48 /* Allsorts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Allsorts.h; sourceTree = "<group>"; };
@@ -206,6 +204,7 @@
 		E087994F1A8E0C9800369B48 = {
 			isa = PBXGroup;
 			children = (
+				E018720B1A92076B004C617C /* README.md */,
 				E087995B1A8E0C9800369B48 /* Source */,
 				E08799681A8E0C9900369B48 /* Test */,
 				E08799941A8E0DF000369B48 /* Demo */,
@@ -232,7 +231,6 @@
 				E087995D1A8E0C9800369B48 /* Info.plist */,
 				E01871F81A8E4B6E004C617C /* version.sh */,
 				E01871F51A8E232C004C617C /* BinarySearch.swift */,
-				E01871EF1A8E1E21004C617C /* Comparing.swift */,
 				E01871F21A8E20CF004C617C /* Detail.swift */,
 				E08799B91A8E0F1300369B48 /* Orderable.swift */,
 				E08799B61A8E0F0500369B48 /* Ordering.swift */,
@@ -249,8 +247,8 @@
 				E087996B1A8E0C9900369B48 /* AllsortsTests.swift */,
 				E01872051A91F1D2004C617C /* BinarySearchTests.swift */,
 				E01871FB1A91EA01004C617C /* OrderableTests.swift */,
-				E01871FE1A91EA15004C617C /* TestHelpers.swift */,
 				E01872081A91F2BA004C617C /* OrderingTests.swift */,
+				E01871FE1A91EA15004C617C /* TestHelpers.swift */,
 			);
 			name = Test;
 			path = AllsortsTests;
@@ -486,7 +484,6 @@
 				E01871E21A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
 				E01871F31A8E20CF004C617C /* Detail.swift in Sources */,
 				E01871DF1A8E149D004C617C /* SequenceType+Orderable.swift in Sources */,
-				E01871F01A8E1E21004C617C /* Comparing.swift in Sources */,
 				E01871D91A8E1216004C617C /* Foundation+Ordering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,7 +513,6 @@
 				E01871E31A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
 				E01871F41A8E20CF004C617C /* Detail.swift in Sources */,
 				E01871E01A8E149D004C617C /* SequenceType+Orderable.swift in Sources */,
-				E01871F11A8E1E21004C617C /* Comparing.swift in Sources */,
 				E01871DA1A8E1216004C617C /* Foundation+Ordering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

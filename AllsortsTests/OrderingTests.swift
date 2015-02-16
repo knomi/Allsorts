@@ -54,5 +54,25 @@ class OrderingTests: XCTestCase {
         XCTAssertEqual(Ordering.compare("barr", "bar"), Ordering.GT)
         XCTAssertEqual(Ordering.compare("foo",  "bar"), Ordering.GT)
     }
+    
+    func testOrderingTo() {
+        XCTAssertEqual(Ordering.to("foo")("bar"), Ordering.LT)
+        XCTAssertEqual(Ordering.to("foo")("foo"), Ordering.EQ)
+        XCTAssertEqual(Ordering.to("foo")("fooo"), Ordering.GT)
+    }
+
+    func testOrderingWithin() {
+        XCTAssertEqual(Ordering.within("baz" ... "foo")("bar"), Ordering.LT)
+        XCTAssertEqual(Ordering.within("baz" ... "foo")("baz"), Ordering.EQ)
+        XCTAssertEqual(Ordering.within("baz" ... "foo")("cow"), Ordering.EQ)
+        XCTAssertEqual(Ordering.within("baz" ... "foo")("foo"), Ordering.EQ)
+        XCTAssertEqual(Ordering.within("baz" ... "foo")("foo!"), Ordering.GT)
+
+        XCTAssertEqual(Ordering.within("baz" ..< "foo")("bar"), Ordering.LT)
+        XCTAssertEqual(Ordering.within("baz" ..< "foo")("baz"), Ordering.EQ)
+        XCTAssertEqual(Ordering.within("baz" ..< "foo")("cow"), Ordering.EQ)
+        XCTAssertEqual(Ordering.within("baz" ..< "foo")("foo"), Ordering.GT)
+        XCTAssertEqual(Ordering.within("baz" ..< "foo")("foo!"), Ordering.GT)
+    }
 
 }

@@ -33,7 +33,7 @@ public func binarySearch<Ix : RandomAccessIndexType>
 ///
 /// **Precondition:** `xs` must be sorted by `ord`.
 ///
-/// **Remark:** For a sorted array of `Comparable`s, just pass `comparingTo(x)`
+/// **Remark:** For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
 /// as `ord`.
 ///
 /// **See also:** `binaryFind`, `equalRange`, `lowerBound`, `upperBound`.
@@ -50,7 +50,7 @@ public func binarySearch<S : CollectionType where
 ///
 /// **Precondition:** `xs` must be sorted by `ord`.
 ///
-/// **Remark:** For a sorted array of `Comparable`s, just pass `comparingTo(x)`
+/// **Remark:** For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
 /// as `ord`.
 ///
 /// **See also:** `binarySearch`, `equalRange`, `lowerBound`, `upperBound`.
@@ -96,7 +96,7 @@ public func lowerBound<Ix : RandomAccessIndexType>
 ///
 /// Precondition: `xs` must be sorted by `ord`.
 ///
-/// Remark: For a sorted array of `Comparable`s, just pass `comparingTo(x)`
+/// Remark: For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
 /// as `ord`.
 public func lowerBound<S : CollectionType where
                        S.Index : RandomAccessIndexType>
@@ -136,7 +136,7 @@ public func upperBound<Ix : RandomAccessIndexType>
 ///
 /// Precondition: `xs` must be sorted by `ord`.
 ///
-/// Remark: For a sorted array of `Comparable`s, just pass `comparingTo(x)`
+/// Remark: For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
 /// as `ord`.
 public func upperBound<S : CollectionType where
                        S.Index : RandomAccessIndexType>
@@ -178,7 +178,7 @@ public func equalRange<Ix : RandomAccessIndexType>
 ///
 /// **Precondition:** `xs` must be sorted by `ord`.
 ///
-/// **Remark:** For a sorted array of `Comparable`s, just pass `comparingTo(x)`
+/// **Remark:** For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
 /// as `ord`.
 public func equalRange<S : CollectionType where
                        S.Index : RandomAccessIndexType>
