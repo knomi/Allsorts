@@ -80,16 +80,15 @@ class OrderableTests : XCTestCase {
         XCTAssertEqual("!!".dataUsingEncoding(NSUTF8StringEncoding)
                    <=> "!".dataUsingEncoding(NSUTF8StringEncoding), Ordering.GT)
 
-        XCTAssertEqual((NSDate.distantPast() as! NSDate)
-                   <=> NSDate(), Ordering.LT)
-        XCTAssertEqual((NSDate.distantFuture() as! NSDate)
-                   <=> NSDate(), Ordering.GT)
-        XCTAssertEqual((NSDate.distantPast() as! NSDate)
-                   <=> (NSDate.distantPast() as! NSDate), Ordering.EQ)
-        XCTAssertEqual((NSDate.distantPast() as! NSDate)
-                   <=> (NSDate.distantFuture() as! NSDate), Ordering.LT)
-        XCTAssertEqual((NSDate.distantFuture() as! NSDate)
-                   <=> (NSDate.distantFuture() as! NSDate), Ordering.EQ)
+        // FIXME: Avoiding `as!` while still supporting Swift 1.1
+        let distantPast = (NSDate.distantPast() as? NSDate)!
+        let distantFuture = (NSDate.distantFuture() as? NSDate)!
+        
+        XCTAssertEqual(distantPast <=> NSDate(), Ordering.LT)
+        XCTAssertEqual(distantFuture <=> NSDate(), Ordering.GT)
+        XCTAssertEqual(distantPast <=> distantPast, Ordering.EQ)
+        XCTAssertEqual(distantPast <=> distantFuture, Ordering.LT)
+        XCTAssertEqual(distantFuture <=> distantFuture, Ordering.EQ)
         XCTAssertEqual(NSDate()
                    <=> NSDate(timeIntervalSince1970: 0), Ordering.GT)
         
