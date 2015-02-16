@@ -11,6 +11,4 @@ import Allsorts
 // -----------------------------------------------------------------------------
 // MARK: - Tests
 
-class AllsortsTests : XCTestCase {
-
-}
+class AllsortsTests : XCTestCase {}

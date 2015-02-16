@@ -32,6 +32,10 @@
 		E01872071A91F1D2004C617C /* BinarySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01872051A91F1D2004C617C /* BinarySearchTests.swift */; };
 		E01872091A91F2BA004C617C /* OrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01872081A91F2BA004C617C /* OrderingTests.swift */; };
 		E018720A1A91F2BA004C617C /* OrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01872081A91F2BA004C617C /* OrderingTests.swift */; };
+		E018720D1A920954004C617C /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018720C1A920954004C617C /* Sorting.swift */; };
+		E018720E1A920954004C617C /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018720C1A920954004C617C /* Sorting.swift */; };
+		E01872101A920EA5004C617C /* SortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018720F1A920EA5004C617C /* SortingTests.swift */; };
+		E01872111A920EA5004C617C /* SortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018720F1A920EA5004C617C /* SortingTests.swift */; };
 		E08799651A8E0C9900369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E087996C1A8E0C9900369B48 /* AllsortsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E087996B1A8E0C9900369B48 /* AllsortsTests.swift */; };
 		E08799891A8E0DA000369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E087997D1A8E0D1900369B48 /* Allsorts.framework */; };
@@ -109,6 +113,8 @@
 		E01872051A91F1D2004C617C /* BinarySearchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchTests.swift; sourceTree = "<group>"; };
 		E01872081A91F2BA004C617C /* OrderingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderingTests.swift; sourceTree = "<group>"; };
 		E018720B1A92076B004C617C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E018720C1A920954004C617C /* Sorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
+		E018720F1A920EA5004C617C /* SortingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingTests.swift; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E087995E1A8E0C9800369B48 /* Allsorts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Allsorts.h; sourceTree = "<group>"; };
@@ -234,6 +240,7 @@
 				E01871F21A8E20CF004C617C /* Detail.swift */,
 				E08799B91A8E0F1300369B48 /* Orderable.swift */,
 				E08799B61A8E0F0500369B48 /* Ordering.swift */,
+				E018720C1A920954004C617C /* Sorting.swift */,
 				E01871E61A8E1822004C617C /* Extensions */,
 			);
 			name = Source;
@@ -248,6 +255,7 @@
 				E01872051A91F1D2004C617C /* BinarySearchTests.swift */,
 				E01871FB1A91EA01004C617C /* OrderableTests.swift */,
 				E01872081A91F2BA004C617C /* OrderingTests.swift */,
+				E018720F1A920EA5004C617C /* SortingTests.swift */,
 				E01871FE1A91EA15004C617C /* TestHelpers.swift */,
 			);
 			name = Test;
@@ -480,6 +488,7 @@
 				E08799BD1A8E0F2D00369B48 /* Swift+Orderable.swift in Sources */,
 				E01871F61A8E232C004C617C /* BinarySearch.swift in Sources */,
 				E01871DC1A8E141C004C617C /* Tuple+Orderable.swift in Sources */,
+				E018720E1A920954004C617C /* Sorting.swift in Sources */,
 				E08799C01A8E0F3F00369B48 /* Foundation+Orderable.swift in Sources */,
 				E01871E21A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
 				E01871F31A8E20CF004C617C /* Detail.swift in Sources */,
@@ -496,6 +505,7 @@
 				E087996C1A8E0C9900369B48 /* AllsortsTests.swift in Sources */,
 				E01872041A91EA3E004C617C /* OrderableTests.swift in Sources */,
 				E018720A1A91F2BA004C617C /* OrderingTests.swift in Sources */,
+				E01872111A920EA5004C617C /* SortingTests.swift in Sources */,
 				E01872011A91EA38004C617C /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +519,7 @@
 				E08799BE1A8E0F2D00369B48 /* Swift+Orderable.swift in Sources */,
 				E01871F71A8E232C004C617C /* BinarySearch.swift in Sources */,
 				E01871DD1A8E141C004C617C /* Tuple+Orderable.swift in Sources */,
+				E018720D1A920954004C617C /* Sorting.swift in Sources */,
 				E08799C11A8E0F3F00369B48 /* Foundation+Orderable.swift in Sources */,
 				E01871E31A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
 				E01871F41A8E20CF004C617C /* Detail.swift in Sources */,
@@ -525,6 +536,7 @@
 				E08799B51A8E0E4B00369B48 /* AllsortsTests.swift in Sources */,
 				E01872031A91EA3D004C617C /* OrderableTests.swift in Sources */,
 				E01872091A91F2BA004C617C /* OrderingTests.swift in Sources */,
+				E01872101A920EA5004C617C /* SortingTests.swift in Sources */,
 				E01872021A91EA38004C617C /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

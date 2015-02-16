@@ -10,6 +10,7 @@ import XCTest
 // -----------------------------------------------------------------------------
 // MARK: - Assertions
 
+
 func AssertContains<T : Comparable>(interval: @autoclosure () -> HalfOpenInterval<T>,
                                     expression: @autoclosure () -> T,
                                     _ message: String = "",

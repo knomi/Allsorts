@@ -97,6 +97,11 @@ public enum Ordering : Int {
             }
         }
     }
+
+    ///
+    public static func by<T, A : Orderable>(a: T -> A) -> (T, T) -> Ordering {
+        return {x, y in a(x) <=> a(y)}
+    }
 }
 
 /// Evaluate the lexicographic ordering of two comparison expressions. If `left`
@@ -106,5 +111,11 @@ public func || (left: Ordering, right: @autoclosure () -> Ordering) -> Ordering 
     case .LT: return .LT
     case .EQ: return right()
     case .GT: return .GT
+    }
+}
+
+public func || <Args>(left: Args -> Ordering, right: Args -> Ordering) -> Args -> Ordering {
+    return {args in
+        left(args) || right(args)
     }
 }

@@ -180,14 +180,14 @@ private func <=> (a: QuicklyDifferent, b: QuicklyDifferent) -> Ordering {
 // MARK: Foundation object construction
 
 /// Construct an `NSIndexPath` with the given indexes.
-func indexPath(indexes: Int...) -> NSIndexPath {
+private func indexPath(indexes: Int...) -> NSIndexPath {
     var path = indexes
     return NSIndexPath(indexes: &path, length: path.count)
 }
 
 // MARK: Conformance checkers
-func isComparableType<T : Comparable>(T.Type) -> Bool { return true }
-func isComparableType<T : Any>(T.Type) -> Bool { return false }
-func isOrderableType<T : Orderable>(T.Type) -> Bool { return true }
-func isOrderableType<T : Any>(T.Type) -> Bool { return false }
+private func isComparableType<T : Comparable>(T.Type) -> Bool { return true }
+private func isComparableType<T : Any>(T.Type) -> Bool { return false }
+private func isOrderableType<T : Orderable>(T.Type) -> Bool { return true }
+private func isOrderableType<T : Any>(T.Type) -> Bool { return false }
 
