@@ -54,12 +54,14 @@ public func popHeap<T>(inout heap: [T], compare: (T, T) -> Ordering) -> T {
 
 // Ported from https://llvm.org/svn/llvm-project/libcxx/trunk/include/algorithm
 // (Flipped the comparator though to make `heap` into a min-heap.)
-func siftDown<T>(inout heap: [T],
-                 var first: Int,
-                 var last: Int,
-                 isOrderedBefore: (T, T) -> Bool,
-                 var len: Int,
-                 var start: Int)
+func siftDown<C : MutableCollectionType
+              where C.Index : RandomAccessIndexType>
+    (inout heap: C,
+     startIndex: C.Index,
+     endIndex: C.Index,
+     isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool,
+     var len: C.Index.Distance,
+     var rootIndex: C.Index)
 {
     // heap array representation:
     //                 0                             i
@@ -72,80 +74,84 @@ func siftDown<T>(inout heap: [T],
     //    / \     / \     / \     / \    ...     ...   ...     ...
     //   7   8   9  10  11  12  13  14
     //
-    // left-child of start is at `2 * index + 1`
-    // right-child of start is at `2 * index + 2`
-    var child = start - first
-
+    // left-child of `index` is at `2 * index + 1`
+    // right-child of `index` is at `2 * index + 2`
+    var child = startIndex.distanceTo(rootIndex)
     if (len < 2 || (len - 2) / 2 < child) {
         return
     }
+    
+    assert((startIndex ..< endIndex).contains(rootIndex))
+    assert(rootIndex.advancedBy(len) <= endIndex)
 
     child = 2 * child + 1;
-    var child_i = first + child
+    var childIndex = startIndex.advancedBy(child)
 
-    if child + 1 < len && isOrderedBefore(heap[child_i + 1], heap[child_i]) {
+    if child + 1 < len && isOrderedBefore(heap[childIndex + 1], heap[childIndex]) {
         // right-child exists and is less than left-child
-        ++child_i
+        ++childIndex
         ++child
     }
 
     // check if we are in heap-order
-    if isOrderedBefore(heap[start], heap[child_i]) {
-        // we are, start is smaller than its smallest child
+    if isOrderedBefore(heap[rootIndex], heap[childIndex]) {
+        // we are, root is smaller than its smallest child
         return
     }
 
-    let top = heap[start]
+    let top = heap[rootIndex]
     do {
         // we are not in heap-order, swap the parent with its smallest child
-        heap[start] = heap[child_i]
-        start = child_i;
+        heap[rootIndex] = heap[childIndex]
+        rootIndex = childIndex;
 
-        if ((len - 2) / 2 < child) {
+        if (len - 2) / 2 < child {
             break
         }
 
         // recompute the child based off of the updated parent
         child = 2 * child + 1
-        child_i = first + child
+        childIndex = startIndex.advancedBy(child)
 
-        if child + 1 < len && isOrderedBefore(heap[child_i + 1], heap[child_i]) {
+        if child + 1 < len && isOrderedBefore(heap[childIndex + 1], heap[childIndex]) {
             // right-child exists and is less than left-child
-            ++child_i
+            ++childIndex
             ++child
         }
 
         // check if we are in heap-order
-    } while (!isOrderedBefore(top, heap[child_i]))
-    heap[start] = top
+    } while !isOrderedBefore(top, heap[childIndex])
+    heap[rootIndex] = top
 }
 
 
 // Ported from https://llvm.org/svn/llvm-project/libcxx/trunk/include/algorithm
 // (Flipped the comparator though to make `heap` into a min-heap.)
-private func siftUp<T>(inout heap: [T],
-                       var first: Int,
-                       var last: Int,
-                       isOrderedBefore: (T, T) -> Bool,
-                       var len: Int)
+private func siftUp<C : MutableCollectionType
+                    where C.Index : RandomAccessIndexType>
+    (inout heap: C,
+     startIndex: C.Index,
+     endIndex: C.Index,
+     isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool,
+     var len: C.Index.Distance)
 {
     if len <= 1 {
         return
     }
     len = (len - 2) / 2
-    var index = first + len
-    last -= 1
-    if (isOrderedBefore(heap[last], heap[index])) {
-        let t = heap[last]
+    var index = startIndex.advancedBy(len)
+    var lastIndex = endIndex - 1
+    if isOrderedBefore(heap[lastIndex], heap[index]) {
+        let t = heap[lastIndex]
         do {
-            heap[last] = heap[index]
-            last = index
+            heap[lastIndex] = heap[index]
+            lastIndex = index
             if len == 0 {
                 break
             }
             len = (len - 1) / 2
-            index = first + len
-        } while (isOrderedBefore(t, heap[index]))
-        heap[last] = t
+            index = startIndex.advancedBy(len)
+        } while isOrderedBefore(t, heap[index])
+        heap[lastIndex] = t
     }
 }

@@ -54,7 +54,7 @@ class HeapTests : XCTestCase {
 
 }
 
-private let perfInput = randomArray(count: 10000, value: 0 ... 5000)
+private let perfInput = randomArray(count: 20000, value: 0 ... 1000)
 
 // MARK: - Random numbers
 
