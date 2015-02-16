@@ -66,7 +66,7 @@ public enum Ordering : Int {
         -> T -> Ordering
     {
         return {value in
-            value < interval.start ? .LT : value < interval.end ? .EQ : .GT
+            value <=> interval
         }
     }
     
@@ -78,7 +78,7 @@ public enum Ordering : Int {
         -> T -> Ordering
     {
         return {value in
-            value < interval.start ? .LT : interval.end < value ? .GT : .EQ
+            value <=> interval
         }
     }
 
