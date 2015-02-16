@@ -76,22 +76,24 @@ private func pushHeapFront<T>(inout xs: [T], comp: (T, T) -> Bool) {
 // Ported from https://llvm.org/svn/llvm-project/libcxx/trunk/include/algorithm
 // (Flipped `comp` though to make `xs` into a min-heap.)
 private func pushHeapBack<T>(inout xs: [T], comp: (T, T) -> Bool) {
-    var i = xs.count
-    if i <= 1 {
+    if xs.count <= 1 {
         return
     }
-    var j = i - 1
-    i = (i - 2) / 2
-    if comp(xs[j], xs[i]) {
-        let t = xs[j]
+    var first = 0
+    var last = xs.count - 1
+    var len = (xs.count - 2) / 2
+    var index = first + len;
+    if (comp(xs[last], xs[index])) {
+        let t = xs[last]
         do {
-            xs[j] = xs[i]
-            j = i
-            if (i == 0) {
+            xs[last] = xs[index]
+            last = index
+            if len == 0 {
                 break
             }
-            i = (i - 1) / 2
-        } while comp(t, xs[i])
-        xs[j] = t
+            len = (len - 1) / 2
+            index = first + len
+        } while (comp(t, xs[index]))
+        xs[last] = t
     }
 }
