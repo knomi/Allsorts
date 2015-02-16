@@ -12,6 +12,9 @@ import Allsorts
 class SortingTests: XCTestCase {
 
     func testSort() {
+        let byRevName = Ordering.reverse(byLast <|> byFirst)
+        byRevName(("ZZ", "Top", 1969), ("Led", "Zeppelin", 1968))
+        
         XCTAssertEqual(
             sorted(musicians) {$0.first < $1.first}.map {$0.first},
             ["Colin", "Ed", "Jonny", "Philip", "Thom"],
@@ -20,9 +23,16 @@ class SortingTests: XCTestCase {
             sorted(musicians, Ordering.by {$0.first}).map {$0.first},
             ["Colin", "Ed", "Jonny", "Philip", "Thom"])
         XCTAssertEqual(
-            sorted(musicians, Ordering.by {$0.last}
-                          <|> Ordering.by {$0.year}).map {$0.first},
+            sorted(musicians, byLast <|> byFirst).map {$0.first},
             ["Colin", "Jonny", "Ed", "Philip", "Thom"])
+        XCTAssertEqual(
+            sorted(musicians, byLast
+                          <|> Ordering.reverse(byYear)).map {$0.first},
+            ["Jonny", "Colin", "Ed", "Philip", "Thom"])
+        XCTAssertEqual(
+            sorted(musicians, Ordering.by {countElements($0.last)}
+                          <|> Ordering.reverse(byYear)).map {$0.first},
+            ["Thom", "Philip", "Ed", "Jonny", "Colin"])
     }
 
     func testStableSort() {
@@ -49,11 +59,10 @@ class SortingTests: XCTestCase {
 // MARK: -
 // MARK: A band member
 
-private typealias Musician = ( first: String
-                             , last: String
-                             , year: Int
-                             )
-
+private typealias Musician = (first: String, last: String, year: Int)
+private let byFirst = Ordering.by {(m: Musician) in m.first}
+private let byLast  = Ordering.by {(m: Musician) in m.last}
+private let byYear  = Ordering.by {(m: Musician) in m.year}
 private let musicians: [Musician] =
     [ ("Thom",   "Yorke",     1968)
     , ("Jonny",  "Greenwood", 1971)

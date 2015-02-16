@@ -114,6 +114,16 @@ public enum Ordering : Int {
     }
 }
 
+extension Ordering : Printable {
+    public var description: String {
+        switch self {
+        case .LT: return "LT"
+        case .EQ: return "EQ"
+        case .GT: return "GT"
+        }
+    }
+}
+
 /// Evaluate the lexicographic ordering of two comparison expressions. If `left`
 /// evaluates not-equal, return its result. Else, evaluate and return `right`.
 public func || (left: Ordering, right: @autoclosure () -> Ordering) -> Ordering {
