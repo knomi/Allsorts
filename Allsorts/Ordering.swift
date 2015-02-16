@@ -23,6 +23,7 @@ public enum Ordering : Int {
         self = rawValue < 0 ? .LT : rawValue == 0 ? .EQ : .GT
     }
 
+    // FIXME: This is apparently needed to workaround a bug in 1.2-beta1
     public static func create(value: Int) -> Ordering {
         return value < 0 ? .LT : value == 0 ? .EQ : .GT
     }
