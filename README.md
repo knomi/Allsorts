@@ -192,10 +192,10 @@ func   upperBound<Ix : RA>(r: Range<Ix>, ord: Ix -> Ordering) -> Ix
 func   equalRange<Ix : RA>(r: Range<Ix>, ord: Ix -> Ordering) -> Range<Ix>
 ```
 
-Heaps or priority queues
-------------------------
+Other
+-----
 
-For popping minimum elements in `O(log N)` time, Allsorts offers simple push and pop functionality for binary heaps backed by plain `Array`s:
+Ported to Swift from [libc++][] Allsorts implements the push and pop operations for array-backed binary trees. This feature isn't very performant, and should be considered experimental. (For the time being, you're probably better off just sorting an array instead.)
 
 ```swift
 func pushHeap<T: Comparable>(inout heap: [T], value: T)
@@ -207,13 +207,9 @@ func popHeap<T>(inout heap: [T], isOrderedBefore: (T, T) -> Bool) -> T
 func popHeap<T>(inout heap: [T], compare: (T, T) -> Ordering) -> T
 ```
 
-Heaps can be used for quickly finding the smallest `K` elements without sorting the entire array:
-
-```swift
-
-```
 
 ____
 [Swift standard library]: http://swiftdoc.org/
 [Comparable]: http://swiftdoc.org/protocol/Comparable/
 [Equatable]: http://swiftdoc.org/protocol/Equatable/
+[libc++]: http://libcxx.llvm.org/
