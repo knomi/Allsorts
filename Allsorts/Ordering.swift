@@ -46,7 +46,7 @@ extension Ordering : Printable {
 
 /// Evaluate the lexicographic ordering of two comparison expressions. If `left`
 /// evaluates not-equal, return its result. Else, evaluate and return `right`.
-public func || (left: Ordering, @autoclosure right: () -> Ordering) -> Ordering {
+public func || (left: Ordering, right: @autoclosure () -> Ordering) -> Ordering {
     switch left {
     case .LT: return .LT
     case .EQ: return right()

@@ -30,7 +30,7 @@ class SortingTests: XCTestCase {
                           <|> Ordering.reverse(byYear)).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            sorted(musicians, Ordering.by {count($0.last)}
+            sorted(musicians, Ordering.by {countElements($0.last)}
                           <|> Ordering.reverse(byYear)).map {$0.first},
             ["Thom", "Philip", "Ed", "Jonny", "Colin"])
     }
