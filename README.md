@@ -1,7 +1,7 @@
 Allsorts
 ========
 
-A Swift library implementing various algorithms for comparable types.
+Algorithms on sorted collections and comparable types in Swift.
 
 Quick demo
 ----------

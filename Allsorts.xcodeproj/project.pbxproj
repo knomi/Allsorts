@@ -122,7 +122,6 @@
 		E01872151A923836004C617C /* HeapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeapTests.swift; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E087995E1A8E0C9800369B48 /* Allsorts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Allsorts.h; sourceTree = "<group>"; };
 		E08799641A8E0C9900369B48 /* AllsortsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllsortsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087996A1A8E0C9900369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E087996B1A8E0C9900369B48 /* AllsortsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllsortsTests.swift; sourceTree = "<group>"; };
@@ -239,7 +238,6 @@
 		E087995B1A8E0C9800369B48 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E087995E1A8E0C9800369B48 /* Allsorts.h */,
 				E087995D1A8E0C9800369B48 /* Info.plist */,
 				E01871F81A8E4B6E004C617C /* version.sh */,
 				E01871F51A8E232C004C617C /* BinarySearch.swift */,
@@ -700,6 +698,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Allsorts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = Allsorts;
 				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
@@ -718,6 +717,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Allsorts/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = Allsorts;
 				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
