@@ -53,13 +53,12 @@ Allsorts defines `<=>` for any [`Comparable`][Comparable] type, and adds a numbe
 For using `<=>` in a generically typed function, the compared types need to implement the protocol `Orderable`:
 
 ```swift
-public protocol Orderable : _Orderable, Comparable {}
-public protocol _Orderable {
+protocol Orderable {
     func <=> (lhs: Self, rhs: Self) -> Ordering
 }
 ```
 
-In practice, it's enough to define either `==` and `<` or just `<=>`, and then declare conformance to `Orderable`.
+In practice, it's enough to define either `==` and `<` or just `<=>`, and then declare conformance to `Orderable` and `Comparable`.
 
 For any already [`Comparable`][Comparable] type, just declare conformance to `Orderable`, and the default behaviour kicks in defining `<=>` for you! That's exactly what Allsorts does to the types found in the standard library:
 

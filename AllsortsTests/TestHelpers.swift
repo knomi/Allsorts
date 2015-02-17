@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Allsorts
 
 // -----------------------------------------------------------------------------
 // MARK: - Assertions
@@ -36,4 +37,12 @@ func AssertContains<T : Comparable>(interval: @autoclosure () -> ClosedInterval<
                               : "\(ivl) does not contain \(expr) -- \(message)"
     XCTAssert(ivl.contains(expr), msg, file: file, line: line)
 }
+
+// -----------------------------------------------------------------------------
+// MARK: - Conformance checkers
+func isComparableType<T : Comparable>(T.Type) -> Bool { return true }
+func isComparableType<T : Any>(T.Type) -> Bool { return false }
+
+func isOrderableType<T : Orderable>(T.Type) -> Bool { return true }
+func isOrderableType<T : Any>(T.Type) -> Bool { return false }
 

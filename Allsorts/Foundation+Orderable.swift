@@ -29,6 +29,11 @@ public func <=>(left: NSDate, right: NSDate) -> Ordering {
     return Ordering.create(left.compare(right).rawValue)
 }
 
+/// Three-way comparison between two `NSDecimalNumber` values.
+public func <=>(left: NSDecimalNumber, right: NSDecimalNumber) -> Ordering {
+    return Ordering.create(left.compare(right).rawValue)
+}
+
 /// Lexicographical three-way comparison between two `NSIndexPath` values.
 public func <=>(left: NSIndexPath, right: NSIndexPath) -> Ordering {
     return Ordering.create(left.compare(right).rawValue)

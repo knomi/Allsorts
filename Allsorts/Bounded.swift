@@ -5,14 +5,12 @@
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
-public protocol _BoundedType {
+public protocol BoundedType {
     class var min: Self { get }
     class var max: Self { get }
 }
 
-public typealias BoundedType = protocol<_BoundedType, Comparable>
-
-public enum Bounded<T : Orderable> : Orderable, BoundedType {
+public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
     case Min
     case Med(T)
     case Max

@@ -6,7 +6,7 @@
 //
 
 /// Orderable value `T` augmented with an upper bound `.End`.
-public enum Ended<T : Orderable> : Orderable {
+public enum Ended<T : Orderable> : Orderable, Comparable {
     case Another(T)
     case End
     

@@ -11,6 +11,14 @@ import Allsorts
 class BoundedTests : XCTestCase {
 
     func testBounded() {
+        XCTAssert(isComparableType(Bounded<String>))
+        XCTAssert(isComparableType(Bounded<Int>))
+        XCTAssert(isComparableType(Bounded<NSData>))
+
+        XCTAssert(isOrderableType(Bounded<Int>))
+        XCTAssert(isOrderableType(Bounded<String>))
+        XCTAssert(isOrderableType(Bounded<NSData>))
+    
         let start = Bounded<String>.min
         let empty = Bounded("")
         let bar = Bounded("bar")

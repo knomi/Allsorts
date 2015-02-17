@@ -35,6 +35,26 @@ public extension Ordering {
     public static func to<T : Orderable>(right: T) -> T -> Ordering {
         return {left in left <=> right}
     }
+
+    /// Create a unary comparator against a constant `Orderable` and
+    /// `Comparable` value. This function is useful for the various binary
+    /// search algorithms in this library:
+    ///
+    /// ```swift
+    /// let index = binarySearch(sortedArray, Ordering.to(value))
+    /// ```
+    ///
+    /// **Remark:** Coding styles differ, but note that the block
+    /// `{$0 <=> value}` can be used synonymously in place of
+    /// `Ordering.to(value)`.
+    ///
+    /// **Remark:** This overload only exists to make an unambiguous choice in
+    /// the overload resolution for `T`.
+    public static func to<T : protocol<Orderable, Comparable>>
+        (right: T) -> T -> Ordering
+    {
+        return {left in left <=> right}
+    }
     
     /// Create a unary comparator against a `HalfOpenInterval<T>`. Values within
     /// `interval` are considered equal (`Orderable.EQ`), and values less than

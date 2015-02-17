@@ -34,6 +34,16 @@ public enum Ordering : Int {
     }
 }
 
+extension Ordering : Comparable {}
+
+public func == (left: Ordering, right: Ordering) -> Bool {
+    return left.rawValue == right.rawValue
+}
+
+public func < (left: Ordering, right: Ordering) -> Bool {
+    return left.rawValue < right.rawValue
+}
+
 extension Ordering : Printable {
     public var description: String {
         switch self {

@@ -11,6 +11,14 @@ import Allsorts
 class EndedTests : XCTestCase {
 
     func testEnded() {
+        XCTAssert(isComparableType(Ended<String>))
+        XCTAssert(isComparableType(Ended<Int>))
+        XCTAssert(isComparableType(Ended<NSData>))
+
+        XCTAssert(isOrderableType(Ended<Int>))
+        XCTAssert(isOrderableType(Ended<String>))
+        XCTAssert(isOrderableType(Ended<NSData>))
+    
         let empty = Ended("")
         let bar = Ended("bar")
         let baz = Ended("baz")
