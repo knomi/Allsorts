@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "Allsorts"
-  spec.version      = "0.0.4"
+  spec.version      = "0.0.5"
   spec.summary      = "Algorithms on sorted collections and comparable types in Swift."
   spec.homepage     = "https://bitbucket.org/pyrtsa/Allsorts"
 
