@@ -2,7 +2,6 @@
 //  HeapTests.swift
 //  Allsorts
 //
-//  Created by Pyry Jahkola on 16.02.2015.
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 

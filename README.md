@@ -235,6 +235,42 @@ func   equalRange<Ix : RA>(r: Range<Ix>, ord: Ix -> Ordering) -> Range<Ix>
 Other
 -----
 
+### `Ended<T>`
+
+For capping an infinite type like `String` with a maximum bound, wrap it in `Ended<T>`. It behaves like `T?` in `<=>` comparisons but is always a type conforming to `Orderable` (which `T?` can't be before Swift allows constrained extension of types).
+
+```swift
+enum Ended<T : Orderable> : Orderable {
+    case Another(T)
+    case End
+}
+
+let a: Ended<String> = Ended("")    // .Another("")
+let b: Ended<String> = Ended("foo") // .Another("foo")
+let c: Ended<String> = Ended(nil)   // .End
+let d: Ended<String> = Ended()      // .End
+
+a <=> b // .LT
+b <=> c // .LT
+c <=> d // .EQ
+```
+
+### `Bounded<T>`
+
+`Bounded<T>` is like `Ended<T>` except with caps in both ends:
+
+```swift
+enum Bounded<T : Orderable> : Orderable, BoundedType {
+    case Min
+    case Med(T)
+    case Max
+}
+```
+
+In addition to `Orderable`, it conforms to another protocol `BoundedType` which simply adds the static member constants `Self.min` and `Self.max`, returning `.Min` and `.Max`, respectively.
+
+### Binary heap
+
 Ported to Swift from [libc++][] Allsorts implements the push and pop operations for array-backed binary trees. This feature isn't very performant, and should be considered experimental. (For the time being, you're probably better off just sorting an array instead.)
 
 ```swift
