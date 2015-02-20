@@ -54,7 +54,7 @@ For using `<=>` in a generically typed function, the compared types need to impl
 
 ```swift
 protocol Orderable {
-    func <=> (lhs: Self, rhs: Self) -> Ordering
+    func <=> (left: Self, right: Self) -> Ordering
 }
 ```
 
@@ -68,7 +68,7 @@ extension Int    : Orderable {}
 extension UInt   : Orderable {} // ...
 
 // Uses the case-sensitive, locale-insensitive `String.compare`:
-public func <=> (lhs: String, rhs: String) -> Ordering
+public func <=> (left: String, right: String) -> Ordering
 extension String : Orderable {}
 ```
 

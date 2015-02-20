@@ -15,8 +15,6 @@
 		E01871EC1A8E1AE5004C617C /* Allsorts.framework in Resources */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E01871EE1A8E1B50004C617C /* Allsorts.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E01871F61A8E232C004C617C /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871F51A8E232C004C617C /* BinarySearch.swift */; };
-		E01871F91A8E4B6E004C617C /* version.sh in Resources */ = {isa = PBXBuildFile; fileRef = E01871F81A8E4B6E004C617C /* version.sh */; };
-		E01871FA1A8E4B6E004C617C /* version.sh in Resources */ = {isa = PBXBuildFile; fileRef = E01871F81A8E4B6E004C617C /* version.sh */; };
 		E01872011A91EA38004C617C /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871FE1A91EA15004C617C /* TestHelpers.swift */; };
 		E01872021A91EA38004C617C /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871FE1A91EA15004C617C /* TestHelpers.swift */; };
 		E01872031A91EA3D004C617C /* OrderableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871FB1A91EA01004C617C /* OrderableTests.swift */; };
@@ -118,7 +116,7 @@
 		E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Orderable.swift"; sourceTree = "<group>"; };
 		E01871E11A8E14B7004C617C /* Optional+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Orderable.swift"; sourceTree = "<group>"; };
 		E01871F51A8E232C004C617C /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
-		E01871F81A8E4B6E004C617C /* version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = version.sh; sourceTree = "<group>"; };
+		E01871F81A8E4B6E004C617C /* version.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = version.bash; sourceTree = "<group>"; };
 		E01871FB1A91EA01004C617C /* OrderableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderableTests.swift; sourceTree = "<group>"; };
 		E01871FE1A91EA15004C617C /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		E01872051A91F1D2004C617C /* BinarySearchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchTests.swift; sourceTree = "<group>"; };
@@ -251,7 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				E087995D1A8E0C9800369B48 /* Info.plist */,
-				E01871F81A8E4B6E004C617C /* version.sh */,
+				E01871F81A8E4B6E004C617C /* version.bash */,
 				E01871F51A8E232C004C617C /* BinarySearch.swift */,
 				E0E829E51A9367E7004A08F4 /* Bounded.swift */,
 				E0FC660F1A929898001D9F91 /* Comparators.swift */,
@@ -326,6 +324,7 @@
 				E08799551A8E0C9800369B48 /* Frameworks */,
 				E08799561A8E0C9800369B48 /* Headers */,
 				E08799571A8E0C9800369B48 /* Resources */,
+				E021E8531A97AECF00A865E7 /* Set Version Number */,
 			);
 			buildRules = (
 			);
@@ -363,6 +362,7 @@
 				E08799771A8E0D1900369B48 /* Frameworks */,
 				E08799781A8E0D1900369B48 /* Headers */,
 				E08799791A8E0D1900369B48 /* Resources */,
+				E021E8541A97AF1600A865E7 /* Set Version Number */,
 			);
 			buildRules = (
 			);
@@ -461,7 +461,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E01871FA1A8E4B6E004C617C /* version.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +475,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E01871F91A8E4B6E004C617C /* version.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +497,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E021E8531A97AECF00A865E7 /* Set Version Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "source Allsorts/version.bash";
+		};
+		E021E8541A97AF1600A865E7 /* Set Version Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "source Allsorts/version.bash";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E08799541A8E0C9800369B48 /* Sources */ = {
