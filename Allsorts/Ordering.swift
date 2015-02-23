@@ -23,11 +23,6 @@ public enum Ordering : Int {
         self = rawValue < 0 ? .LT : rawValue == 0 ? .EQ : .GT
     }
 
-    // FIXME: This is apparently needed to workaround a bug in 1.2-beta1
-    public static func create(value: Int) -> Ordering {
-        return value < 0 ? .LT : value == 0 ? .EQ : .GT
-    }
-    
     /// Compute the `Ordering` between the `Comparable`\ s `left` and `right` by
     /// using the `<` operator and, if not less-than, the `==` operator.
     public static func compare<T : Comparable>(left: T, _ right: T) -> Ordering {

@@ -11,13 +11,13 @@ import Allsorts
 class OrderingTests: XCTestCase {
 
     func testOrdering() {
-        XCTAssertEqual(Ordering.create(Int.min), Ordering.LT)
-        XCTAssertEqual(Ordering.create(-2),      Ordering.LT)
-        XCTAssertEqual(Ordering.create(-1),      Ordering.LT)
-        XCTAssertEqual(Ordering.create(0),       Ordering.EQ)
-        XCTAssertEqual(Ordering.create(1),       Ordering.GT)
-        XCTAssertEqual(Ordering.create(3),       Ordering.GT)
-        XCTAssertEqual(Ordering.create(Int.max), Ordering.GT)
+        XCTAssertEqual(Ordering(rawValue: Int.min), Ordering.LT)
+        XCTAssertEqual(Ordering(rawValue: -2),      Ordering.LT)
+        XCTAssertEqual(Ordering(rawValue: -1),      Ordering.LT)
+        XCTAssertEqual(Ordering(rawValue: 0),       Ordering.EQ)
+        XCTAssertEqual(Ordering(rawValue: 1),       Ordering.GT)
+        XCTAssertEqual(Ordering(rawValue: 3),       Ordering.GT)
+        XCTAssertEqual(Ordering(rawValue: Int.max), Ordering.GT)
         
         XCTAssertEqual(Ordering.compare(Int.min, Int.max), Ordering.LT)
         XCTAssertEqual(Ordering.compare(Int.min, 1), Ordering.LT)
