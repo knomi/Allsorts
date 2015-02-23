@@ -125,6 +125,11 @@ public func <=> <T>(left: T, rightInterval: HalfOpenInterval<T>) -> Ordering {
          : left < rightInterval.end ? .EQ : .GT
 }
 
+/// The reverse of `right <=> leftInterval`.
+public func <=> <T>(leftInterval: HalfOpenInterval<T>, right: T) -> Ordering {
+    return -(right <=> leftInterval)
+}
+
 /// Compare `left` to an interval of right-hand side values, `rightInterval`.
 ///
 /// Values within `rightInterval` are considered equal (`Orderable.EQ`), and
@@ -133,4 +138,9 @@ public func <=> <T>(left: T, rightInterval: HalfOpenInterval<T>) -> Ordering {
 public func <=> <T>(left: T, rightInterval: ClosedInterval<T>) -> Ordering {
     return left < rightInterval.start ? .LT
          : left > rightInterval.end ? .GT : .EQ
+}
+
+/// The reverse of `right <=> leftInterval`.
+public func <=> <T>(leftInterval: ClosedInterval<T>, right: T) -> Ordering {
+    return -(right <=> leftInterval)
 }

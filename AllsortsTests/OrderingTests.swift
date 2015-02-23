@@ -73,6 +73,30 @@ class OrderingTests: XCTestCase {
         XCTAssertEqual(Ordering.within("baz" ..< "foo")("cow"), Ordering.EQ)
         XCTAssertEqual(Ordering.within("baz" ..< "foo")("foo"), Ordering.GT)
         XCTAssertEqual(Ordering.within("baz" ..< "foo")("foo!"), Ordering.GT)
+        
+        XCTAssertEqual(0.5 <=> 1...2, Ordering.LT)
+        XCTAssertEqual(1.5 <=> 1...2, Ordering.EQ)
+        XCTAssertEqual(1.5 <=> 1...2, Ordering.EQ)
+        XCTAssertEqual(2.0 <=> 1...2, Ordering.EQ)
+        XCTAssertEqual(2.1 <=> 1...2, Ordering.GT)
+        
+        XCTAssertEqual(1...2 <=> 0.5, Ordering.GT)
+        XCTAssertEqual(1...2 <=> 1.5, Ordering.EQ)
+        XCTAssertEqual(1...2 <=> 1.5, Ordering.EQ)
+        XCTAssertEqual(1...2 <=> 2.0, Ordering.EQ)
+        XCTAssertEqual(1...2 <=> 2.1, Ordering.LT)
+
+        XCTAssertEqual(0.5 <=> 1..<2, Ordering.LT)
+        XCTAssertEqual(1.5 <=> 1..<2, Ordering.EQ)
+        XCTAssertEqual(1.5 <=> 1..<2, Ordering.EQ)
+        XCTAssertEqual(2.0 <=> 1..<2, Ordering.GT)
+        XCTAssertEqual(2.1 <=> 1..<2, Ordering.GT)
+        
+        XCTAssertEqual(1..<2 <=> 0.5, Ordering.GT)
+        XCTAssertEqual(1..<2 <=> 1.5, Ordering.EQ)
+        XCTAssertEqual(1..<2 <=> 1.5, Ordering.EQ)
+        XCTAssertEqual(1..<2 <=> 2.0, Ordering.LT)
+        XCTAssertEqual(1..<2 <=> 2.1, Ordering.LT)
     }
 
 }

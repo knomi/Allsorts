@@ -36,6 +36,10 @@ public enum Ordering : Int {
 
 extension Ordering : Comparable {}
 
+prefix func -(reversed: Ordering) -> Ordering {
+    return Ordering(rawValue: -reversed.rawValue)
+}
+
 public func == (left: Ordering, right: Ordering) -> Bool {
     return left.rawValue == right.rawValue
 }
