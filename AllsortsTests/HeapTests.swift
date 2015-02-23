@@ -69,7 +69,7 @@ private func randomMax<T : UnsignedIntegerType>(max: T) -> T {
     let m = bitwiseCeil(max)
     var buf = T(0)
     do {
-        arc4random_buf(&buf, UInt(sizeof(UInt.self)))
+        arc4random_buf(&buf, sizeof(UInt.self))
         buf &= m
     } while buf > max
     return buf

@@ -775,6 +775,7 @@
 				PRODUCT_NAME = Allsorts;
 				PROVISIONING_PROFILE = "b5d68f6c-1b26-4c93-a232-d29973acf141";
 				SKIP_INSTALL = YES;
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 			};
 			name = Release;
 		};
@@ -848,6 +849,7 @@
 				PRODUCT_NAME = Allsorts;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 			};
 			name = Release;
 		};

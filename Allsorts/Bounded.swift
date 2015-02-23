@@ -6,8 +6,8 @@
 //
 
 public protocol BoundedType {
-    class var min: Self { get }
-    class var max: Self { get }
+    static var min: Self { get }
+    static var max: Self { get }
 }
 
 public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
