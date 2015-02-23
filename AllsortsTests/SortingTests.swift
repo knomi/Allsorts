@@ -2,7 +2,6 @@
 //  SortingTests.swift
 //  Allsorts
 //
-//  Created by Pyry Jahkola on 16.02.2015.
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
@@ -30,7 +29,7 @@ class SortingTests: XCTestCase {
                           <|> Ordering.reverse(byYear)).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            sorted(musicians, Ordering.by {count($0.last)}
+            sorted(musicians, Ordering.by {countElements($0.last)}
                           <|> Ordering.reverse(byYear)).map {$0.first},
             ["Thom", "Philip", "Ed", "Jonny", "Colin"])
     }

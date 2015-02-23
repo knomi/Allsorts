@@ -72,13 +72,13 @@ class OrderableTests : XCTestCase {
     
         XCTAssertEqual(NSData() <=> NSData(), Ordering.EQ)
         XCTAssertEqual(NSData()
-                   <=> "".dataUsingEncoding(NSUTF8StringEncoding), Ordering.EQ)
+                   <=> "".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.EQ)
         XCTAssertEqual(NSData()
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding), Ordering.LT)
-        XCTAssertEqual("!".dataUsingEncoding(NSUTF8StringEncoding)
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding), Ordering.EQ)
-        XCTAssertEqual("!!".dataUsingEncoding(NSUTF8StringEncoding)
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding), Ordering.GT)
+                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.LT)
+        XCTAssertEqual("!".dataUsingEncoding(NSUTF8StringEncoding)!
+                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.EQ)
+        XCTAssertEqual("!!".dataUsingEncoding(NSUTF8StringEncoding)!
+                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.GT)
 
         // FIXME: Avoiding `as!` while still supporting Swift 1.1
         let distantPast = (NSDate.distantPast() as? NSDate)!
@@ -121,7 +121,7 @@ class OrderableTests : XCTestCase {
 
 /// This struct is used for testing how `Orderable` can be used with ordinary
 /// user-defined data structures.
-private struct Record<K : Orderable, V> : Orderable {
+private struct Record<K : Orderable, V> : Orderable, Comparable {
     var key: K
     var value: V
     init(_ k: K, _ v: V) { key = k; value = v }
@@ -136,7 +136,7 @@ private func <=> <K, V>(a: Record<K, V>, b: Record<K, V>) -> Ordering {
 /// This struct is used for checking that `QuicklyDifferent` doesn't perform
 /// comparisons overly eagerly. If `.Bad` is compared with something, a test
 /// assertion failure is recorded.
-private enum HardlyComparable : Orderable {
+private enum HardlyComparable : Orderable, Comparable {
     case One
     case Two
     case Bad
@@ -162,7 +162,7 @@ private func <=> (a: HardlyComparable, b: HardlyComparable) -> Ordering {
 /// relying on `<=>` for the less-than comparisons. In other words, using this
 /// struct to test that `Orderable` and `Comparable` play decently alongside
 /// each other.
-private struct QuicklyDifferent : Orderable {
+private struct QuicklyDifferent : Orderable, Comparable {
     let elements: [HardlyComparable]
     init(_ elements: [HardlyComparable]) { self.elements = elements }
 }
@@ -183,10 +183,3 @@ private func indexPath(indexes: Int...) -> NSIndexPath {
     var path = indexes
     return NSIndexPath(indexes: &path, length: path.count)
 }
-
-// MARK: Conformance checkers
-private func isComparableType<T : Comparable>(T.Type) -> Bool { return true }
-private func isComparableType<T : Any>(T.Type) -> Bool { return false }
-private func isOrderableType<T : Orderable>(T.Type) -> Bool { return true }
-private func isOrderableType<T : Any>(T.Type) -> Bool { return false }
-

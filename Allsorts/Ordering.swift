@@ -35,6 +35,20 @@ public enum Ordering : Int {
     }
 }
 
+extension Ordering : Comparable {}
+
+prefix func -(reversed: Ordering) -> Ordering {
+    return Ordering(rawValue: -reversed.rawValue)
+}
+
+public func == (left: Ordering, right: Ordering) -> Bool {
+    return left.rawValue == right.rawValue
+}
+
+public func < (left: Ordering, right: Ordering) -> Bool {
+    return left.rawValue < right.rawValue
+}
+
 extension Ordering : Printable {
     public var description: String {
         switch self {
@@ -47,7 +61,7 @@ extension Ordering : Printable {
 
 /// Evaluate the lexicographic ordering of two comparison expressions. If `left`
 /// evaluates not-equal, return its result. Else, evaluate and return `right`.
-public func || (left: Ordering, @autoclosure right: () -> Ordering) -> Ordering {
+public func || (left: Ordering, right: @autoclosure () -> Ordering) -> Ordering {
     switch left {
     case .LT: return .LT
     case .EQ: return right()

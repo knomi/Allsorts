@@ -1,7 +1,7 @@
 Allsorts
 ========
 
-A Swift library implementing various algorithms for comparable types.
+Algorithms on sorted collections and comparable types in Swift.
 
 Quick demo
 ----------
@@ -53,13 +53,12 @@ Allsorts defines `<=>` for any [`Comparable`][Comparable] type, and adds a numbe
 For using `<=>` in a generically typed function, the compared types need to implement the protocol `Orderable`:
 
 ```swift
-public protocol Orderable : _Orderable, Comparable {}
-public protocol _Orderable {
-    func <=> (lhs: Self, rhs: Self) -> Ordering
+protocol Orderable {
+    func <=> (left: Self, right: Self) -> Ordering
 }
 ```
 
-In practice, it's enough to define either `==` and `<` or just `<=>`, and then declare conformance to `Orderable`.
+In practice, it's enough to define either `==` and `<` or just `<=>`, and then declare conformance to `Orderable` and `Comparable`.
 
 For any already [`Comparable`][Comparable] type, just declare conformance to `Orderable`, and the default behaviour kicks in defining `<=>` for you! That's exactly what Allsorts does to the types found in the standard library:
 
@@ -69,7 +68,7 @@ extension Int    : Orderable {}
 extension UInt   : Orderable {} // ...
 
 // Uses the case-sensitive, locale-insensitive `String.compare`:
-public func <=> (lhs: String, rhs: String) -> Ordering
+public func <=> (left: String, right: String) -> Ordering
 extension String : Orderable {}
 ```
 
@@ -119,7 +118,7 @@ let musicians: [Musician] = [("Thom",   "Yorke",     1968),
 sorted(names, byLast <|> byFirst).map {$0.first}
 //=> ["Colin", "Jonny", "Ed", "Philip", "Thom"]
 
-sorted(names, Ordering.by {count($0.last)}
+sorted(names, Ordering.by {countElements($0.last)}
           <|> Ordering.reverse(byYear)
 ).map {$0.first}
 //=> ["Thom", "Philip", "Ed", "Jonny", "Colin"]
@@ -234,6 +233,42 @@ func   equalRange<Ix : RA>(r: Range<Ix>, ord: Ix -> Ordering) -> Range<Ix>
 
 Other
 -----
+
+### `Ended<T>`
+
+For capping an infinite type like `String` with a maximum bound, wrap it in `Ended<T>`. It behaves like `T?` in `<=>` comparisons but is always a type conforming to `Orderable` (which `T?` can't be before Swift allows constrained extension of types).
+
+```swift
+enum Ended<T : Orderable> : Orderable {
+    case Another(T)
+    case End
+}
+
+let a: Ended<String> = Ended("")    // .Another("")
+let b: Ended<String> = Ended("foo") // .Another("foo")
+let c: Ended<String> = Ended(nil)   // .End
+let d: Ended<String> = Ended()      // .End
+
+a <=> b // .LT
+b <=> c // .LT
+c <=> d // .EQ
+```
+
+### `Bounded<T>`
+
+`Bounded<T>` is like `Ended<T>` except with caps in both ends:
+
+```swift
+enum Bounded<T : Orderable> : Orderable, BoundedType {
+    case Min
+    case Med(T)
+    case Max
+}
+```
+
+In addition to `Orderable`, it conforms to another protocol `BoundedType` which simply adds the static member constants `Self.min` and `Self.max`, returning `.Min` and `.Max`, respectively.
+
+### Binary heap
 
 Ported to Swift from [libc++][] Allsorts implements the push and pop operations for array-backed binary trees. This feature isn't very performant, and should be considered experimental. (For the time being, you're probably better off just sorting an array instead.)
 
