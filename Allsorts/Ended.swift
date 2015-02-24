@@ -33,6 +33,15 @@ public enum Ended<T : Orderable> : Orderable, Comparable {
     }
 }
 
+extension Ended : Printable {
+    public var description: String {
+        switch self {
+        case let .Another(x): return "Another(\(x))"
+        case     .End:        return "End"
+        }
+    }
+}
+
 /// Ordering based on `a <=> b == .Another(a) <=> .Another(b)` and
 /// `.Another(_) < .End`.
 public func <=> <T>(a: Ended<T>, b: Ended<T>) -> Ordering {

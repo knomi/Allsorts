@@ -40,5 +40,13 @@ class BoundedTests : XCTestCase {
         XCTAssertLessThan(baz, foo)
         XCTAssertLessThan(foo, end)
     }
+    
+    func testPrintable() {
+        XCTAssertEqual(Bounded<String>.min.description, "Min")
+        XCTAssertEqual(Bounded("foo").description, "Med(foo)")
+        XCTAssertEqual(Bounded<String>.max.description, "Max")
+        
+        XCTAssertEqual((Bounded("bar") ... Bounded("foo")).description, "Med(bar)...Med(foo)")
+    }
 
 }

@@ -29,6 +29,8 @@
 		E01872141A9223C7004C617C /* Heap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01872121A9223C7004C617C /* Heap.swift */; };
 		E01872161A923836004C617C /* HeapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01872151A923836004C617C /* HeapTests.swift */; };
 		E01872171A923836004C617C /* HeapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01872151A923836004C617C /* HeapTests.swift */; };
+		E07B2EBF1A9C8E5500474C17 /* Swift+BoundedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07B2EBE1A9C8E5500474C17 /* Swift+BoundedType.swift */; };
+		E07B2EC01A9C8E5500474C17 /* Swift+BoundedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07B2EBE1A9C8E5500474C17 /* Swift+BoundedType.swift */; };
 		E08799651A8E0C9900369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E087996C1A8E0C9900369B48 /* AllsortsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E087996B1A8E0C9900369B48 /* AllsortsTests.swift */; };
 		E08799891A8E0DA000369B48 /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E087997D1A8E0D1900369B48 /* Allsorts.framework */; };
@@ -126,6 +128,7 @@
 		E018720F1A920EA5004C617C /* SortingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingTests.swift; sourceTree = "<group>"; };
 		E01872121A9223C7004C617C /* Heap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
 		E01872151A923836004C617C /* HeapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeapTests.swift; sourceTree = "<group>"; };
+		E07B2EBE1A9C8E5500474C17 /* Swift+BoundedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+BoundedType.swift"; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E08799641A8E0C9900369B48 /* AllsortsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllsortsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +201,7 @@
 			children = (
 				E01871E11A8E14B7004C617C /* Optional+Orderable.swift */,
 				E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */,
+				E07B2EBE1A9C8E5500474C17 /* Swift+BoundedType.swift */,
 				E08799BC1A8E0F2D00369B48 /* Swift+Orderable.swift */,
 				E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */,
 			);
@@ -542,6 +546,7 @@
 				E01871DC1A8E141C004C617C /* Tuple+Orderable.swift in Sources */,
 				E018720E1A920954004C617C /* Sorting.swift in Sources */,
 				E08799C01A8E0F3F00369B48 /* Foundation+Orderable.swift in Sources */,
+				E07B2EC01A9C8E5500474C17 /* Swift+BoundedType.swift in Sources */,
 				E0E829ED1A93686C004A08F4 /* Ended.swift in Sources */,
 				E01871E21A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
 				E01871DF1A8E149D004C617C /* SequenceType+Orderable.swift in Sources */,
@@ -579,6 +584,7 @@
 				E0FC66161A929910001D9F91 /* Foundation+Orderable.swift in Sources */,
 				E0FC66131A9298EE001D9F91 /* BinarySearch.swift in Sources */,
 				E0FC661A1A929920001D9F91 /* Tuple+Orderable.swift in Sources */,
+				E07B2EBF1A9C8E5500474C17 /* Swift+BoundedType.swift in Sources */,
 				E0E829EC1A93686C004A08F4 /* Ended.swift in Sources */,
 				E0FC66141A9298FD001D9F91 /* Heap.swift in Sources */,
 				E0FC66101A929898001D9F91 /* Comparators.swift in Sources */,

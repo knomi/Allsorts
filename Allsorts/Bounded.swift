@@ -21,6 +21,16 @@ public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
     public static var max: Bounded { return .Max }
 }
 
+extension Bounded : Printable {
+    public var description: String {
+        switch self {
+        case     .Min:    return "Min"
+        case let .Med(x): return "Med(\(x))"
+        case     .Max:    return "Max"
+        }
+    }
+}
+
 public func <=> <T>(a: Bounded<T>, b: Bounded<T>) -> Ordering {
     switch a {
     case .Min: switch b { case .Min: return .EQ; default: return .LT }
