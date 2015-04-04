@@ -10,7 +10,6 @@
 		E01871D91A8E1216004C617C /* Foundation+Ordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871D81A8E1216004C617C /* Foundation+Ordering.swift */; };
 		E01871DC1A8E141C004C617C /* Tuple+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */; };
 		E01871DF1A8E149D004C617C /* SequenceType+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */; };
-		E01871E21A8E14B7004C617C /* Optional+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871E11A8E14B7004C617C /* Optional+Orderable.swift */; };
 		E01871E91A8E1AB2004C617C /* Allsorts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E01871EC1A8E1AE5004C617C /* Allsorts.framework in Resources */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; };
 		E01871EE1A8E1B50004C617C /* Allsorts.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E08799591A8E0C9800369B48 /* Allsorts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -62,7 +61,6 @@
 		E0FC66151A92990A001D9F91 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018720C1A920954004C617C /* Sorting.swift */; };
 		E0FC66161A929910001D9F91 /* Foundation+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BF1A8E0F3F00369B48 /* Foundation+Orderable.swift */; };
 		E0FC66171A929914001D9F91 /* Foundation+Ordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871D81A8E1216004C617C /* Foundation+Ordering.swift */; };
-		E0FC66181A929918001D9F91 /* Optional+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871E11A8E14B7004C617C /* Optional+Orderable.swift */; };
 		E0FC66191A92991C001D9F91 /* SequenceType+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */; };
 		E0FC661A1A929920001D9F91 /* Tuple+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */; };
 /* End PBXBuildFile section */
@@ -116,7 +114,6 @@
 		E01871D81A8E1216004C617C /* Foundation+Ordering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Ordering.swift"; sourceTree = "<group>"; };
 		E01871DB1A8E141C004C617C /* Tuple+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tuple+Orderable.swift"; sourceTree = "<group>"; };
 		E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Orderable.swift"; sourceTree = "<group>"; };
-		E01871E11A8E14B7004C617C /* Optional+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Orderable.swift"; sourceTree = "<group>"; };
 		E01871F51A8E232C004C617C /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		E01871F81A8E4B6E004C617C /* version.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = version.bash; sourceTree = "<group>"; };
 		E01871FB1A91EA01004C617C /* OrderableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderableTests.swift; sourceTree = "<group>"; };
@@ -199,7 +196,6 @@
 		E01871E41A8E17D1004C617C /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				E01871E11A8E14B7004C617C /* Optional+Orderable.swift */,
 				E01871DE1A8E149D004C617C /* SequenceType+Orderable.swift */,
 				E07B2EBE1A9C8E5500474C17 /* Swift+BoundedType.swift */,
 				E08799BC1A8E0F2D00369B48 /* Swift+Orderable.swift */,
@@ -548,7 +544,6 @@
 				E08799C01A8E0F3F00369B48 /* Foundation+Orderable.swift in Sources */,
 				E07B2EC01A9C8E5500474C17 /* Swift+BoundedType.swift in Sources */,
 				E0E829ED1A93686C004A08F4 /* Ended.swift in Sources */,
-				E01871E21A8E14B7004C617C /* Optional+Orderable.swift in Sources */,
 				E01871DF1A8E149D004C617C /* SequenceType+Orderable.swift in Sources */,
 				E0FC66111A929898001D9F91 /* Comparators.swift in Sources */,
 				E0E829E71A9367E7004A08F4 /* Bounded.swift in Sources */,
@@ -577,7 +572,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0C8FDB01A929F2300CBFA76 /* Swift+Orderable.swift in Sources */,
-				E0FC66181A929918001D9F91 /* Optional+Orderable.swift in Sources */,
 				E0FC66171A929914001D9F91 /* Foundation+Ordering.swift in Sources */,
 				E0FC66151A92990A001D9F91 /* Sorting.swift in Sources */,
 				E0FC66191A92991C001D9F91 /* SequenceType+Orderable.swift in Sources */,
