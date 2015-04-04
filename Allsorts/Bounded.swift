@@ -17,8 +17,23 @@ public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
     
     public init(_ value: T) { self = .Med(value) }
     
+    public static func pure(value: T) -> Bounded {
+        return .Med(value)
+    }
+    
     public static var min: Bounded { return .Min }
     public static var max: Bounded { return .Max }
+    
+    public func analysis<R>(#ifMin: () -> R,
+                             ifMed: T -> R,
+                             ifMax: () -> R) -> R
+    {
+        switch self {
+        case     .Min:    return ifMin()
+        case let .Med(x): return ifMed(x)
+        case     .Max:    return ifMax()
+        }
+    }
 }
 
 extension Bounded : Printable {
@@ -32,14 +47,15 @@ extension Bounded : Printable {
 }
 
 public func <=> <T>(a: Bounded<T>, b: Bounded<T>) -> Ordering {
-    switch a {
-    case .Min: switch b { case .Min: return .EQ; default: return .LT }
-    case .Max: switch b { case .Max: return .EQ; default: return .GT }
-    case let .Med(a):
-        switch b {
-        case     .Max:    return .LT
-        case let .Med(b): return a <=> b
-        case     .Min:    return .GT
-        }
+    switch (a, b) {
+    case     (.Min,    .Min   ): return .EQ
+    case     (.Min,    _      ): return .LT
+    
+    case     (.Med,    .Max   ): return .LT
+    case let (.Med(a), .Med(b)): return a <=> b
+    case     (.Med,    .Min   ): return .GT
+    
+    case     (.Max,    .Max   ): return .EQ
+    case     (.Max,    _      ): return .GT
     }
 }
