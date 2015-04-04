@@ -5,9 +5,12 @@
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
-/// Orderable value `T` augmented with an upper bound `.End`.
+/// Orderable value `T` augmented with an upper bound `.End`. An `Ended<T>` is
+/// structurally equivalent to `Optional<T>` but flips the ordering of the
+/// `Optional.Some(T)` (~ `Ended.Value(T)`) and the `Optional.None` (~
+/// `Ended.End`) cases such that `.Value(x)` compares less than `.End`.
 public enum Ended<T : Orderable> : Orderable, Comparable {
-    case Another(T)
+    case Value(T)
     case End
     
     public init() {
@@ -15,20 +18,31 @@ public enum Ended<T : Orderable> : Orderable, Comparable {
     }
     
     public init(_ value: T?) {
-        self = value.map {x in .Another(x)} ?? .End
+        self = value.map {x in .Value(x)} ?? .End
     }
     
-    public var another: T? {
+    public static func pure(value: T) -> Ended {
+        return .Value(value)
+    }
+    
+    public var value: T? {
         switch self {
-        case let .Another(x): return .Some(x)
-        case     .End:        return .None
+        case let .Value(x): return .Some(x)
+        case     .End:      return .None
         }
     }
     
-    public var isEnd: Bool {
+    public func map<U>(f: T -> U) -> Ended<U> {
         switch self {
-        case .Another: return false
-        case .End:     return true
+        case let .Value(x): return .Value(f(x))
+        case     .End:      return .End
+        }
+    }
+    
+    public func flatMap<U>(f: T -> Ended<U>) -> Ended<U> {
+        switch self {
+        case let .Value(x): return f(x)
+        case     .End:      return .End
         }
     }
 }
@@ -36,19 +50,19 @@ public enum Ended<T : Orderable> : Orderable, Comparable {
 extension Ended : Printable {
     public var description: String {
         switch self {
-        case let .Another(x): return "Another(\(x))"
-        case     .End:        return "End"
+        case let .Value(x): return "Value(\(x))"
+        case     .End:      return "End"
         }
     }
 }
 
-/// Ordering based on `a <=> b == .Another(a) <=> .Another(b)` and
-/// `.Another(_) < .End`.
+/// Ordering based on `a <=> b == .Value(a) <=> .Value(b)` and
+/// `.Value(_) < .End`.
 public func <=> <T>(a: Ended<T>, b: Ended<T>) -> Ordering {
     switch (a, b) {
-    case     (.Another,    .End       ): return .LT
-    case     (.End,        .End       ): return .EQ
-    case     (.End,        .Another   ): return .GT
-    case let (.Another(a), .Another(b)): return a <=> b
+    case let (.Value(a), .Value(b)): return a <=> b
+    case     (.Value,    .End     ): return .LT
+    case     (.End,      .End     ): return .EQ
+    case     (.End,      .Value   ): return .GT
     }
 }
