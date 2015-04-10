@@ -6,8 +6,8 @@
 //
 
 public protocol BoundedType {
-    class var min: Self { get }
-    class var max: Self { get }
+    static var min: Self { get }
+    static var max: Self { get }
 }
 
 public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
@@ -24,9 +24,9 @@ public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
     public static var min: Bounded { return .Min }
     public static var max: Bounded { return .Max }
     
-    public func analysis<R>(#ifMin: () -> R,
-                             ifMed: T -> R,
-                             ifMax: () -> R) -> R
+    public func analysis<R>(@noescape #ifMin: () -> R,
+                            @noescape  ifMed: T -> R,
+                            @noescape  ifMax: () -> R) -> R
     {
         switch self {
         case     .Min:    return ifMin()
@@ -42,6 +42,16 @@ extension Bounded : Printable {
         case     .Min:    return "Min"
         case let .Med(x): return "Med(\(x))"
         case     .Max:    return "Max"
+        }
+    }
+}
+
+extension Bounded : Printable {
+    public var debugDescription: String {
+        switch self {
+        case     .Min:    return "Bounded.Min"
+        case let .Med(x): return "Bounded.Med(\(toDebugString(x)))"
+        case     .Max:    return "Bounded.Max"
         }
     }
 }

@@ -18,7 +18,7 @@ extension NSUUID          : Orderable {}
 /// Lexicographical three-way comparison between two `NSData` treated as arrays
 /// of unsigned bytes.
 public func <=>(left: NSData, right: NSData) -> Ordering {
-    let c = memcmp(left.bytes, right.bytes, UInt(min(left.length, right.length)))
+    let c = memcmp(left.bytes, right.bytes, min(left.length, right.length))
     if c < 0 { return .LT }
     if c > 0 { return .GT }
     return Ordering.compare(left.length, right.length)

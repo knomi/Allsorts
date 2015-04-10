@@ -118,7 +118,7 @@ let musicians: [Musician] = [("Thom",   "Yorke",     1968),
 sorted(names, byLast <|> byFirst).map {$0.first}
 //=> ["Colin", "Jonny", "Ed", "Philip", "Thom"]
 
-sorted(names, Ordering.by {countElements($0.last)}
+sorted(names, Ordering.by {count($0.last)}
           <|> Ordering.reverse(byYear)
 ).map {$0.first}
 //=> ["Thom", "Philip", "Ed", "Jonny", "Colin"]

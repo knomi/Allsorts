@@ -32,14 +32,14 @@ public enum Ended<T : Orderable> : Orderable, Comparable {
         }
     }
     
-    public func map<U>(f: T -> U) -> Ended<U> {
+    public func map<U>(@noescape f: T -> U) -> Ended<U> {
         switch self {
         case let .Value(x): return .Value(f(x))
         case     .End:      return .End
         }
     }
     
-    public func flatMap<U>(f: T -> Ended<U>) -> Ended<U> {
+    public func flatMap<U>(@noescape f: T -> Ended<U>) -> Ended<U> {
         switch self {
         case let .Value(x): return f(x)
         case     .End:      return .End
@@ -52,6 +52,15 @@ extension Ended : Printable {
         switch self {
         case let .Value(x): return "Value(\(x))"
         case     .End:      return "End"
+        }
+    }
+}
+
+extension Ended : DebugPrintable {
+    public var debugDescription: String {
+        switch self {
+        case let .Value(x): return "Ended.Value(\(toDebugString(x)))"
+        case     .End:      return "Ended.End"
         }
     }
 }
