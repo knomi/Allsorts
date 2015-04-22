@@ -22,7 +22,7 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "YES">
@@ -31,6 +31,20 @@
                BlueprintIdentifier = "E08799631A8E0C9900369B48"
                BuildableName = "AllsortsTests.xctest"
                BlueprintName = "Allsorts iOS Tests"
+               ReferencedContainer = "container:Allsorts.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E08799921A8E0DF000369B48"
+               BuildableName = "Allsorts Demo.app"
+               BlueprintName = "Allsorts Demo"
                ReferencedContainer = "container:Allsorts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
