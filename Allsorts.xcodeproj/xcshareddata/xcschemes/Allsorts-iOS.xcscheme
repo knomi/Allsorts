@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E08799581A8E0C9800369B48"
                BuildableName = "Allsorts.framework"
-               BlueprintName = "Allsorts iOS"
+               BlueprintName = "Allsorts-iOS"
                ReferencedContainer = "container:Allsorts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E08799631A8E0C9900369B48"
                BuildableName = "AllsortsTests.xctest"
-               BlueprintName = "Allsorts iOS Tests"
+               BlueprintName = "AllsortsTests-iOS"
                ReferencedContainer = "container:Allsorts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E08799921A8E0DF000369B48"
-               BuildableName = "Allsorts Demo.app"
-               BlueprintName = "Allsorts Demo"
+               BuildableName = "AllsortsDemo.app"
+               BlueprintName = "AllsortsDemo"
                ReferencedContainer = "container:Allsorts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,7 +62,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E08799631A8E0C9900369B48"
                BuildableName = "AllsortsTests.xctest"
-               BlueprintName = "Allsorts iOS Tests"
+               BlueprintName = "AllsortsTests-iOS"
                ReferencedContainer = "container:Allsorts.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -72,7 +72,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E08799581A8E0C9800369B48"
             BuildableName = "Allsorts.framework"
-            BlueprintName = "Allsorts iOS"
+            BlueprintName = "Allsorts-iOS"
             ReferencedContainer = "container:Allsorts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -91,7 +91,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E08799581A8E0C9800369B48"
             BuildableName = "Allsorts.framework"
-            BlueprintName = "Allsorts iOS"
+            BlueprintName = "Allsorts-iOS"
             ReferencedContainer = "container:Allsorts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -109,7 +109,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E08799581A8E0C9800369B48"
             BuildableName = "Allsorts.framework"
-            BlueprintName = "Allsorts iOS"
+            BlueprintName = "Allsorts-iOS"
             ReferencedContainer = "container:Allsorts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

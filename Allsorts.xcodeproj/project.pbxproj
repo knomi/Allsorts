@@ -316,9 +316,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E08799581A8E0C9800369B48 /* Allsorts iOS */ = {
+		E08799581A8E0C9800369B48 /* Allsorts-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E087996F1A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "Allsorts iOS" */;
+			buildConfigurationList = E087996F1A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "Allsorts-iOS" */;
 			buildPhases = (
 				E08799541A8E0C9800369B48 /* Sources */,
 				E08799551A8E0C9800369B48 /* Frameworks */,
@@ -330,14 +330,14 @@
 			);
 			dependencies = (
 			);
-			name = "Allsorts iOS";
+			name = "Allsorts-iOS";
 			productName = Allsorts;
 			productReference = E08799591A8E0C9800369B48 /* Allsorts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E08799631A8E0C9900369B48 /* Allsorts iOS Tests */ = {
+		E08799631A8E0C9900369B48 /* AllsortsTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E08799721A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "Allsorts iOS Tests" */;
+			buildConfigurationList = E08799721A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "AllsortsTests-iOS" */;
 			buildPhases = (
 				E08799601A8E0C9900369B48 /* Sources */,
 				E08799611A8E0C9900369B48 /* Frameworks */,
@@ -349,14 +349,14 @@
 				E08799671A8E0C9900369B48 /* PBXTargetDependency */,
 				E01871E81A8E1A4E004C617C /* PBXTargetDependency */,
 			);
-			name = "Allsorts iOS Tests";
+			name = "AllsortsTests-iOS";
 			productName = AllsortsTests;
 			productReference = E08799641A8E0C9900369B48 /* AllsortsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E08799751A8E0D1900369B48 /* Allsorts Mac */ = {
+		E08799751A8E0D1900369B48 /* Allsorts-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E087997A1A8E0D1900369B48 /* Build configuration list for PBXNativeTarget "Allsorts Mac" */;
+			buildConfigurationList = E087997A1A8E0D1900369B48 /* Build configuration list for PBXNativeTarget "Allsorts-Mac" */;
 			buildPhases = (
 				E08799761A8E0D1900369B48 /* Sources */,
 				E08799771A8E0D1900369B48 /* Frameworks */,
@@ -368,14 +368,14 @@
 			);
 			dependencies = (
 			);
-			name = "Allsorts Mac";
+			name = "Allsorts-Mac";
 			productName = Allsorts;
 			productReference = E087997D1A8E0D1900369B48 /* Allsorts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E08799821A8E0DA000369B48 /* Allsorts Mac Tests */ = {
+		E08799821A8E0DA000369B48 /* AllsortsTests-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E087998C1A8E0DA000369B48 /* Build configuration list for PBXNativeTarget "Allsorts Mac Tests" */;
+			buildConfigurationList = E087998C1A8E0DA000369B48 /* Build configuration list for PBXNativeTarget "AllsortsTests-Mac" */;
 			buildPhases = (
 				E087997F1A8E0DA000369B48 /* Sources */,
 				E08799801A8E0DA000369B48 /* Frameworks */,
@@ -386,14 +386,14 @@
 			dependencies = (
 				E087998B1A8E0DA000369B48 /* PBXTargetDependency */,
 			);
-			name = "Allsorts Mac Tests";
+			name = "AllsortsTests-Mac";
 			productName = "Allsorts Mac Tests";
 			productReference = E08799831A8E0DA000369B48 /* AllsortsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E08799921A8E0DF000369B48 /* Allsorts Demo */ = {
+		E08799921A8E0DF000369B48 /* AllsortsDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E08799AF1A8E0DF100369B48 /* Build configuration list for PBXNativeTarget "Allsorts Demo" */;
+			buildConfigurationList = E08799AF1A8E0DF100369B48 /* Build configuration list for PBXNativeTarget "AllsortsDemo" */;
 			buildPhases = (
 				E087998F1A8E0DF000369B48 /* Sources */,
 				E08799901A8E0DF000369B48 /* Frameworks */,
@@ -405,7 +405,7 @@
 			dependencies = (
 				E01871EB1A8E1AD7004C617C /* PBXTargetDependency */,
 			);
-			name = "Allsorts Demo";
+			name = AllsortsDemo;
 			productName = "Allsorts Demo";
 			productReference = E08799931A8E0DF000369B48 /* Allsorts Demo.app */;
 			productType = "com.apple.product-type.application";
@@ -447,11 +447,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E08799751A8E0D1900369B48 /* Allsorts Mac */,
-				E08799821A8E0DA000369B48 /* Allsorts Mac Tests */,
-				E08799581A8E0C9800369B48 /* Allsorts iOS */,
-				E08799631A8E0C9900369B48 /* Allsorts iOS Tests */,
-				E08799921A8E0DF000369B48 /* Allsorts Demo */,
+				E08799751A8E0D1900369B48 /* Allsorts-Mac */,
+				E08799581A8E0C9800369B48 /* Allsorts-iOS */,
+				E08799821A8E0DA000369B48 /* AllsortsTests-Mac */,
+				E08799631A8E0C9900369B48 /* AllsortsTests-iOS */,
+				E08799921A8E0DF000369B48 /* AllsortsDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -618,22 +618,22 @@
 /* Begin PBXTargetDependency section */
 		E01871E81A8E1A4E004C617C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E08799921A8E0DF000369B48 /* Allsorts Demo */;
+			target = E08799921A8E0DF000369B48 /* AllsortsDemo */;
 			targetProxy = E01871E71A8E1A4E004C617C /* PBXContainerItemProxy */;
 		};
 		E01871EB1A8E1AD7004C617C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E08799581A8E0C9800369B48 /* Allsorts iOS */;
+			target = E08799581A8E0C9800369B48 /* Allsorts-iOS */;
 			targetProxy = E01871EA1A8E1AD7004C617C /* PBXContainerItemProxy */;
 		};
 		E08799671A8E0C9900369B48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E08799581A8E0C9800369B48 /* Allsorts iOS */;
+			target = E08799581A8E0C9800369B48 /* Allsorts-iOS */;
 			targetProxy = E08799661A8E0C9900369B48 /* PBXContainerItemProxy */;
 		};
 		E087998B1A8E0DA000369B48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E08799751A8E0D1900369B48 /* Allsorts Mac */;
+			target = E08799751A8E0D1900369B48 /* Allsorts-Mac */;
 			targetProxy = E087998A1A8E0DA000369B48 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -930,7 +930,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E087996F1A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "Allsorts iOS" */ = {
+		E087996F1A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "Allsorts-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E08799701A8E0C9900369B48 /* Debug */,
@@ -939,7 +939,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E08799721A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "Allsorts iOS Tests" */ = {
+		E08799721A8E0C9900369B48 /* Build configuration list for PBXNativeTarget "AllsortsTests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E08799731A8E0C9900369B48 /* Debug */,
@@ -948,7 +948,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E087997A1A8E0D1900369B48 /* Build configuration list for PBXNativeTarget "Allsorts Mac" */ = {
+		E087997A1A8E0D1900369B48 /* Build configuration list for PBXNativeTarget "Allsorts-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E087997B1A8E0D1900369B48 /* Debug */,
@@ -957,7 +957,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E087998C1A8E0DA000369B48 /* Build configuration list for PBXNativeTarget "Allsorts Mac Tests" */ = {
+		E087998C1A8E0DA000369B48 /* Build configuration list for PBXNativeTarget "AllsortsTests-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E087998D1A8E0DA000369B48 /* Debug */,
@@ -966,7 +966,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E08799AF1A8E0DF100369B48 /* Build configuration list for PBXNativeTarget "Allsorts Demo" */ = {
+		E08799AF1A8E0DF100369B48 /* Build configuration list for PBXNativeTarget "AllsortsDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E08799B01A8E0DF100369B48 /* Debug */,
