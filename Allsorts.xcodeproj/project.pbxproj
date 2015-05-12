@@ -44,6 +44,8 @@
 		E08799BA1A8E0F1300369B48 /* Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799B91A8E0F1300369B48 /* Orderable.swift */; };
 		E08799BD1A8E0F2D00369B48 /* Swift+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BC1A8E0F2D00369B48 /* Swift+Orderable.swift */; };
 		E08799C01A8E0F3F00369B48 /* Foundation+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BF1A8E0F3F00369B48 /* Foundation+Orderable.swift */; };
+		E08C48BC1B01ED76004BCA7F /* Combinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08C48BB1B01ED76004BCA7F /* Combinators.swift */; };
+		E08C48BD1B01ED76004BCA7F /* Combinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08C48BB1B01ED76004BCA7F /* Combinators.swift */; };
 		E0C8FDB01A929F2300CBFA76 /* Swift+Orderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08799BC1A8E0F2D00369B48 /* Swift+Orderable.swift */; };
 		E0E829E61A9367E7004A08F4 /* Bounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E829E51A9367E7004A08F4 /* Bounded.swift */; };
 		E0E829E71A9367E7004A08F4 /* Bounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E829E51A9367E7004A08F4 /* Bounded.swift */; };
@@ -133,7 +135,7 @@
 		E087996B1A8E0C9900369B48 /* AllsortsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllsortsTests.swift; sourceTree = "<group>"; };
 		E087997D1A8E0D1900369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08799831A8E0DA000369B48 /* AllsortsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllsortsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E08799931A8E0DF000369B48 /* Allsorts Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Allsorts Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E08799931A8E0DF000369B48 /* Allsorts Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Allsorts Demo.app"; path = AllsortsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08799961A8E0DF000369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E08799971A8E0DF000369B48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E08799991A8E0DF000369B48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		E08799B91A8E0F1300369B48 /* Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orderable.swift; sourceTree = "<group>"; };
 		E08799BC1A8E0F2D00369B48 /* Swift+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+Orderable.swift"; sourceTree = "<group>"; };
 		E08799BF1A8E0F3F00369B48 /* Foundation+Orderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Orderable.swift"; sourceTree = "<group>"; };
+		E08C48BB1B01ED76004BCA7F /* Combinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Combinators.swift; sourceTree = "<group>"; };
 		E0E829E51A9367E7004A08F4 /* Bounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bounded.swift; sourceTree = "<group>"; };
 		E0E829EB1A93686C004A08F4 /* Ended.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ended.swift; sourceTree = "<group>"; };
 		E0E829EE1A9369F7004A08F4 /* BoundedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundedTests.swift; sourceTree = "<group>"; };
@@ -248,10 +251,11 @@
 		E087995B1A8E0C9800369B48 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E087995D1A8E0C9800369B48 /* Info.plist */,
 				E01871F81A8E4B6E004C617C /* version.bash */,
+				E087995D1A8E0C9800369B48 /* Info.plist */,
 				E01871F51A8E232C004C617C /* BinarySearch.swift */,
 				E0E829E51A9367E7004A08F4 /* Bounded.swift */,
+				E08C48BB1B01ED76004BCA7F /* Combinators.swift */,
 				E0FC660F1A929898001D9F91 /* Comparators.swift */,
 				E0E829EB1A93686C004A08F4 /* Ended.swift */,
 				E01872121A9223C7004C617C /* Heap.swift */,
@@ -534,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E08C48BD1B01ED76004BCA7F /* Combinators.swift in Sources */,
 				E08799BA1A8E0F1300369B48 /* Orderable.swift in Sources */,
 				E08799B71A8E0F0500369B48 /* Ordering.swift in Sources */,
 				E08799BD1A8E0F2D00369B48 /* Swift+Orderable.swift in Sources */,
@@ -571,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E08C48BC1B01ED76004BCA7F /* Combinators.swift in Sources */,
 				E0C8FDB01A929F2300CBFA76 /* Swift+Orderable.swift in Sources */,
 				E0FC66171A929914001D9F91 /* Foundation+Ordering.swift in Sources */,
 				E0FC66151A92990A001D9F91 /* Sorting.swift in Sources */,
