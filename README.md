@@ -240,12 +240,12 @@ For capping an infinite type like `String` with a maximum bound, wrap it in `End
 
 ```swift
 enum Ended<T : Orderable> : Orderable {
-    case Another(T)
+    case Value(T)
     case End
 }
 
-let a: Ended<String> = Ended("")    // .Another("")
-let b: Ended<String> = Ended("foo") // .Another("foo")
+let a: Ended<String> = Ended("")    // .Value("")
+let b: Ended<String> = Ended("foo") // .Value("foo")
 let c: Ended<String> = Ended(nil)   // .End
 let d: Ended<String> = Ended()      // .End
 
@@ -273,13 +273,18 @@ In addition to `Orderable`, it conforms to another protocol `BoundedType` which 
 Ported to Swift from [libc++][] Allsorts implements the push and pop operations for array-backed binary trees. This feature isn't very performant, and should be considered experimental. (For the time being, you're probably better off just sorting an array instead.)
 
 ```swift
-func pushHeap<T: Comparable>(inout heap: [T], value: T)
-func pushHeap<T>(inout heap: [T], value: T, isOrderedBefore: (T, T) -> Bool)
-func pushHeap<T: Comparable>(inout heap: [T], value: T)
+extension Array {
+    mutating func pushHeap(value: Element, isOrderedBefore: (Element, Element) -> Bool)
+    mutating func pushHeap(value: Element, _ ordering: (Element, Element) -> Ordering)
 
-func popHeap<T: Comparable>(inout heap: [T]) -> T
-func popHeap<T>(inout heap: [T], isOrderedBefore: (T, T) -> Bool) -> T
-func popHeap<T>(inout heap: [T], compare: (T, T) -> Ordering) -> T
+    mutating func popHeap(isOrderedBefore: (Element, Element) -> Bool) -> Element
+    mutating func popHeap(ordering: (Element, Element) -> Ordering) -> Element
+}
+
+extension Array where Element : Comparable {
+    mutating func pushHeap(value: T)
+    mutating func popHeap() -> T
+}
 ```
 
 

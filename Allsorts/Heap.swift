@@ -16,7 +16,7 @@ extension Array {
 
     /// Push `value` into the min-heap `heap`, as defined by the comparator
     /// `compare`.
-    public mutating func pushHeap(value: Element, ordering: (Element, Element) -> Ordering) {
+    public mutating func pushHeap(value: Element, _ ordering: (Element, Element) -> Ordering) {
         pushHeap(value) {a, b in ordering(a, b) == .LT}
     }
      
