@@ -516,6 +516,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "source Allsorts/version.bash";
+			showEnvVarsInLog = 0;
 		};
 		E021E8541A97AF1600A865E7 /* Set Version Number */ = {
 			isa = PBXShellScriptBuildPhase;

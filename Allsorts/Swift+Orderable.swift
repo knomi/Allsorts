@@ -38,9 +38,13 @@ extension Character : Orderable {}
 extension UnicodeScalar : Orderable {}
 
 /// Case-sensitive, locale-insensitive three-way comparison between two
-/// `String`\ s. Currently uses `NSString.compare` as an implementation detail.
+/// `String`\ s. Currently uses `String.compare` as an implementation detail.
 public func <=> (left: String, right: String) -> Ordering {
     return Ordering.create(left.compare(right).rawValue)
 }
 
 extension String : Orderable {}
+
+// MARK: Other
+
+extension ObjectIdentifier : Orderable {}

@@ -57,3 +57,13 @@ extension Ordering : Printable {
         }
     }
 }
+
+extension Ordering : DebugPrintable {
+    public var debugDescription: String {
+        switch self {
+        case .LT: return "Ordering.LT"
+        case .EQ: return "Ordering.EQ"
+        case .GT: return "Ordering.GT"
+        }
+    }
+}

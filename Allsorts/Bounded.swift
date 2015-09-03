@@ -46,7 +46,7 @@ extension Bounded : Printable {
     }
 }
 
-extension Bounded : Printable {
+extension Bounded : DebugPrintable {
     public var debugDescription: String {
         switch self {
         case     .Min:    return "Bounded.Min"
