@@ -135,7 +135,7 @@
 		E087996B1A8E0C9900369B48 /* AllsortsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllsortsTests.swift; sourceTree = "<group>"; };
 		E087997D1A8E0D1900369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08799831A8E0DA000369B48 /* AllsortsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllsortsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E08799931A8E0DF000369B48 /* Allsorts Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Allsorts Demo.app"; path = AllsortsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E08799931A8E0DF000369B48 /* AllsortsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllsortsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08799961A8E0DF000369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E08799971A8E0DF000369B48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E08799991A8E0DF000369B48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 				E08799641A8E0C9900369B48 /* AllsortsTests.xctest */,
 				E087997D1A8E0D1900369B48 /* Allsorts.framework */,
 				E08799831A8E0DA000369B48 /* AllsortsTests.xctest */,
-				E08799931A8E0DF000369B48 /* Allsorts Demo.app */,
+				E08799931A8E0DF000369B48 /* AllsortsDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -411,7 +411,7 @@
 			);
 			name = AllsortsDemo;
 			productName = "Allsorts Demo";
-			productReference = E08799931A8E0DF000369B48 /* Allsorts Demo.app */;
+			productReference = E08799931A8E0DF000369B48 /* AllsortsDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -420,6 +420,8 @@
 		E08799501A8E0C9800369B48 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Pyry Jahkola";
 				TargetAttributes = {

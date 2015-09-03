@@ -9,7 +9,6 @@ import Foundation
 
 extension NSData          : Orderable {}
 extension NSDate          : Orderable {}
-extension NSDecimalNumber : Orderable {}
 extension NSIndexPath     : Orderable {}
 extension NSNumber        : Orderable {}
 extension NSString        : Orderable {}
@@ -26,27 +25,27 @@ public func <=>(left: NSData, right: NSData) -> Ordering {
 
 /// Three-way comparison between two `NSDate` values.
 public func <=>(left: NSDate, right: NSDate) -> Ordering {
-    return Ordering.create(left.compare(right).rawValue)
+    return Ordering(left.compare(right).rawValue)
 }
 
 /// Three-way comparison between two `NSDecimalNumber` values.
 public func <=>(left: NSDecimalNumber, right: NSDecimalNumber) -> Ordering {
-    return Ordering.create(left.compare(right).rawValue)
+    return Ordering(left.compare(right).rawValue)
 }
 
 /// Lexicographical three-way comparison between two `NSIndexPath` values.
 public func <=>(left: NSIndexPath, right: NSIndexPath) -> Ordering {
-    return Ordering.create(left.compare(right).rawValue)
+    return Ordering(left.compare(right).rawValue)
 }
 
 /// Three-way comparison between two `NSNumber` values.
 public func <=>(left: NSNumber, right: NSNumber) -> Ordering {
-    return Ordering.create(left.compare(right).rawValue)
+    return Ordering(left.compare(right).rawValue)
 }
 
 /// Lexicographical three-way comparison between two `NSString` values.
 public func <=>(left: NSString, right: NSString) -> Ordering {
-    return Ordering.create((left as String).compare(right as String).rawValue)
+    return Ordering((left as String).compare(right as String).rawValue)
 }
 
 /// Lexicographical three-way comparison between two `NSUUID` values.

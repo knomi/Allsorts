@@ -17,16 +17,12 @@ public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
     
     public init(_ value: T) { self = .Med(value) }
     
-    public static func pure(value: T) -> Bounded {
-        return .Med(value)
-    }
-    
     public static var min: Bounded { return .Min }
     public static var max: Bounded { return .Max }
     
-    public func analysis<R>(@noescape #ifMin: () -> R,
-                            @noescape  ifMed: T -> R,
-                            @noescape  ifMax: () -> R) -> R
+    public func analysis<R>(@noescape ifMin ifMin: () -> R,
+                            @noescape ifMed:       T  -> R,
+                            @noescape ifMax:       () -> R) -> R
     {
         switch self {
         case     .Min:    return ifMin()
@@ -36,7 +32,7 @@ public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
     }
 }
 
-extension Bounded : Printable {
+extension Bounded : CustomStringConvertible {
     public var description: String {
         switch self {
         case     .Min:    return "Min"
@@ -46,11 +42,11 @@ extension Bounded : Printable {
     }
 }
 
-extension Bounded : DebugPrintable {
+extension Bounded : CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case     .Min:    return "Bounded.Min"
-        case let .Med(x): return "Bounded.Med(\(toDebugString(x)))"
+        case let .Med(x): return "Bounded.Med(\(String(reflecting: x)))"
         case     .Max:    return "Bounded.Max"
         }
     }

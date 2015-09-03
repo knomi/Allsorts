@@ -118,7 +118,7 @@ let musicians: [Musician] = [("Thom",   "Yorke",     1968),
 sorted(names, byLast <|> byFirst).map {$0.first}
 //=> ["Colin", "Jonny", "Ed", "Philip", "Thom"]
 
-sorted(names, Ordering.by {count($0.last)}
+sorted(names, Ordering.by {$0.last.characters.count}
           <|> Ordering.reverse(byYear)
 ).map {$0.first}
 //=> ["Thom", "Philip", "Ed", "Jonny", "Colin"]
@@ -152,8 +152,8 @@ ord(1995) //=> Ordering.GT
 
 ```swift
 let byRevName = Ordering.reverse(byLast <|> byFirst)
-byRevName(("ZZ",  "Top",      1969),
-          ("Led", "Zeppelin", 1968)) //=> Ordering.GT
+byRevName(("ZZ",  "Top",      1969) as Musician,
+          ("Led", "Zeppelin", 1968) as Musician) //=> Ordering.GT
 
 let rev = Ordering.reverse(Ordering.to(1999))
 ord(1998) //=> Ordering.GT

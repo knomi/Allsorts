@@ -5,48 +5,58 @@
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
-/// Push `value` into the min-heap `heap`, as defined by the less-than
-/// comparison `isOrderedBefore`.
-public func pushHeap<T>(inout heap: [T],
-                        value: T,
-                        isOrderedBefore: (T, T) -> Bool)
-{
-    heap.append(value)
-    siftUp(&heap, heap.startIndex, heap.endIndex, isOrderedBefore, heap.count)
-}
- 
-/// Push `value` into the min-heap `heap`, as defined by `<`.
-public func pushHeap<T: Comparable>(inout heap: [T], value: T) {
-    pushHeap(&heap, value) {a, b in a < b}
-}
- 
-/// Push `value` into the min-heap `heap`, as defined by the comparator
-/// `compare`.
-public func pushHeap<T>(inout heap: [T], value: T, compare: (T, T) -> Ordering)
-{
-    pushHeap(&heap, value) {a, b in compare(a, b) == .LT}
-}
- 
-/// Pop the min-element from the min-heap `heap`, as defined by the
-/// less-than comparison `isOrderedBefore`.
-public func popHeap<T>(inout heap: [T], isOrderedBefore: (T, T) -> Bool) -> T {
-    precondition(!heap.isEmpty, "cannot pop an empty heap")
-    swap(&heap[heap.startIndex], &heap[heap.endIndex - 1])
-    siftDown(&heap, heap.startIndex, heap.endIndex - 1,
-             isOrderedBefore, heap.count - 1, heap.startIndex)
-    let result = heap.removeLast()
-    return result
-}
- 
-/// Pop the min-element from the min-heap `heap`, as defined by `<`.
-public func popHeap<T: Comparable>(inout heap: [T]) -> T {
-    return popHeap(&heap) {a, b in a < b}
+extension Array {
+
+    /// Push `value` into the min-heap `heap`, as defined by the less-than
+    /// comparison `isOrderedBefore`.
+    public mutating func pushHeap(value: Element, isOrderedBefore: (Element, Element) -> Bool) {
+        append(value)
+        siftUp(&self, startIndex: startIndex, endIndex: endIndex, isOrderedBefore: isOrderedBefore, len: count)
+    }
+
+    /// Push `value` into the min-heap `heap`, as defined by the comparator
+    /// `compare`.
+    public mutating func pushHeap(value: Element, ordering: (Element, Element) -> Ordering) {
+        pushHeap(value) {a, b in ordering(a, b) == .LT}
+    }
+     
+    /// Pop the min-element from the min-heap `heap`, as defined by the
+    /// less-than comparison `isOrderedBefore`.
+    ///
+    /// Requires: The array must not be empty.
+    public mutating func popHeap(isOrderedBefore: (Element, Element) -> Bool) -> Element {
+        precondition(!isEmpty, "cannot pop an empty heap")
+        swap(&self[startIndex], &self[endIndex - 1])
+        siftDown(&self, startIndex: startIndex, endIndex: endIndex - 1,
+                 isOrderedBefore: isOrderedBefore, len: count - 1, rootIndex: startIndex)
+        let result = removeLast()
+        return result
+    }
+     
+    /// Pop the min-element from the min-heap `heap`, as defined by the comparator
+    /// `compare`.
+    ///
+    /// Requires: The array must not be empty.
+    public mutating func popHeap(ordering: (Element, Element) -> Ordering) -> Element {
+        return popHeap {a, b in ordering(a, b) == .LT}
+    }
+
 }
 
-/// Pop the min-element from the min-heap `heap`, as defined by the comparator
-/// `compare`.
-public func popHeap<T>(inout heap: [T], compare: (T, T) -> Ordering) -> T {
-    return popHeap(&heap) {a, b in compare(a, b) == .LT}
+extension Array where Element : Comparable {
+
+    /// Push `value` into the min-heap `heap`, as defined by `<`.
+    public mutating func pushHeap(value: Element) {
+        pushHeap(value) {a, b in a < b}
+    }
+     
+    /// Pop the min-element from the min-heap `heap`, as defined by `<`.
+    ///
+    /// Precondition: The array must not be empty.
+    public mutating func popHeap() -> Element {
+        return popHeap {a, b in a < b}
+    }
+
 }
 
 // -----------------------------------------------------------------------------
@@ -60,7 +70,7 @@ func siftDown<C : MutableCollectionType
      startIndex: C.Index,
      endIndex: C.Index,
      isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool,
-     var len: C.Index.Distance,
+     len: C.Index.Distance,
      var rootIndex: C.Index)
 {
     // heap array representation:
@@ -100,7 +110,7 @@ func siftDown<C : MutableCollectionType
     }
 
     let top = heap[rootIndex]
-    do {
+    repeat {
         // we are not in heap-order, swap the parent with its smallest child
         heap[rootIndex] = heap[childIndex]
         rootIndex = childIndex;
@@ -143,7 +153,7 @@ private func siftUp<C : MutableCollectionType
     var lastIndex = endIndex - 1
     if isOrderedBefore(heap[lastIndex], heap[index]) {
         let t = heap[lastIndex]
-        do {
+        repeat {
             heap[lastIndex] = heap[index]
             lastIndex = index
             if len == 0 {

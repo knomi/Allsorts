@@ -25,10 +25,10 @@ public func <=> <S : SequenceType where S.Generator.Element : Orderable>
     var gr = right.generate()
     while true {
         switch (gl.next(), gr.next()) {
-        case     (.None,    .Some   ): return .LT
-        case     (.None,    .None   ): return .EQ
-        case     (.Some,    .None   ): return .GT
-        case let (.Some(l), .Some(r)):
+        case     (nil, _?):  return .LT
+        case     (nil, nil): return .EQ
+        case     (_?,  nil): return .GT
+        case let (l?,  r?):
             switch l <=> r {
             case .EQ: break
             case let ord: return ord
@@ -57,10 +57,10 @@ public func <=> <S : SequenceType where
     var gr = right.generate()
     while true {
         switch (gl.next(), gr.next()) {
-        case     (.None,    .Some   ): return .LT
-        case     (.None,    .None   ): return .EQ
-        case     (.Some,    .None   ): return .GT
-        case let (.Some(l), .Some(r)):
+        case     (nil, _?):  return .LT
+        case     (nil, nil): return .EQ
+        case     (_?,  nil): return .GT
+        case let (l?,  r?):
             switch l <=> r {
             case .EQ: break
             case let ord: return ord
@@ -90,10 +90,10 @@ public func <=> <S : SequenceType where
     var gr = right.generate()
     while true {
         switch (gl.next(), gr.next()) {
-        case     (.None,    .Some   ): return .LT
-        case     (.None,    .None   ): return .EQ
-        case     (.Some,    .None   ): return .GT
-        case let (.Some(l), .Some(r)):
+        case     (nil, _?):  return .LT
+        case     (nil, nil): return .EQ
+        case     (_?,  nil): return .GT
+        case let (l?,  r?):
             switch l <=> r {
             case .EQ: break
             case let ord: return ord

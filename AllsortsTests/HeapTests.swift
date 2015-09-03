@@ -15,7 +15,7 @@ class HeapTests : XCTestCase {
         func test(input: [Int]) {
             let heap = buildHeap(input)
             let output = heapSorted(heap)
-            XCTAssertEqual(output, sorted(input), "Given input: \(input)")
+            XCTAssertEqual(output, input.sort(), "Given input: \(input)")
         }
         test([1, 4, 4, 1, 3, 0, 4, 3])
         for _ in 0 ..< 100 {
@@ -25,13 +25,13 @@ class HeapTests : XCTestCase {
     
     func testNSmallestPerformance() {
         let input = perfInput
-        let top100 = Array(sorted(input)[0 ..< 100])
+        let top100 = Array(input.sort()[0 ..< 100])
         measureBlock {
             var heap = buildHeap(input)
             var output = [Int]()
             output.reserveCapacity(100)
             for _ in 0 ..< 100 {
-                output.append(popHeap(&heap))
+                output.append(heap.popHeap())
             }
             XCTAssertEqual(output, top100)
         }
@@ -43,10 +43,10 @@ class HeapTests : XCTestCase {
         var top100 = [Int]()
         top100.reserveCapacity(100)
         for _ in 0 ..< 100 {
-            top100.append(popHeap(&heap))
+            top100.append(heap.popHeap())
         }
         measureBlock {
-            let output = Array(sorted(input)[0 ..< 100])
+            let output = Array(input.sort()[0 ..< 100])
             XCTAssertEqual(output, top100)
         }
     }
@@ -68,7 +68,7 @@ private func bitwiseCeil<T : UnsignedIntegerType>(x: T) -> T {
 private func randomMax<T : UnsignedIntegerType>(max: T) -> T {
     let m = bitwiseCeil(max)
     var buf = T(0)
-    do {
+    repeat {
         arc4random_buf(&buf, sizeof(UInt.self))
         buf &= m
     } while buf > max
@@ -88,8 +88,8 @@ private func random(interval: ClosedInterval<Int>) -> Int {
     return Int(bitPattern: UInt.addWithOverflow(a, randomMax(n)).0)
 }
 
-private func randomArray(#count: Int,
-                         #value: ClosedInterval<Int>) -> [Int]
+private func randomArray(count count: Int,
+                         value: ClosedInterval<Int>) -> [Int]
 {
     var ints = [Int]()
     for _ in 0 ..< count {
@@ -102,7 +102,7 @@ private func buildHeap(ints: [Int]) -> [Int] {
     var heap = [Int]()
     heap.reserveCapacity(ints.count)
     for i in ints {
-        pushHeap(&heap, i)
+        heap.pushHeap(i)
     }
     return heap
 }
@@ -110,7 +110,7 @@ private func buildHeap(ints: [Int]) -> [Int] {
 private func heapSorted(var heap: [Int]) -> [Int] {
     var ints = [Int]()
     while !heap.isEmpty {
-        ints.append(popHeap(&heap))
+        ints.append(heap.popHeap())
     }
     return ints
 }

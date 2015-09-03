@@ -11,7 +11,7 @@ public extension Ordering {
 
     /// Convert an `NSComparisonResult` into an `Ordering`.
     public init(_ comparisonResult: NSComparisonResult) {
-        self.init(rawValue: comparisonResult.rawValue)
+        self.init(comparisonResult.rawValue)
     }
 
     /// Convert an `Ordering` into an `NSComparisonResult`.

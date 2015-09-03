@@ -12,10 +12,11 @@ class SortingTests: XCTestCase {
 
     func testSort() {
         let byRevName = Ordering.reverse(byLast <|> byFirst)
-        byRevName(("ZZ", "Top", 1969), ("Led", "Zeppelin", 1968))
+        byRevName(("ZZ", "Top", 1969) as Musician,
+                  ("Led", "Zeppelin", 1968) as Musician)
         
         XCTAssertEqual(
-            sorted(musicians) {$0.first < $1.first}.map {$0.first},
+            musicians.sort {$0.first < $1.first}.map {$0.first},
             ["Colin", "Ed", "Jonny", "Philip", "Thom"],
             "Swift.sorted(xs, isLessThan) should still work too")
         XCTAssertEqual(
@@ -29,7 +30,7 @@ class SortingTests: XCTestCase {
                           <|> Ordering.reverse(byYear)).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            sorted(musicians, Ordering.by {count($0.last)}
+            sorted(musicians, Ordering.by {$0.last.characters.count}
                           <|> Ordering.reverse(byYear)).map {$0.first},
             ["Thom", "Philip", "Ed", "Jonny", "Colin"])
     }

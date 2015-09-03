@@ -80,9 +80,8 @@ class OrderableTests : XCTestCase {
         XCTAssertEqual("!!".dataUsingEncoding(NSUTF8StringEncoding)!
                    <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.GT)
 
-        // FIXME: Avoiding `as!` while still supporting Swift 1.1
-        let distantPast = (NSDate.distantPast() as? NSDate)!
-        let distantFuture = (NSDate.distantFuture() as? NSDate)!
+        let distantPast = NSDate.distantPast()
+        let distantFuture = NSDate.distantFuture()
         
         XCTAssertEqual(distantPast <=> NSDate(), Ordering.LT)
         XCTAssertEqual(distantFuture <=> NSDate(), Ordering.GT)
