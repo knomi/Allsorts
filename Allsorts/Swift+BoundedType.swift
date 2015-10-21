@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: Numbers
 
-extension Float  : BoundedType {
+extension Float : BoundedType {
     public static var min: Float { return -infinity }
     public static var max: Float { return infinity }
 }

@@ -127,6 +127,7 @@
 		E018720F1A920EA5004C617C /* SortingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingTests.swift; sourceTree = "<group>"; };
 		E01872121A9223C7004C617C /* Heap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
 		E01872151A923836004C617C /* HeapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeapTests.swift; sourceTree = "<group>"; };
+		E0723C181BD7EB7300212043 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		E07B2EBE1A9C8E5500474C17 /* Swift+BoundedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+BoundedType.swift"; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -135,7 +136,7 @@
 		E087996B1A8E0C9900369B48 /* AllsortsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllsortsTests.swift; sourceTree = "<group>"; };
 		E087997D1A8E0D1900369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08799831A8E0DA000369B48 /* AllsortsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllsortsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E08799931A8E0DF000369B48 /* Allsorts Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Allsorts Demo.app"; path = AllsortsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E08799931A8E0DF000369B48 /* AllsortsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllsortsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08799961A8E0DF000369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E08799971A8E0DF000369B48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E08799991A8E0DF000369B48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +229,7 @@
 		E087994F1A8E0C9800369B48 = {
 			isa = PBXGroup;
 			children = (
+				E0723C181BD7EB7300212043 /* LICENSE.md */,
 				E018720B1A92076B004C617C /* README.md */,
 				E087995B1A8E0C9800369B48 /* Source */,
 				E08799681A8E0C9900369B48 /* Test */,
@@ -243,7 +245,7 @@
 				E08799641A8E0C9900369B48 /* AllsortsTests.xctest */,
 				E087997D1A8E0D1900369B48 /* Allsorts.framework */,
 				E08799831A8E0DA000369B48 /* AllsortsTests.xctest */,
-				E08799931A8E0DF000369B48 /* Allsorts Demo.app */,
+				E08799931A8E0DF000369B48 /* AllsortsDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -411,7 +413,7 @@
 			);
 			name = AllsortsDemo;
 			productName = "Allsorts Demo";
-			productReference = E08799931A8E0DF000369B48 /* Allsorts Demo.app */;
+			productReference = E08799931A8E0DF000369B48 /* AllsortsDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -420,7 +422,9 @@
 		E08799501A8E0C9800369B48 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Pyry Jahkola";
 				TargetAttributes = {
 					E08799581A8E0C9800369B48 = {
@@ -685,6 +689,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -761,6 +766,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Allsorts;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -780,9 +786,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Allsorts;
 				SKIP_INSTALL = YES;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -800,8 +807,9 @@
 				);
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AllsortsTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allsorts Demo.app/Allsorts Demo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AllsortsDemo.app/AllsortsDemo";
 			};
 			name = Debug;
 		};
@@ -815,8 +823,9 @@
 				);
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AllsortsTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Allsorts Demo.app/Allsorts Demo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AllsortsDemo.app/AllsortsDemo";
 			};
 			name = Release;
 		};
@@ -833,6 +842,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Allsorts;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -853,10 +863,11 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Allsorts;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -875,6 +886,7 @@
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AllsortsTests;
 				SDKROOT = macosx;
 			};
@@ -892,6 +904,7 @@
 				INFOPLIST_FILE = AllsortsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AllsortsTests;
 				SDKROOT = macosx;
 			};
@@ -908,6 +921,7 @@
 				);
 				INFOPLIST_FILE = "Allsorts Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_MODULE_NAME = Main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -920,6 +934,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Allsorts Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pyrtsa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_MODULE_NAME = Main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

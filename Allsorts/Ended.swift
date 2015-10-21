@@ -21,10 +21,6 @@ public enum Ended<T : Orderable> : Orderable, Comparable {
         self = value.map {x in .Value(x)} ?? .End
     }
     
-    public static func pure(value: T) -> Ended {
-        return .Value(value)
-    }
-    
     public var value: T? {
         switch self {
         case let .Value(x): return .Some(x)
@@ -47,7 +43,7 @@ public enum Ended<T : Orderable> : Orderable, Comparable {
     }
 }
 
-extension Ended : Printable {
+extension Ended : CustomStringConvertible {
     public var description: String {
         switch self {
         case let .Value(x): return "Value(\(x))"
@@ -56,10 +52,10 @@ extension Ended : Printable {
     }
 }
 
-extension Ended : DebugPrintable {
+extension Ended : CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case let .Value(x): return "Ended.Value(\(toDebugString(x)))"
+        case let .Value(x): return "Ended.Value(\(String(reflecting: x)))"
         case     .End:      return "Ended.End"
         }
     }

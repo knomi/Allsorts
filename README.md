@@ -118,7 +118,7 @@ let musicians: [Musician] = [("Thom",   "Yorke",     1968),
 sorted(names, byLast <|> byFirst).map {$0.first}
 //=> ["Colin", "Jonny", "Ed", "Philip", "Thom"]
 
-sorted(names, Ordering.by {count($0.last)}
+sorted(names, Ordering.by {$0.last.characters.count}
           <|> Ordering.reverse(byYear)
 ).map {$0.first}
 //=> ["Thom", "Philip", "Ed", "Jonny", "Colin"]
@@ -152,8 +152,8 @@ ord(1995) //=> Ordering.GT
 
 ```swift
 let byRevName = Ordering.reverse(byLast <|> byFirst)
-byRevName(("ZZ",  "Top",      1969),
-          ("Led", "Zeppelin", 1968)) //=> Ordering.GT
+byRevName(("ZZ",  "Top",      1969) as Musician,
+          ("Led", "Zeppelin", 1968) as Musician) //=> Ordering.GT
 
 let rev = Ordering.reverse(Ordering.to(1999))
 ord(1998) //=> Ordering.GT
@@ -240,12 +240,12 @@ For capping an infinite type like `String` with a maximum bound, wrap it in `End
 
 ```swift
 enum Ended<T : Orderable> : Orderable {
-    case Another(T)
+    case Value(T)
     case End
 }
 
-let a: Ended<String> = Ended("")    // .Another("")
-let b: Ended<String> = Ended("foo") // .Another("foo")
+let a: Ended<String> = Ended("")    // .Value("")
+let b: Ended<String> = Ended("foo") // .Value("foo")
 let c: Ended<String> = Ended(nil)   // .End
 let d: Ended<String> = Ended()      // .End
 
@@ -273,13 +273,18 @@ In addition to `Orderable`, it conforms to another protocol `BoundedType` which 
 Ported to Swift from [libc++][] Allsorts implements the push and pop operations for array-backed binary trees. This feature isn't very performant, and should be considered experimental. (For the time being, you're probably better off just sorting an array instead.)
 
 ```swift
-func pushHeap<T: Comparable>(inout heap: [T], value: T)
-func pushHeap<T>(inout heap: [T], value: T, isOrderedBefore: (T, T) -> Bool)
-func pushHeap<T: Comparable>(inout heap: [T], value: T)
+extension Array {
+    mutating func pushHeap(value: Element, isOrderedBefore: (Element, Element) -> Bool)
+    mutating func pushHeap(value: Element, _ ordering: (Element, Element) -> Ordering)
 
-func popHeap<T: Comparable>(inout heap: [T]) -> T
-func popHeap<T>(inout heap: [T], isOrderedBefore: (T, T) -> Bool) -> T
-func popHeap<T>(inout heap: [T], compare: (T, T) -> Ordering) -> T
+    mutating func popHeap(isOrderedBefore: (Element, Element) -> Bool) -> Element
+    mutating func popHeap(ordering: (Element, Element) -> Ordering) -> Element
+}
+
+extension Array where Element : Comparable {
+    mutating func pushHeap(value: T)
+    mutating func popHeap() -> T
+}
 ```
 
 

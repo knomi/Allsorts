@@ -20,11 +20,11 @@ public enum Ordering : Int {
     /// Construct an `Ordering` from any `rawValue`. Negative values coerce to
     /// `.LT`, zero to `.EQ` and positive values to `.GT`.
     public init(rawValue: Int) {
-        self = rawValue < 0 ? .LT : rawValue == 0 ? .EQ : .GT
+        self.init(rawValue)
     }
 
-    public static func create(value: Int) -> Ordering {
-        return value < 0 ? .LT : value == 0 ? .EQ : .GT
+    public init(_ value: Int) {
+        self = value < 0 ? .LT : value == 0 ? .EQ : .GT
     }
     
     /// Compute the `Ordering` between the `Comparable`\ s `left` and `right` by
@@ -48,7 +48,7 @@ public func < (left: Ordering, right: Ordering) -> Bool {
     return left.rawValue < right.rawValue
 }
 
-extension Ordering : Printable {
+extension Ordering : CustomStringConvertible {
     public var description: String {
         switch self {
         case .LT: return "LT"
@@ -58,7 +58,7 @@ extension Ordering : Printable {
     }
 }
 
-extension Ordering : DebugPrintable {
+extension Ordering : CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .LT: return "Ordering.LT"

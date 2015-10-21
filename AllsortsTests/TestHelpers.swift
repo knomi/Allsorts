@@ -13,7 +13,7 @@ import Allsorts
 
 
 func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterval<T>,
-                                    @autoclosure expression: () -> T,
+                                    @autoclosure _ expression: () -> T,
                                     _ message: String = "",
                                     file: String = __FILE__,
                                     line: UInt = __LINE__)
@@ -26,7 +26,7 @@ func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterva
 }
 
 func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedInterval<T>,
-                                    @autoclosure expression: () -> T,
+                                    @autoclosure _ expression: () -> T,
                                     _ message: String = "",
                                     file: String = __FILE__,
                                     line: UInt = __LINE__)
@@ -40,9 +40,9 @@ func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedInterval<
 
 // -----------------------------------------------------------------------------
 // MARK: - Conformance checkers
-func isComparableType<T : Comparable>(T.Type) -> Bool { return true }
-func isComparableType<T : Any>(T.Type) -> Bool { return false }
+func isComparableType<T : Comparable>(_: T.Type) -> Bool { return true }
+func isComparableType<T : Any>(_: T.Type) -> Bool { return false }
 
-func isOrderableType<T : Orderable>(T.Type) -> Bool { return true }
-func isOrderableType<T : Any>(T.Type) -> Bool { return false }
+func isOrderableType<T : Orderable>(_: T.Type) -> Bool { return true }
+func isOrderableType<T : Any>(_: T.Type) -> Bool { return false }
 
