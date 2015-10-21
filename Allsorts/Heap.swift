@@ -26,7 +26,9 @@ extension Array {
     /// Requires: The array must not be empty.
     public mutating func popHeap(isOrderedBefore: (Element, Element) -> Bool) -> Element {
         precondition(!isEmpty, "cannot pop an empty heap")
-        swap(&self[startIndex], &self[endIndex - 1])
+        if count > 1 {
+            swap(&self[startIndex], &self[endIndex - 1])
+        }
         siftDown(&self, startIndex: startIndex, endIndex: endIndex - 1,
                  isOrderedBefore: isOrderedBefore, len: count - 1, rootIndex: startIndex)
         let result = removeLast()
