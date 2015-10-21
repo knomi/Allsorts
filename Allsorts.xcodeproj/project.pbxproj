@@ -127,6 +127,7 @@
 		E018720F1A920EA5004C617C /* SortingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingTests.swift; sourceTree = "<group>"; };
 		E01872121A9223C7004C617C /* Heap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
 		E01872151A923836004C617C /* HeapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeapTests.swift; sourceTree = "<group>"; };
+		E0723C181BD7EB7300212043 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		E07B2EBE1A9C8E5500474C17 /* Swift+BoundedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+BoundedType.swift"; sourceTree = "<group>"; };
 		E08799591A8E0C9800369B48 /* Allsorts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Allsorts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087995D1A8E0C9800369B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,6 +229,7 @@
 		E087994F1A8E0C9800369B48 = {
 			isa = PBXGroup;
 			children = (
+				E0723C181BD7EB7300212043 /* LICENSE.md */,
 				E018720B1A92076B004C617C /* README.md */,
 				E087995B1A8E0C9800369B48 /* Source */,
 				E08799681A8E0C9900369B48 /* Test */,
