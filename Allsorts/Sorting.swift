@@ -9,6 +9,7 @@
 /// `source` by the three-way comparator `ordering`.
 ///
 /// - Seealso: `stableSorted`, `Ordering.by`
+@warn_unused_result
 public func sorted<C : SequenceType>
     (source: C, _ ordering: (C.Generator.Element,
                              C.Generator.Element) -> Ordering)
@@ -38,6 +39,7 @@ public func sorted<C : SequenceType>
 /// future.
 ///
 /// - Seealso: `sorted`, `Ordering.by`
+@warn_unused_result
 public func stableSorted<C : SequenceType>
     (source: C, _ ordering: (C.Generator.Element,
                              C.Generator.Element) -> Ordering)

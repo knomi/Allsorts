@@ -7,9 +7,10 @@
 
 /// Lexicographical three-way comparison between two 2-tuples.
 ///
-/// **Remark:** This is hopefully a temporary hack to circumvent impossibility
+/// - Remark: This is hopefully a temporary hack to circumvent impossibility
 /// of adding protocol conformance conditionally, in particular as of Swift 1.2,
 /// it is impossible to extend a tuple to implement a protocol.
+@warn_unused_result
 public func <=> <A : Orderable,
                  B : Orderable>
     (left: (A, B), right: (A, B)) -> Ordering
@@ -20,9 +21,10 @@ public func <=> <A : Orderable,
 
 /// Lexicographical three-way comparison between two 3-tuples.
 ///
-/// **Remark:** This is hopefully a temporary hack to circumvent impossibility
+/// - Remark: This is hopefully a temporary hack to circumvent impossibility
 /// of adding protocol conformance conditionally, in particular as of Swift 1.2,
 /// it is impossible to extend a tuple to implement a protocol.
+@warn_unused_result
 public func <=> <A : Orderable,
                  B : Orderable,
                  C : Orderable>
@@ -36,9 +38,10 @@ public func <=> <A : Orderable,
 
 /// Lexicographical three-way comparison between two 4-tuples.
 ///
-/// **Remark:** This is hopefully a temporary hack to circumvent impossibility
+/// - Remark: This is hopefully a temporary hack to circumvent impossibility
 /// of adding protocol conformance conditionally, in particular as of Swift 1.2,
 /// it is impossible to extend a tuple to implement a protocol.
+@warn_unused_result
 public func <=> <A : Orderable,
                  B : Orderable,
                  C : Orderable,
@@ -54,9 +57,10 @@ public func <=> <A : Orderable,
 
 /// Lexicographical three-way comparison between two 5-tuples.
 ///
-/// **Remark:** This is hopefully a temporary hack to circumvent impossibility
+/// - Remark: This is hopefully a temporary hack to circumvent impossibility
 /// of adding protocol conformance conditionally, in particular as of Swift 1.2,
 /// it is impossible to extend a tuple to implement a protocol.
+@warn_unused_result
 public func <=> <A : Orderable,
                  B : Orderable,
                  C : Orderable,

@@ -7,6 +7,7 @@
 
 /// Evaluate the lexicographic ordering of two comparison expressions. If `left`
 /// evaluates not-equal, return its result. Else, evaluate and return `right`.
+@warn_unused_result
 public func || (left: Ordering, @autoclosure right: () -> Ordering) -> Ordering {
     switch left {
     case .LT: return .LT
@@ -27,9 +28,10 @@ infix operator <|> {
 /// the `left` comparator evaluates different than `Ordering.EQ`. Otherwise,
 /// evaluates and returns the result of the `right` comparator.
 ///
-/// **Remark:** This operator is useful together with the use of `Ordering.by`.
+/// - Remark: This operator is useful together with the use of `Ordering.by`.
 ///
-/// **See also:** `Ordering.by`. `sorted`, `stableSorted`
+/// - Seealso: `Ordering.by`. `sorted`, `stableSorted`
+@warn_unused_result
 public func <|> <Args>(left: Args -> Ordering, right: Args -> Ordering) -> Args -> Ordering {
     return {args in
         left(args) || right(args)

@@ -19,6 +19,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     ///   `Ordering.to(x)` as `ordering`, or just call `coll.binaryFind(x)`.
     ///
     /// - Seealso: `binarySearch`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
     public func binaryFind(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index? {
         let (lower: lower, upper: upper) = try indices.forkEqualRange {index in
             try ordering(self[index])
@@ -50,6 +51,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     ///   `Ordering.to(x)` as `ordering`, or just call `coll.binarySearch(x)`.
     ///
     /// - Seealso: `binaryFind`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
     public func binarySearch(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
         return try indices.forkEqualRange {index in
             try ordering(self[index])
@@ -71,6 +73,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     ///   `Ordering.to(x)` as `ordering`, or just call `coll.lowerBound(x)`.
     ///
     /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `upperBound`.
+    @warn_unused_result
     public func lowerBound(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
         var (lo, hi) = (startIndex, endIndex)
         while lo < hi {
@@ -95,6 +98,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     ///   `Ordering.to(x)` as `ordering`, or just call `coll.upperBound(x)`.
     ///
     /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `lowerBound`.
+    @warn_unused_result
     public func upperBound(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
         var (lo, hi) = (startIndex, endIndex)
         while lo < hi {
@@ -123,6 +127,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     ///   `Ordering.to(x)` as `ordering`, or just call `coll.equalRange(x)`.
     ///
     /// - Seealso: `binarySearch`, `binaryFind`, `lowerBound`, `upperBound`.
+    @warn_unused_result
     public func equalRange(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Range<Index> {
         let (lower, upper) = try indices.forkEqualRange {index in
             try ordering(self[index])
@@ -145,6 +150,7 @@ extension CollectionType where Index : RandomAccessIndexType, Generator.Element 
     ///   `Ordering.to(value)` as `ordering`.
     ///
     /// - Seealso: `binarySearch`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
     public func binaryFind(value: Generator.Element) -> Index? {
         return binaryFind(Ordering.to(value))
     }
@@ -169,6 +175,7 @@ extension CollectionType where Index : RandomAccessIndexType, Generator.Element 
     ///   `Ordering.to(value)` as `ordering`.
     ///
     /// - Seealso: `binaryFind`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
     public func binarySearch(value: Generator.Element) -> Index {
         return binarySearch(Ordering.to(value))
     }
@@ -188,6 +195,7 @@ extension CollectionType where Index : RandomAccessIndexType, Generator.Element 
     ///   `Ordering.to(value)` as `ordering`.
     ///
     /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `upperBound`.
+    @warn_unused_result
     public func lowerBound(value: Generator.Element) -> Index {
         return lowerBound(Ordering.to(value))
     }
@@ -207,6 +215,7 @@ extension CollectionType where Index : RandomAccessIndexType, Generator.Element 
     ///   `Ordering.to(value)` as `ordering`.
     ///
     /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `lowerBound`.
+    @warn_unused_result
     public func upperBound(value: Generator.Element) -> Index {
         return upperBound(Ordering.to(value))
     }
@@ -230,6 +239,7 @@ extension CollectionType where Index : RandomAccessIndexType, Generator.Element 
     ///   `Ordering.to(value)` as `ordering`.
     ///
     /// - Seealso: `binarySearch`, `binaryFind`, `lowerBound`, `upperBound`.
+    @warn_unused_result
     public func equalRange(value: Generator.Element) -> Range<Index> {
         return equalRange(Ordering.to(value))
     }
@@ -258,6 +268,7 @@ extension Range where Element : RandomAccessIndexType {
     /// - Remark: Note that the subranges may be empty.
     ///
     /// - Seealso: `binarySearch`, `lowerBound`, `upperBound` and `equalRange`
+    @warn_unused_result
     internal func forkEqualRange(@noescape ordering: Element throws -> Ordering) rethrows
             -> (lower: Range, upper: Range)
     {

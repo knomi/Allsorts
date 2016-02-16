@@ -32,12 +32,14 @@ public protocol Orderable {
 }
 
 /// Default implementation for making `Comparable` types `Orderable`.
+@warn_unused_result
 public func <=> <T : Comparable>(left: T, right: T) -> Ordering {
     return Ordering.compare(left, right)
 }
 
 /// Default implementation for making `Orderable` types `Equatable`. Override
 /// if needed.
+@warn_unused_result
 public func == <T : protocol<Orderable, Comparable>>(left: T, right: T) -> Bool {
     switch left <=> right {
     case .EQ: return true
@@ -47,6 +49,7 @@ public func == <T : protocol<Orderable, Comparable>>(left: T, right: T) -> Bool 
 
 /// Default implementation for making `Orderable` types `Comparable`. Override
 /// if needed.
+@warn_unused_result
 public func < <T : protocol<Orderable, Comparable>>(left: T, right: T) -> Bool {
     switch left <=> right {
     case .LT: return true
