@@ -8,7 +8,7 @@
 /// Convenience function around `Swift.sorted` for sorting the elements in
 /// `source` by the three-way comparator `ordering`.
 ///
-/// **See also:** `stableSorted`, `Ordering.by`
+/// - Seealso: `stableSorted`, `Ordering.by`
 public func sorted<C : SequenceType>
     (source: C, _ ordering: (C.Generator.Element,
                              C.Generator.Element) -> Ordering)
@@ -31,13 +31,13 @@ public func sorted<C : SequenceType>
 /// Sort the elements in `source` by the three-way comparator `ordering` while
 /// keeping the relative ordering of equal (`Ordering.EQ`) elements.
 ///
-/// **Remark:** While asymptotically not worse in in memory usage or performance
+/// - Remark: While asymptotically not worse in in memory usage or performance
 /// than `Swift.sorted`, the current implementation does some extra work and
 /// comparisons, e.g. allocating an array of indices to preserve the order. This
 /// implementation is hopefully replaced with a more efficient one in the
 /// future.
 ///
-/// **See also:** `sorted`, `Ordering.by`
+/// - Seealso: `sorted`, `Ordering.by`
 public func stableSorted<C : SequenceType>
     (source: C, _ ordering: (C.Generator.Element,
                              C.Generator.Element) -> Ordering)

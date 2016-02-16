@@ -15,7 +15,7 @@ import Allsorts
 func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterval<T>,
                                     @autoclosure _ expression: () -> T,
                                     _ message: String = "",
-                                    file: String = __FILE__,
+                                    file: StaticString = __FILE__,
                                     line: UInt = __LINE__)
 {
     let ivl = interval()
@@ -28,7 +28,7 @@ func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterva
 func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedInterval<T>,
                                     @autoclosure _ expression: () -> T,
                                     _ message: String = "",
-                                    file: String = __FILE__,
+                                    file: StaticString = __FILE__,
                                     line: UInt = __LINE__)
 {
     let ivl = interval()

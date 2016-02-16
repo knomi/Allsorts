@@ -101,8 +101,8 @@ func siftDown<C : MutableCollectionType
 
     if child + 1 < len && isOrderedBefore(heap[childIndex + 1], heap[childIndex]) {
         // right-child exists and is less than left-child
-        ++childIndex
-        ++child
+        childIndex += 1
+        child += 1
     }
 
     // check if we are in heap-order
@@ -127,8 +127,8 @@ func siftDown<C : MutableCollectionType
 
         if child + 1 < len && isOrderedBefore(heap[childIndex + 1], heap[childIndex]) {
             // right-child exists and is less than left-child
-            ++childIndex
-            ++child
+            childIndex += 1
+            child += 1
         }
 
         // check if we are in heap-order
