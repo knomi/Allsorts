@@ -231,8 +231,9 @@ Note that because `Range<Int>` is a random access collection itself, you can als
 ```swift
 let surnames   = ["Greenwood", "Greenwood", "O'Brien", "Selway", "Yorke"]
 let givenNames = ["Colin",     "Jonny",     "Ed",      "Philip", "Thom"]
-let index = surnames.indices.binarySearch {i in
-    surnames[i] <=> "Greenwood" || givenNames[i] <=> "Jonny"
+let index1 = surnames.binarySearch {n in n <=> "OK Computer"} //=> 3
+let index2 = surnames.indices.binarySearch {i in
+    surnames[i] <=> "Greenwood" || givenNames[i] <=> "Danny"
 } //=> 1
 ```
 

@@ -94,10 +94,12 @@ class BinarySearchTests : XCTestCase {
         do {
             let surnames   = ["Greenwood", "Greenwood", "O'Brien", "Selway", "Yorke"]
             let givenNames = ["Colin",     "Jonny",     "Ed",      "Philip", "Thom"]
-            let index = surnames.indices.binarySearch {i in
-                surnames[i] <=> "Greenwood" || givenNames[i] <=> "Jonny"
-            }
-            XCTAssertEqual(index, 1)
+            let index1 = surnames.binarySearch {n in n <=> "OK Computer"} //=> 3
+            let index2 = surnames.indices.binarySearch {i in
+                surnames[i] <=> "Greenwood" || givenNames[i] <=> "Danny"
+            } //=> 1
+            XCTAssertEqual(index1, 3)
+            XCTAssertEqual(index2, 1)
         }
     }
 
