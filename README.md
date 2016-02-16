@@ -187,7 +187,9 @@ let musiciansByYear = stableSorted(musicians, byYear)
 Binary search
 -------------
 
-A binary search algorithm finds an index in a sorted random access collection in `O(log N)` time. There is more than one kind of binary searches. Allsorts implements the following:
+A binary search algorithm finds an index in a sorted random access collection in `O(log N)` time, and in principle also works for sorted, non-random access collections while less efficiently (making `O(log N)` comparisons but `O(N)` index increments).
+
+There are more than one kind of binary searches. Allsorts implements the following:
 
 ```swift
 // indices:          0,   1,  2,   3,  4,  5,   6,  7,  8,  9
@@ -226,13 +228,15 @@ let r31: Range<Int> = xs.equalRange(31) //=> 6 ..< 6
 let r20 = xs.equalRange(Ordering.within(20 ... 30)) //=> 1 ..< 6
 ```
 
-Note that because `Range<Int>` is a random access collection itself, you can also call these methods on the `indices` of an `Array`:
+Note that because `Range<Int>` is a collection itself, you can also call these methods on the `indices` of an `Array`:
 
 ```swift
 let surnames   = ["Greenwood", "Greenwood", "O'Brien", "Selway", "Yorke"]
 let givenNames = ["Colin",     "Jonny",     "Ed",      "Philip", "Thom"]
-let index1 = surnames.binarySearch {n in n <=> "OK Computer"} //=> 3
-let index2 = surnames.indices.binarySearch {i in
+let index1 = surnames.binarySearch("York")                    //=> 4
+let index2 = surnames.binarySearch("Yorkey")                  //=> 5
+let index3 = surnames.binarySearch {n in n <=> "OK Computer"} //=> 3
+let index4 = surnames.indices.binarySearch {i in
     surnames[i] <=> "Greenwood" || givenNames[i] <=> "Danny"
 } //=> 1
 ```

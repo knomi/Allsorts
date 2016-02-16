@@ -94,12 +94,31 @@ class BinarySearchTests : XCTestCase {
         do {
             let surnames   = ["Greenwood", "Greenwood", "O'Brien", "Selway", "Yorke"]
             let givenNames = ["Colin",     "Jonny",     "Ed",      "Philip", "Thom"]
-            let index1 = surnames.binarySearch {n in n <=> "OK Computer"} //=> 3
-            let index2 = surnames.indices.binarySearch {i in
+            let index1 = surnames.binarySearch("York") //=> 4
+            let index2 = surnames.binarySearch("Yorkey") //=> 5
+            let index3 = surnames.binarySearch {n in n <=> "OK Computer"} //=> 3
+            let index4 = surnames.indices.binarySearch {i in
                 surnames[i] <=> "Greenwood" || givenNames[i] <=> "Danny"
             } //=> 1
-            XCTAssertEqual(index1, 3)
-            XCTAssertEqual(index2, 1)
+            XCTAssertEqual(index1, 4)
+            XCTAssertEqual(index2, 5)
+            XCTAssertEqual(index3, 3)
+            XCTAssertEqual(index4, 1)
+        }
+    }
+
+    func testEqualRangePerformance() {
+        var results: [Range<Int>] = []
+        let value = 400
+        measureBlock {
+            for input in perfInputs {
+                results.append(input.equalRange(value))
+            }
+        }
+        for (input, result) in zip(perfInputs, results) {
+            XCTAssertTrue(!input[input.startIndex ..< result.startIndex].contains {x in x >= value})
+            XCTAssertTrue(!input[result].contains {x in x != value})
+            XCTAssertTrue(!input[result.endIndex ..< input.endIndex].contains {x in x <= value})
         }
     }
 
@@ -193,4 +212,8 @@ class BinarySearchTests : XCTestCase {
         }
     }
     
+}
+
+private let perfInputs = (1 ... 40).map {i in
+    randomArray(count: i * i * 200, value: 0 ... 1000).sort()
 }

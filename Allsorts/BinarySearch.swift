@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
-extension CollectionType where Index : RandomAccessIndexType {
+extension CollectionType where Index : ForwardIndexType {
 
     /// Find an index that compares equal as against the given `ordering` of
     /// the sorted collection `self`. If none is found, returns `nil`.
@@ -76,7 +76,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     @warn_unused_result
     public func lowerBound(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
         var (lo, hi) = (startIndex, endIndex)
-        while lo < hi {
+        while lo != hi {
             let index = (lo ..< hi).midIndex
             (lo, hi) = try ordering(self[index]) == .LT ? (index.successor(), hi) : (lo, index)
         }
@@ -101,7 +101,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     @warn_unused_result
     public func upperBound(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
         var (lo, hi) = (startIndex, endIndex)
-        while lo < hi {
+        while lo != hi {
             let index = (lo ..< hi).midIndex
             (lo, hi) = try ordering(self[index]) == .GT ? (lo, index) : (index.successor(), hi)
         }
@@ -137,7 +137,7 @@ extension CollectionType where Index : RandomAccessIndexType {
     }
 }
 
-extension CollectionType where Index : RandomAccessIndexType, Generator.Element : Comparable {
+extension CollectionType where Index : ForwardIndexType, Generator.Element : Comparable {
     /// Find an index that compares equal to `value` in the sorted collection
     /// `self`. If none is found, returns `nil`.
     ///
@@ -248,7 +248,7 @@ extension CollectionType where Index : RandomAccessIndexType, Generator.Element 
 // -----------------------------------------------------------------------------
 // MARK: - Private
 
-extension Range where Element : RandomAccessIndexType {
+extension Range where Element : ForwardIndexType {
     /// The index at, or just below, the mid-point from `start` to `end`.
     internal var midIndex: Element {
         let fullDistance = startIndex.distanceTo(endIndex)
@@ -273,7 +273,7 @@ extension Range where Element : RandomAccessIndexType {
             -> (lower: Range, upper: Range)
     {
         var (lo, hi) = (startIndex, endIndex)
-        while lo < hi {
+        while lo != hi {
             let m = (lo ..< hi).midIndex
             switch try ordering(m) {
             case .LT: lo = m.successor()
