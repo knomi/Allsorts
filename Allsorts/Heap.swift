@@ -73,7 +73,7 @@ func siftDown<C : MutableCollectionType
      endIndex: C.Index,
      isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool,
      len: C.Index.Distance,
-     var rootIndex: C.Index)
+     rootIndex: C.Index)
 {
     // heap array representation:
     //                 0                             i
@@ -88,6 +88,7 @@ func siftDown<C : MutableCollectionType
     //
     // left-child of `index` is at `2 * index + 1`
     // right-child of `index` is at `2 * index + 2`
+    var rootIndex = rootIndex
     var child = startIndex.distanceTo(rootIndex)
     if (len < 2 || (len - 2) / 2 < child) {
         return
@@ -145,12 +146,12 @@ private func siftUp<C : MutableCollectionType
      startIndex: C.Index,
      endIndex: C.Index,
      isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool,
-     var len: C.Index.Distance)
+     len: C.Index.Distance)
 {
     if len <= 1 {
         return
     }
-    len = (len - 2) / 2
+    var len = (len - 2) / 2
     var index = startIndex.advancedBy(len)
     var lastIndex = endIndex - 1
     if isOrderedBefore(heap[lastIndex], heap[index]) {

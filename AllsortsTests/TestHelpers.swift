@@ -15,8 +15,8 @@ import Allsorts
 func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterval<T>,
                                     @autoclosure _ expression: () -> T,
                                     _ message: String = "",
-                                    file: StaticString = __FILE__,
-                                    line: UInt = __LINE__)
+                                    file: StaticString = #file,
+                                    line: UInt = #line)
 {
     let ivl = interval()
     let expr = expression()
@@ -28,8 +28,8 @@ func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterva
 func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedInterval<T>,
                                     @autoclosure _ expression: () -> T,
                                     _ message: String = "",
-                                    file: StaticString = __FILE__,
-                                    line: UInt = __LINE__)
+                                    file: StaticString = #file,
+                                    line: UInt = #line)
 {
     let ivl = interval()
     let expr = expression()
@@ -61,7 +61,7 @@ func randomMax<T : UnsignedIntegerType>(max: T) -> T {
     var buf = T(0)
     repeat {
         arc4random_buf(&buf, sizeof(UInt.self))
-        buf &= m
+        buf = buf & m
     } while buf > max
     return buf
 }
