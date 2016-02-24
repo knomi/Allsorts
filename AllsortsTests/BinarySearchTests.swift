@@ -188,7 +188,7 @@ class BinarySearchTests : XCTestCase {
     }
 
     func testEqualRange() {
-        func check(array: [Int], _ element: Int, _ message: String = "", file: StaticString = __FILE__, line: UInt = __LINE__) {
+        func check(array: [Int], _ element: Int, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
             let result = array.equalRange(element)
             XCTAssertEqual(result.startIndex, array.lowerBound(element), message, file: file, line: line)
             XCTAssertEqual(result.endIndex, array.upperBound(element), message, file: file, line: line)

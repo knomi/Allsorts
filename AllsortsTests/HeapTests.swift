@@ -64,7 +64,8 @@ private func buildHeap(ints: [Int]) -> [Int] {
     return heap
 }
 
-private func heapSorted(var heap: [Int]) -> [Int] {
+private func heapSorted(heap: [Int]) -> [Int] {
+    var heap = heap
     var ints = [Int]()
     while !heap.isEmpty {
         ints.append(heap.popHeap())
