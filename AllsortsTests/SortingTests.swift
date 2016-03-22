@@ -8,7 +8,7 @@
 import XCTest
 import Allsorts
 
-class SortingTests: XCTestCase {
+class SortingTests : XCTestCase {
 
     func testSort() {
         let byRevName = Ordering.reverse(byLast <|> byFirst)
@@ -20,36 +20,33 @@ class SortingTests: XCTestCase {
             ["Colin", "Ed", "Jonny", "Philip", "Thom"],
             "Swift.sorted(xs, isLessThan) should still work too")
         XCTAssertEqual(
-            sorted(musicians, Ordering.by {$0.first}).map {$0.first},
+            musicians.sort(ordering: Ordering.by {$0.first}).map {$0.first},
             ["Colin", "Ed", "Jonny", "Philip", "Thom"])
         XCTAssertEqual(
-            sorted(musicians, byLast <|> byFirst).map {$0.first},
+            musicians.sort(ordering: byLast <|> byFirst).map {$0.first},
             ["Colin", "Jonny", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            sorted(musicians, byLast
-                          <|> Ordering.reverse(byYear)).map {$0.first},
+            musicians.sort(ordering: byLast
+                                 <|> Ordering.reverse(byYear)).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            sorted(musicians, Ordering.by {$0.last.characters.count}
-                          <|> Ordering.reverse(byYear)).map {$0.first},
+            musicians.sort(ordering: Ordering.by {$0.last.characters.count}
+                                 <|> Ordering.reverse(byYear)).map {$0.first},
             ["Thom", "Philip", "Ed", "Jonny", "Colin"])
-    }
-
-    func testStableSort() {
         XCTAssertEqual(
-            stableSorted(musicians, Ordering.by {$0.year}).map {$0.first},
+            musicians.sort(ordering: Ordering.by {$0.year}).map {$0.first},
             ["Philip", "Thom", "Ed", "Colin", "Jonny"])
         XCTAssertEqual(
-            stableSorted(musicians, Ordering.by {$0.year}
-                                <|> Ordering.by {$0.last}
-                                <|> Ordering.by {$0.first}).map {$0.first},
+            musicians.sort(ordering: Ordering.by {$0.year}
+                                 <|> Ordering.by {$0.last}
+                                 <|> Ordering.by {$0.first}).map {$0.first},
             ["Philip", "Ed", "Thom", "Colin", "Jonny"])
         XCTAssertEqual(
-            stableSorted(musicians, Ordering.by({$0.last})).map {$0.first},
+            musicians.sort(ordering: Ordering.by({$0.last})).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            stableSorted(musicians, Ordering.by {$0.last}
-                                <|> Ordering.by {$0.first}).map {$0.first},
+            musicians.sort(ordering: Ordering.by {$0.last}
+                                 <|> Ordering.by {$0.first}).map {$0.first},
             ["Colin", "Jonny", "Ed", "Philip", "Thom"])
     }
 

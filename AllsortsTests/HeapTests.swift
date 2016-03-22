@@ -55,49 +55,6 @@ class HeapTests : XCTestCase {
 
 private let perfInput = randomArray(count: 20000, value: 0 ... 1000)
 
-// MARK: - Random numbers
-
-private func bitwiseCeil<T : UnsignedIntegerType>(x: T) -> T {
-    var i = ~T(0)
-    while ~i < x {
-        i = T.multiplyWithOverflow(i, 2).0
-    }
-    return ~i
-}
-
-private func randomMax<T : UnsignedIntegerType>(max: T) -> T {
-    let m = bitwiseCeil(max)
-    var buf = T(0)
-    repeat {
-        arc4random_buf(&buf, sizeof(UInt.self))
-        buf &= m
-    } while buf > max
-    return buf
-}
-
-private func random<T : UnsignedIntegerType>(interval: ClosedInterval<T>) -> T {
-    let a = interval.start
-    let b = interval.end
-    return a + randomMax(b - a)
-}
-
-private func random(interval: ClosedInterval<Int>) -> Int {
-    let a = UInt(bitPattern: interval.start)
-    let b = UInt(bitPattern: interval.end)
-    let n = b - a
-    return Int(bitPattern: UInt.addWithOverflow(a, randomMax(n)).0)
-}
-
-private func randomArray(count count: Int,
-                         value: ClosedInterval<Int>) -> [Int]
-{
-    var ints = [Int]()
-    for _ in 0 ..< count {
-        ints.append(random(value))
-    }
-    return ints
-}
-
 private func buildHeap(ints: [Int]) -> [Int] {
     var heap = [Int]()
     heap.reserveCapacity(ints.count)
@@ -107,7 +64,8 @@ private func buildHeap(ints: [Int]) -> [Int] {
     return heap
 }
 
-private func heapSorted(var heap: [Int]) -> [Int] {
+private func heapSorted(heap: [Int]) -> [Int] {
+    var heap = heap
     var ints = [Int]()
     while !heap.isEmpty {
         ints.append(heap.popHeap())

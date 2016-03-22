@@ -52,6 +52,7 @@ extension Bounded : CustomDebugStringConvertible {
     }
 }
 
+@warn_unused_result
 public func <=> <T>(a: Bounded<T>, b: Bounded<T>) -> Ordering {
     switch (a, b) {
     case     (.Min,    .Min   ): return .EQ

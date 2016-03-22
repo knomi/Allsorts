@@ -5,227 +5,283 @@
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
+extension CollectionType where Index : ForwardIndexType {
 
-// -----------------------------------------------------------------------------
-// MARK: - Binary search
+    /// Find an index that compares equal as against the given `ordering` of
+    /// the sorted collection `self`. If none is found, returns `nil`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `ordering`, i.e. for all
+    ///   index pairs `i < j`, `ordering(self[i]) <= ordering(self[j])`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: For a collection of `Comparable`s sorted by `<`, pass
+    ///   `Ordering.to(x)` as `ordering`, or just call `coll.binaryFind(x)`.
+    ///
+    /// - Seealso: `binarySearch`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
+    public func binaryFind(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index? {
+        let (lower: lower, upper: upper) = try indices.forkEqualRange {index in
+            try ordering(self[index])
+        }
+        guard lower.startIndex != upper.endIndex else {
+            return nil
+        }
+        return lower.endIndex
+    }
 
-/// Arbitrarily find an index `i` within the `range` sorted by `ordering` such
-/// that:
-///
-/// - `ordering(i) == Ordering.EQ` iff `ordering(j) == Ordering.EQ` for some
-///   `j`, and
-/// - otherwise, `ordering(i) == .GT` and `ordering(j) == .LT` for all `j < i`.
-///
-/// **Precondition:** The `range` must be sorted by `ordering`.
-///
-/// **Complexity:** `O(log n)` where `n` is the number of indices in `range`.
-///
-/// **See also:** `binaryFind`, `equalRange`, `lowerBound`, `upperBound`.
-public func binarySearch<Ix : RandomAccessIndexType>
-    (range: Range<Ix>, _ ordering: Ix -> Ordering) -> Ix
-{
-    return forkEqualRange(range, ordering).lower.endIndex
-}
+    /// Find an index that splits the sorted collection `self` in
+    /// lesser-or-equal and greater-or-equal halves. Additionally, if one or
+    /// more equally comparing values exist, then it is guaranteed that the
+    /// returned index has value comparing equal.
+    ///
+    /// Returns an arbitrary index `i` within `startIndex...endIndex` such that:
+    ///
+    /// * iff there exists `j` such that `ordering(self[j]) == .EQ`, then
+    ///   `ordering(self[i]) == .EQ`,
+    /// * otherwise, `ordering(self[i]) == .GT` and `ordering(self[j]) == .LT`
+    ///   for all `j < i`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `ordering`, i.e. for all
+    ///   index pairs `i < j`, `ordering(self[i]) <= ordering(self[j])`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: For a collection of `Comparable`s sorted by `<`, pass
+    ///   `Ordering.to(x)` as `ordering`, or just call `coll.binarySearch(x)`.
+    ///
+    /// - Seealso: `binaryFind`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
+    public func binarySearch(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
+        return try indices.forkEqualRange {index in
+            try ordering(self[index])
+        }.lower.endIndex
+    }
+    
+    /// Find the index that splits the sorted collection `self` in
+    /// strictly-lesser and greater-or-equal halves.
+    ///
+    /// Returns the index `i` within `startIndex...endIndex` for which
+    /// `ordering(j) == .LT` iff `j < i`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `ordering`, i.e. for all
+    ///   index pairs `i < j`, `ordering(self[i]) <= ordering(self[j])`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: For a collection of `Comparable`s sorted by `<`, pass
+    ///   `Ordering.to(x)` as `ordering`, or just call `coll.lowerBound(x)`.
+    ///
+    /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `upperBound`.
+    @warn_unused_result
+    public func lowerBound(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
+        var (lo, hi) = (startIndex, endIndex)
+        while lo != hi {
+            let index = (lo ..< hi).midIndex
+            (lo, hi) = try ordering(self[index]) == .LT ? (index.successor(), hi) : (lo, index)
+        }
+        return lo
+    }
+    
+    /// Find the index that splits the sorted collection `self` in
+    /// lesser-or-equal and strictly-greater halves.
+    ///
+    /// Returns the index `i` within `startIndex...endIndex` for which
+    /// `ordering(j) != .GT` iff `j < i`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `ordering`, i.e. for all
+    ///   index pairs `i < j`, `ordering(self[i]) <= ordering(self[j])`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: For a collection of `Comparable`s sorted by `<`, pass
+    ///   `Ordering.to(x)` as `ordering`, or just call `coll.upperBound(x)`.
+    ///
+    /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `lowerBound`.
+    @warn_unused_result
+    public func upperBound(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Index {
+        var (lo, hi) = (startIndex, endIndex)
+        while lo != hi {
+            let index = (lo ..< hi).midIndex
+            (lo, hi) = try ordering(self[index]) == .GT ? (lo, index) : (index.successor(), hi)
+        }
+        return lo
+    }
 
-/// Convenience function for arbitrarily finding an index `i` within
-/// `indices(xs)` such that:
-///
-/// - `ordering(xs[j]) != Ordering.GT` for all `j` in `xs.beginIndex ..< i`,
-/// - `ordering(xs[k]) != Ordering.LT` for all `k` in `i ..< xs.endIndex`.
-///
-/// **Precondition:** `xs` must be sorted by `ordering`.
-///
-/// **Remark:** For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
-/// as `ordering`.
-///
-/// **See also:** `binaryFind`, `equalRange`, `lowerBound`, `upperBound`.
-public func binarySearch<S : CollectionType where
-                         S.Index : RandomAccessIndexType>
-    (xs: S, _ ordering: S.Generator.Element -> Ordering) -> S.Index
-{
-    return binarySearch(xs.indices) {i in ordering(xs[i])}
-}
-
-/// Convenience function for arbitrarily finding an index `i` within
-/// `indices(xs)` such that `ordering(i) == Ordering.EQ`. If none is found,
-/// returns `nil`.
-///
-/// **Precondition:** `xs` must be sorted by `ordering`.
-///
-/// **Remark:** For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
-/// as `ordering`.
-///
-/// **See also:** `binarySearch`, `equalRange`, `lowerBound`, `upperBound`.
-public func binaryFind<S : CollectionType where S.Index : RandomAccessIndexType>
-    (xs: S, _ ordering: S.Generator.Element -> Ordering) -> S.Index?
-{
-    let forks = forkEqualRange(xs.indices) {i in ordering(xs[i])}
-    if forks.lower.startIndex != forks.upper.endIndex {
-        return forks.lower.endIndex
-    } else {
-        return nil
+    /// Find the index range of the sorted collection `self` for which all
+    /// indices `i` satisfy `ordering(i) == .EQ`. If there is no such range,
+    /// return the empty range at the point where those elements would be
+    /// inserted while preserving the ordering.
+    ///
+    /// - Precondition: `self` **must** be sorted by `ordering`, i.e. for all
+    ///   index pairs `i < j`, `ordering(self[i]) <= ordering(self[j])`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: `coll.equalRange(ord)` returns the range
+    ///   `coll.lowerBound(ord) ..< coll.upperBound(ord)` but
+    ///   performs fewer comparisons than calling `lowerBound` and `upperBound`
+    ///   separately.
+    ///
+    /// - Remark: For a collection of `Comparable`s sorted by `<`, pass
+    ///   `Ordering.to(x)` as `ordering`, or just call `coll.equalRange(x)`.
+    ///
+    /// - Seealso: `binarySearch`, `binaryFind`, `lowerBound`, `upperBound`.
+    @warn_unused_result
+    public func equalRange(@noescape ordering: Generator.Element throws -> Ordering) rethrows -> Range<Index> {
+        let (lower, upper) = try indices.forkEqualRange {index in
+            try ordering(self[index])
+        }
+        return try lower.lowerBound {i in try ordering(self[i])}
+               ..< upper.upperBound {i in try ordering(self[i])}
     }
 }
 
-
-// -----------------------------------------------------------------------------
-// MARK: - Lower bound
-
-/// Compute the lowest index `i` within `range` for which `ordering(i)` does not
-/// return `Ordering.LT`. If there is no such index, return `range.endIndex`.
-///
-/// Precondition: The `range` must be sorted by `ordering`.
-///
-/// Complexity: `O(log n)` where `n` is the number of indices in the `range`.
-///
-/// See also: `equalRange`, `upperBound`, `binarySearch`.
-public func lowerBound<Ix : RandomAccessIndexType>
-    (range: Range<Ix>, _ ordering: Ix -> Ordering) -> Ix
-{
-    var (lo, hi) = (range.startIndex, range.endIndex)
-    while lo < hi {
-        let m = midIndex(lo ..< hi)
-        (lo, hi) = ordering(m) == .LT ? (m.successor(), hi) : (lo, m)
+extension CollectionType where Index : ForwardIndexType, Generator.Element : Comparable {
+    /// Find an index that compares equal to `value` in the sorted collection
+    /// `self`. If none is found, returns `nil`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `<`, i.e. for all
+    ///   index pairs `i < j`, `self[i] <= self[j]`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: This is a convenience overload of `binaryFind(_:)` using
+    ///   `Ordering.to(value)` as `ordering`.
+    ///
+    /// - Seealso: `binarySearch`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
+    public func binaryFind(value: Generator.Element) -> Index? {
+        return binaryFind(Ordering.to(value))
     }
-    return lo
-}
 
-/// Convenience function for finding the lower bound index `i` within
-/// `indices(xs)` such that:
-///
-/// - `ordering(xs[j]) != Ordering.GT` for all `j` in `xs.startIndex ..< i`, and
-/// - `ordering(xs[k]) == Ordering.GT` for all `k` in `i ..< xs.endIndex`.
-///
-/// Precondition: `xs` must be sorted by `ordering`.
-///
-/// Remark: For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
-/// as `ordering`.
-public func lowerBound<S : CollectionType where
-                       S.Index : RandomAccessIndexType>
-    (xs: S, _ ordering: S.Generator.Element -> Ordering) -> S.Index
-{
-    return lowerBound(xs.indices) {i in ordering(xs[i])}
-}
-
-
-// -----------------------------------------------------------------------------
-// MARK: - Upper bound
-
-/// Compute the lowest index `i` within `range` for which `ordering(i)` returns
-/// `Ordering.GT`. If there is no such index, return `range.endIndex`.
-///
-/// Precondition: The `range` must be sorted by `ordering`.
-///
-/// Complexity: `O(log n)` where `n` is the number of indices in the `range`.
-///
-/// See also: `equalRange`, `lowerBound`, `binarySearch`.
-public func upperBound<Ix : RandomAccessIndexType>
-    (range: Range<Ix>, _ ordering: Ix -> Ordering) -> Ix
-{
-    var (lo, hi) = (range.startIndex, range.endIndex)
-    while lo < hi {
-        let m = midIndex(lo ..< hi)
-        (lo, hi) = ordering(m) == .GT ? (lo, m) : (m.successor(), hi)
+    /// Find an index that splits the sorted collection `self` in
+    /// lesser-or-equal and greater-or-equal halves compared to `value`.
+    /// Additionally, if one or more values equal to `value` exist, then it is
+    /// guaranteed that the returned index has value comparing equal to `value`.
+    ///
+    /// Returns an arbitrary index `i` within `startIndex...endIndex` such that:
+    ///
+    /// * iff there exists `j` such that `self[j] == value`, then
+    ///   `self[i] == value`,
+    /// * otherwise, `self[i] > value` and for all `j < i`, `self[j] < value`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `<`, i.e. for all
+    ///   index pairs `i < j`, `self[i] <= self[j]`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: This is a convenience overload of `binarySearch(_:)` using
+    ///   `Ordering.to(value)` as `ordering`.
+    ///
+    /// - Seealso: `binaryFind`, `equalRange`, `lowerBound`, `upperBound`.
+    @warn_unused_result
+    public func binarySearch(value: Generator.Element) -> Index {
+        return binarySearch(Ordering.to(value))
     }
-    return lo
+
+    /// Find the index that splits the sorted collection `self` in
+    /// strictly-lesser and greater-or-equal halves compared to `value`.
+    ///
+    /// Returns the index `i` within `startIndex...endIndex` for which
+    /// `self[j] < value` iff `j < i`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `<`, i.e. for all
+    ///   index pairs `i < j`, `self[i] <= self[j]`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: This is a convenience overload of `lowerBound(_:)` using
+    ///   `Ordering.to(value)` as `ordering`.
+    ///
+    /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `upperBound`.
+    @warn_unused_result
+    public func lowerBound(value: Generator.Element) -> Index {
+        return lowerBound(Ordering.to(value))
+    }
+
+    /// Find the index that splits the sorted collection `self` in
+    /// lesser-or-equal and strictly-greater halves compared to `value`.
+    ///
+    /// Returns the index `i` within `startIndex...endIndex` for which
+    /// `self[j] <= value` iff `j < i`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `<`, i.e. for all
+    ///   index pairs `i < j`, `self[i] <= self[j]`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: This is a convenience overload of `upperBound(_:)` using
+    ///   `Ordering.to(value)` as `ordering`.
+    ///
+    /// - Seealso: `binarySearch`, `binaryFind`, `equalRange`, `lowerBound`.
+    @warn_unused_result
+    public func upperBound(value: Generator.Element) -> Index {
+        return upperBound(Ordering.to(value))
+    }
+
+    /// Find the index range of the sorted collection `self` containing all
+    /// indices `i` that compare equal to `value`. If there is no such range,
+    /// returns the empty range at the point where those elements would be
+    /// inserted while preserving the ordering.
+    ///
+    /// - Precondition: `self` **must** be sorted by `<`, i.e. for all
+    ///   index pairs `i < j`, `self[i] <= self[j]`.
+    ///
+    /// - Complexity: `O(log n)` where `n` is the number of elements in `self`.
+    ///
+    /// - Remark: `coll.equalRange(value)` returns the range
+    ///   `coll.lowerBound(value) ..< coll.upperBound(value)` but
+    ///   performs fewer comparisons than calling `lowerBound` and `upperBound`
+    ///   separately.
+    ///
+    /// - Remark: This is a convenience overload of `equalRange(_:)` using
+    ///   `Ordering.to(value)` as `ordering`.
+    ///
+    /// - Seealso: `binarySearch`, `binaryFind`, `lowerBound`, `upperBound`.
+    @warn_unused_result
+    public func equalRange(value: Generator.Element) -> Range<Index> {
+        return equalRange(Ordering.to(value))
+    }
 }
-
-/// Convenience function for finding the upper bound index `i` within
-/// `indices(xs)` such that:
-///
-/// - `ordering(xs[j]) == Ordering.LT` for all `j` in `xs.startIndex ..< i`, and
-/// - `ordering(xs[k]) != Ordering.LT` for all `k` in `i ..< xs.endIndex`.
-///
-/// Precondition: `xs` must be sorted by `ordering`.
-///
-/// Remark: For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
-/// as `ordering`.
-public func upperBound<S : CollectionType where
-                       S.Index : RandomAccessIndexType>
-    (xs: S, _ ordering: S.Generator.Element -> Ordering) -> S.Index
-{
-    return upperBound(xs.indices) {i in ordering(xs[i])}
-}
-
-
-// -----------------------------------------------------------------------------
-// MARK: - Equal range
-
-/// Find the subrange or `range` for which all indices `i` satisfy
-/// `ordering(i) == .EQ`. If there is no such range, return the empty range at
-/// the point where those elements would be inserted while preserving the
-/// ordering.
-///
-/// **Precondition:** The `range` must be sorted by `ordering`.
-///
-/// **Complexity:** `O(log n)` where `n` is the number of indices in `range`.
-///
-/// **Remark:** `equalRange(range, ordering: ord)` returns the range
-/// `lowerBound(range, ordering: ord) ..< upperBound(range, ordering: ord)` but
-/// performs fewer comparisons than calling `lowerBound` and `upperBound`
-/// separately.
-///
-/// **See also:** `lowerBound`, `upperBound`, `binarySearch`.
-public func equalRange<Ix : RandomAccessIndexType>
-    (range: Range<Ix>, _ ordering: Ix -> Ordering) -> Range<Ix>
-{
-    let (lower, upper) = forkEqualRange(range, ordering)
-    return lowerBound(lower, ordering) ..< upperBound(upper, ordering)
-}
-
-/// Convenience function for finding the subrange `start ..< end` of
-/// `indices(xs)` such that:
-///
-/// - `ordering(xs[i]) == Ordering.LT` for all `i` in `xs.beginIndex ..< start`,
-/// - `ordering(xs[j]) == Ordering.EQ` for all `j` in `start ..< end`, and
-/// - `ordering(xs[k]) == Ordering.GT` for all `k` in `end ..< xs.endIndex`.
-///
-/// **Precondition:** `xs` must be sorted by `ordering`.
-///
-/// **Remark:** For a sorted array of `Comparable`s, just pass `Ordering.to(x)`
-/// as `ordering`.
-public func equalRange<S : CollectionType where
-                       S.Index : RandomAccessIndexType>
-    (xs: S, _ ordering: S.Generator.Element -> Ordering) -> Range<S.Index>
-{
-    return equalRange(xs.indices) {i in ordering(xs[i])}
-}
-
 
 // -----------------------------------------------------------------------------
 // MARK: - Private
 
-/// Compute the index at, or just below, the mid-point from `start` to `end`.
-internal func midIndex<Ix : RandomAccessIndexType>(range: Range<Ix>) -> Ix {
-    let fullDistance = range.startIndex.distanceTo(range.endIndex)
-    return range.startIndex.advancedBy(fullDistance / 2)
+extension Range where Element : ForwardIndexType {
+    /// The index at, or just below, the mid-point from `start` to `end`.
+    internal var midIndex: Element {
+        let fullDistance = startIndex.distanceTo(endIndex)
+        return startIndex.advancedBy(fullDistance / 2)
+    }
+
+    /// Arbitrarily find two subranges `(lower, upper)` of `self` such that:
+    ///
+    /// * `lower.endIndex == upper.startIndex`,
+    /// * `lower.lowerBound(ord) == self.lowerBound(ord)`, and
+    /// * `upper.upperBound(ord) == self.upperBound(ord)`.
+    ///
+    /// - Precondition: `self` **must** be sorted by `ordering`.
+    ///
+    /// - Complexity: `O(n)` where `n` is the number of indices in the `range`.
+    ///
+    /// - Remark: Note that the subranges may be empty.
+    ///
+    /// - Seealso: `binarySearch`, `lowerBound`, `upperBound` and `equalRange`
+    @warn_unused_result
+    internal func forkEqualRange(@noescape ordering: Element throws -> Ordering) rethrows
+            -> (lower: Range, upper: Range)
+    {
+        var (lo, hi) = (startIndex, endIndex)
+        while lo != hi {
+            let m = (lo ..< hi).midIndex
+            switch try ordering(m) {
+            case .LT: lo = m.successor()
+            case .EQ: return (lo ..< m, m ..< hi)
+            case .GT: hi = m
+            }
+        }
+        return (lo ..< lo, lo ..< lo)
+    }
 }
 
-/// Arbitrarily find two subranges `(lower, upper)` of `range` such that:
-///
-/// - `lower.endIndex == upper.startIndex`,
-/// - `lowerBound(lower, ordering: ord) == lowerBound(range, ordering: ord)`, and
-/// - `upperBound(upper, ordering: ord) == upperBound(range, ordering: ord)`.
-///
-/// **Precondition:** The `range` must be sorted by `ordering`.
-///
-/// **Complexity:** `O(n)` where `n` is the number of indices in the `range`.
-///
-/// **Remark:** Note that the subranges may
-///
-/// **See also:** `lowerBound`, `upperBound` and `equalRange`
-internal func forkEqualRange<Ix : RandomAccessIndexType>
-    (range: Range<Ix>, _ ordering: Ix -> Ordering) -> (lower: Range<Ix>,
-                                                       upper: Range<Ix>)
-{
-    var (lo, hi) = (range.startIndex, range.endIndex)
-    while lo < hi {
-        let m = midIndex(lo ..< hi)
-        switch ordering(m) {
-        case .LT: lo = m.successor()
-        case .EQ: return (lo ..< m, m ..< hi)
-        case .GT: hi = m
-        }
-    }
-    return (lo ..< lo, lo ..< lo)
-}

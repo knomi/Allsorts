@@ -29,6 +29,7 @@ public enum Ordering : Int {
     
     /// Compute the `Ordering` between the `Comparable`\ s `left` and `right` by
     /// using the `<` operator and, if not less-than, the `==` operator.
+    @warn_unused_result
     public static func compare<T : Comparable>(left: T, _ right: T) -> Ordering {
         return left < right ? .LT : left == right ? .EQ : .GT
     }
@@ -36,14 +37,17 @@ public enum Ordering : Int {
 
 extension Ordering : Comparable {}
 
+@warn_unused_result
 prefix func -(reversed: Ordering) -> Ordering {
     return Ordering(rawValue: -reversed.rawValue)
 }
 
+@warn_unused_result
 public func == (left: Ordering, right: Ordering) -> Bool {
     return left.rawValue == right.rawValue
 }
 
+@warn_unused_result
 public func < (left: Ordering, right: Ordering) -> Bool {
     return left.rawValue < right.rawValue
 }
