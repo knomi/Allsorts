@@ -110,7 +110,8 @@ public extension Ordering {
     /// sorted(people, Ordering.by {$0.lastName} <|> Ordering.by {$0.firstName})
     /// ```
     ///
-    /// See also: `sorted`, `stableSorted`, `<|>`
+    /// - Seealso: `Array.sortInPlace(ordering:)`,
+    ///   `SequenceType.sort(ordering:)`, `<|>`
     @warn_unused_result
     public static func by<T, K : Orderable>(key: T -> K) -> (T, T) -> Ordering {
         return {left, right in

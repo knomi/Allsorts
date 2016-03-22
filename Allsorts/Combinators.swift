@@ -30,7 +30,8 @@ infix operator <|> {
 ///
 /// - Remark: This operator is useful together with the use of `Ordering.by`.
 ///
-/// - Seealso: `Ordering.by`. `sorted`, `stableSorted`
+/// - Seealso: `Ordering.by`. `Array.sortInPlace(ordering:)`,
+///   `SequenceType.sort(ordering:)`
 @warn_unused_result
 public func <|> <Args>(left: Args -> Ordering, right: Args -> Ordering) -> Args -> Ordering {
     return {args in

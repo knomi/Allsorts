@@ -180,7 +180,7 @@ Allsorts doesn't currently add much to tasks involving sorting, but the followin
 let musiciansByName = sorted(musicians, byLast <|> byFirst)
 //=> Greenwood Colin, Greenwood Jonny, O'Brien Ed, Selway Philip, Yorke Thom
 
-let musiciansByYear = stableSorted(musicians, byYear)
+let musiciansByYear = musicians.sort(ordering: byYear)
 //=> Philip 1967, Thom 1968, Ed 1968, Colin 1969, Jonny 1971
 ```
 
