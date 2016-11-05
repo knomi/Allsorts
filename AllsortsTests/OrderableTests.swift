@@ -20,28 +20,28 @@ class OrderableTests : XCTestCase {
         
         XCTAssertEqual(QuicklyDifferent([]),
                        QuicklyDifferent([]))
-        XCTAssertEqual(QuicklyDifferent([.One]),
-                       QuicklyDifferent([.One]))
-        XCTAssertEqual(QuicklyDifferent([.One, .Two]),
-                       QuicklyDifferent([.One, .Two]))
+        XCTAssertEqual(QuicklyDifferent([.one]),
+                       QuicklyDifferent([.one]))
+        XCTAssertEqual(QuicklyDifferent([.one, .two]),
+                       QuicklyDifferent([.one, .two]))
         
         XCTAssertLessThan(QuicklyDifferent([]),
-                          QuicklyDifferent([.One]))
-        XCTAssertLessThan(QuicklyDifferent([.Two, .One]),
-                          QuicklyDifferent([.Two, .Two]))
-        XCTAssertLessThan(QuicklyDifferent([.Two, .One, .Bad]),
-                          QuicklyDifferent([.Two, .Two]))
-        XCTAssertLessThan(QuicklyDifferent([.Two, .One, .Bad]),
-                          QuicklyDifferent([.Two, .Two, .Bad]))
+                          QuicklyDifferent([.one]))
+        XCTAssertLessThan(QuicklyDifferent([.two, .one]),
+                          QuicklyDifferent([.two, .two]))
+        XCTAssertLessThan(QuicklyDifferent([.two, .one, .bad]),
+                          QuicklyDifferent([.two, .two]))
+        XCTAssertLessThan(QuicklyDifferent([.two, .one, .bad]),
+                          QuicklyDifferent([.two, .two, .bad]))
 
-        XCTAssertEqual(QuicklyDifferent([.One]),
-                       QuicklyDifferent([.One]))
-        XCTAssertFalse(QuicklyDifferent([.Bad])
-                    == QuicklyDifferent([.One, .Two]))
-        XCTAssert(QuicklyDifferent([.Bad])
-               != QuicklyDifferent([.Two, .Two]))
-        XCTAssertNotEqual(QuicklyDifferent([.Two]),
-                          QuicklyDifferent([.Bad, .Two]))
+        XCTAssertEqual(QuicklyDifferent([.one]),
+                       QuicklyDifferent([.one]))
+        XCTAssertFalse(QuicklyDifferent([.bad])
+                    == QuicklyDifferent([.one, .two]))
+        XCTAssert(QuicklyDifferent([.bad])
+               != QuicklyDifferent([.two, .two]))
+        XCTAssertNotEqual(QuicklyDifferent([.two]),
+                          QuicklyDifferent([.bad, .two]))
     }
     
     func testOrderableIsComparable() {
@@ -59,37 +59,37 @@ class OrderableTests : XCTestCase {
     }
     
     func testOrderableFoundation() {
-        XCTAssertFalse(isOrderableType(NSObject))
-        XCTAssertFalse(isOrderableType(NSArray))
-        XCTAssertFalse(isOrderableType(NSDictionary))
-        XCTAssert(isOrderableType(NSData))
-        XCTAssert(isOrderableType(NSDate))
-        XCTAssert(isOrderableType(NSIndexPath))
-        XCTAssert(isOrderableType(NSDecimalNumber))
-        XCTAssert(isOrderableType(NSNumber))
-        XCTAssert(isOrderableType(NSString))
-        XCTAssert(isOrderableType(NSUUID))
+        XCTAssertFalse(isOrderableType(NSObject.self))
+        XCTAssertFalse(isOrderableType(NSArray.self))
+        XCTAssertFalse(isOrderableType(NSDictionary.self))
+        XCTAssert(isOrderableType(Data.self))
+        XCTAssert(isOrderableType(Date.self))
+        XCTAssert(isOrderableType(IndexPath.self))
+        XCTAssert(isOrderableType(NSDecimalNumber.self))
+        XCTAssert(isOrderableType(NSNumber.self))
+        //XCTAssert(isOrderableType(NSString.self))
+        XCTAssert(isOrderableType(UUID.self))
     
-        XCTAssertEqual(NSData() <=> NSData(), Ordering.equal)
-        XCTAssertEqual(NSData()
-                   <=> "".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.equal)
-        XCTAssertEqual(NSData()
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.less)
-        XCTAssertEqual("!".dataUsingEncoding(NSUTF8StringEncoding)!
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.equal)
-        XCTAssertEqual("!!".dataUsingEncoding(NSUTF8StringEncoding)!
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.greater)
+        XCTAssertEqual(Data() <=> Data(), Ordering.equal)
+        XCTAssertEqual(Data()
+                   <=> "".data(using: .utf8)!, Ordering.equal)
+        XCTAssertEqual(Data()
+                   <=> "!".data(using: .utf8)!, Ordering.less)
+        XCTAssertEqual("!".data(using: .utf8)!
+                   <=> "!".data(using: .utf8)!, Ordering.equal)
+        XCTAssertEqual("!!".data(using: .utf8)!
+                   <=> "!".data(using: .utf8)!, Ordering.greater)
 
-        let distantPast = NSDate.distantPast()
-        let distantFuture = NSDate.distantFuture()
+        let distantPast = Date.distantPast
+        let distantFuture = Date.distantFuture
         
-        XCTAssertEqual(distantPast <=> NSDate(), Ordering.less)
-        XCTAssertEqual(distantFuture <=> NSDate(), Ordering.greater)
+        XCTAssertEqual(distantPast <=> Date(), Ordering.less)
+        XCTAssertEqual(distantFuture <=> Date(), Ordering.greater)
         XCTAssertEqual(distantPast <=> distantPast, Ordering.equal)
         XCTAssertEqual(distantPast <=> distantFuture, Ordering.less)
         XCTAssertEqual(distantFuture <=> distantFuture, Ordering.equal)
-        XCTAssertEqual(NSDate()
-                   <=> NSDate(timeIntervalSince1970: 0), Ordering.greater)
+        XCTAssertEqual(Date()
+                   <=> Date(timeIntervalSince1970: 0), Ordering.greater)
         
         XCTAssertEqual(indexPath() <=> indexPath(), Ordering.equal)
         XCTAssertEqual(indexPath(1) <=> indexPath(), Ordering.greater)
@@ -133,25 +133,25 @@ private func <=> <K, V>(a: Record<K, V>, b: Record<K, V>) -> Ordering {
 // MARK: Limited comparisons
 
 /// This struct is used for checking that `QuicklyDifferent` doesn't perform
-/// comparisons overly eagerly. If `.Bad` is compared with something, a test
+/// comparisons overly eagerly. If `.bad` is compared with something, a test
 /// assertion failure is recorded.
 private enum HardlyComparable : Orderable, Comparable {
-    case One
-    case Two
-    case Bad
+    case one
+    case two
+    case bad
 }
 
 private func <=> (a: HardlyComparable, b: HardlyComparable) -> Ordering {
     switch (a, b) {
-    case (.One, .One):                         return .equal
-    case (.One, .Two):                         return .less
-    case (.One, .Bad): XCTFail("one <=> bad"); return .less
-    case (.Two, .One):                         return .greater
-    case (.Two, .Two):                         return .equal
-    case (.Two, .Bad): XCTFail("two <=> bad"); return .less
-    case (.Bad, .One): XCTFail("bad <=> one"); return .less
-    case (.Bad, .Two): XCTFail("bad <=> two"); return .greater
-    case (.Bad, .Bad): XCTFail("bad <=> bad"); return .less
+    case (.one, .one):                         return .equal
+    case (.one, .two):                         return .less
+    case (.one, .bad): XCTFail("one <=> bad"); return .less
+    case (.two, .one):                         return .greater
+    case (.two, .two):                         return .equal
+    case (.two, .bad): XCTFail("two <=> bad"); return .less
+    case (.bad, .one): XCTFail("bad <=> one"); return .less
+    case (.bad, .two): XCTFail("bad <=> two"); return .greater
+    case (.bad, .bad): XCTFail("bad <=> bad"); return .less
     }
 }
 
@@ -168,7 +168,7 @@ private struct QuicklyDifferent : Orderable, Comparable {
 
 private func == (a: QuicklyDifferent, b: QuicklyDifferent) -> Bool {
     return !(a.elements.count != b.elements.count)
-        && a.elements <=> b.elements == .equal
+        && (a.elements <=> b.elements) == .equal
 }
 
 private func <=> (a: QuicklyDifferent, b: QuicklyDifferent) -> Ordering {
@@ -177,8 +177,7 @@ private func <=> (a: QuicklyDifferent, b: QuicklyDifferent) -> Ordering {
 
 // MARK: Foundation object construction
 
-/// Construct an `NSIndexPath` with the given indexes.
-private func indexPath(indexes: Int...) -> NSIndexPath {
-    var path = indexes
-    return NSIndexPath(indexes: &path, length: path.count)
+/// Construct an `IndexPath` with the given indexes.
+private func indexPath(_ indexes: Int...) -> IndexPath {
+    return IndexPath(indexes: indexes)
 }

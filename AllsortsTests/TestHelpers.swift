@@ -12,8 +12,8 @@ import Allsorts
 // MARK: - Assertions
 
 
-func AssertContains<T : Comparable>(@autoclosure interval: () -> Range<T>,
-                                    @autoclosure _ expression: () -> T,
+func AssertContains<T : Comparable>(_ interval: @autoclosure () -> Range<T>,
+                                    _ expression: @autoclosure () -> T,
                                     _ message: String = "",
                                     file: StaticString = #file,
                                     line: UInt = #line)
@@ -25,8 +25,8 @@ func AssertContains<T : Comparable>(@autoclosure interval: () -> Range<T>,
     XCTAssert(ivl.contains(expr), msg, file: file, line: line)
 }
 
-func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedRange<T>,
-                                    @autoclosure _ expression: () -> T,
+func AssertContains<T : Comparable>(_ interval: @autoclosure () -> ClosedRange<T>,
+                                    _ expression: @autoclosure () -> T,
                                     _ message: String = "",
                                     file: StaticString = #file,
                                     line: UInt = #line)
@@ -48,7 +48,7 @@ func isOrderableType<T : Any>(_: T.Type) -> Bool { return false }
 
 // MARK: - Random numbers
 
-func bitwiseCeil<T : UnsignedIntegerType>(x: T) -> T {
+func bitwiseCeil<T : UnsignedInteger>(_ x: T) -> T {
     var i = ~T(0)
     while ~i < x {
         i = T.multiplyWithOverflow(i, 2).0
@@ -56,32 +56,30 @@ func bitwiseCeil<T : UnsignedIntegerType>(x: T) -> T {
     return ~i
 }
 
-func randomMax<T : UnsignedIntegerType>(max: T) -> T {
+func randomMax<T : UnsignedInteger>(_ max: T) -> T {
     let m = bitwiseCeil(max)
     var buf = T(0)
     repeat {
-        arc4random_buf(&buf, sizeof(UInt.self))
+        arc4random_buf(&buf, MemoryLayout<UInt>.size)
         buf = buf & m
     } while buf > max
     return buf
 }
 
-func random<T : UnsignedIntegerType>(interval: ClosedRange<T>) -> T {
-    let a = interval.start
-    let b = interval.end
+func random<T : UnsignedInteger>(_ interval: ClosedRange<T>) -> T {
+    let a = interval.lowerBound
+    let b = interval.upperBound
     return a + randomMax(b - a)
 }
 
-func random(interval: ClosedRange<Int>) -> Int {
-    let a = UInt(bitPattern: interval.start)
-    let b = UInt(bitPattern: interval.end)
+func random(_ interval: ClosedRange<Int>) -> Int {
+    let a = UInt(bitPattern: interval.lowerBound)
+    let b = UInt(bitPattern: interval.upperBound)
     let n = b - a
     return Int(bitPattern: UInt.addWithOverflow(a, randomMax(n)).0)
 }
 
-func randomArray(count count: Int,
-                         value: ClosedRange<Int>) -> [Int]
-{
+func randomArray(count: Int, value: ClosedRange<Int>) -> [Int] {
     var ints = [Int]()
     for _ in 0 ..< count {
         ints.append(random(value))

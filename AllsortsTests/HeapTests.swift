@@ -12,10 +12,10 @@ import Allsorts
 class HeapTests : XCTestCase {
 
     func testHeap() {
-        func test(input: [Int]) {
+        func test(_ input: [Int]) {
             let heap = buildHeap(input)
             let output = heapSorted(heap)
-            XCTAssertEqual(output, input.sort(), "Given input: \(input)")
+            XCTAssertEqual(output, input.sorted(), "Given input: \(input)")
         }
         test([1, 4, 4, 1, 3, 0, 4, 3])
         for _ in 0 ..< 100 {
@@ -25,8 +25,8 @@ class HeapTests : XCTestCase {
     
     func testNSmallestPerformance() {
         let input = perfInput
-        let top100 = Array(input.sort()[0 ..< 100])
-        measureBlock {
+        let top100 = Array(input.sorted()[0 ..< 100])
+        measure {
             var heap = buildHeap(input)
             var output = [Int]()
             output.reserveCapacity(100)
@@ -45,8 +45,8 @@ class HeapTests : XCTestCase {
         for _ in 0 ..< 100 {
             top100.append(heap.popHeap())
         }
-        measureBlock {
-            let output = Array(input.sort()[0 ..< 100])
+        measure {
+            let output = Array(input.sorted()[0 ..< 100])
             XCTAssertEqual(output, top100)
         }
     }
@@ -55,7 +55,7 @@ class HeapTests : XCTestCase {
 
 private let perfInput = randomArray(count: 20000, value: 0 ... 1000)
 
-private func buildHeap(ints: [Int]) -> [Int] {
+private func buildHeap(_ ints: [Int]) -> [Int] {
     var heap = [Int]()
     heap.reserveCapacity(ints.count)
     for i in ints {
@@ -64,7 +64,7 @@ private func buildHeap(ints: [Int]) -> [Int] {
     return heap
 }
 
-private func heapSorted(heap: [Int]) -> [Int] {
+private func heapSorted(_ heap: [Int]) -> [Int] {
     var heap = heap
     var ints = [Int]()
     while !heap.isEmpty {
