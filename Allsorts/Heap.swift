@@ -9,15 +9,15 @@ extension Array {
 
     /// Push `value` into the min-heap `heap`, as defined by the less-than
     /// comparison `isOrderedBefore`.
-    public mutating func pushHeap(value: Element, isOrderedBefore: (Element, Element) -> Bool) {
+    public mutating func pushHeap(_ value: Element, isOrderedBefore: (Element, Element) -> Bool) {
         append(value)
-        siftUp(&self, startIndex: startIndex, endIndex: endIndex, isOrderedBefore: isOrderedBefore, len: count)
+        siftUp(heap: &self, startIndex: startIndex, endIndex: endIndex, isOrderedBefore: isOrderedBefore, len: count)
     }
 
     /// Push `value` into the min-heap `heap`, as defined by the comparator
     /// `compare`.
-    public mutating func pushHeap(value: Element, _ ordering: (Element, Element) -> Ordering) {
-        pushHeap(value) {a, b in ordering(a, b) == .LT}
+    public mutating func pushHeap(_ value: Element, _ ordering: (Element, Element) -> Ordering) {
+        pushHeap(value) {a, b in ordering(a, b) == .less}
     }
      
     /// Pop the min-element from the min-heap `heap`, as defined by the
@@ -29,7 +29,7 @@ extension Array {
         if count > 1 {
             swap(&self[startIndex], &self[endIndex - 1])
         }
-        siftDown(&self, startIndex: startIndex, endIndex: endIndex - 1,
+        siftDown(heap: &self, startIndex: startIndex, endIndex: endIndex - 1,
                  isOrderedBefore: isOrderedBefore, len: count - 1, rootIndex: startIndex)
         let result = removeLast()
         return result
@@ -40,7 +40,7 @@ extension Array {
     ///
     /// Requires: The array must not be empty.
     public mutating func popHeap(ordering: (Element, Element) -> Ordering) -> Element {
-        return popHeap {a, b in ordering(a, b) == .LT}
+        return popHeap {a, b in ordering(a, b) == .less}
     }
 
 }
@@ -48,7 +48,7 @@ extension Array {
 extension Array where Element : Comparable {
 
     /// Push `value` into the min-heap `heap`, as defined by `<`.
-    public mutating func pushHeap(value: Element) {
+    public mutating func pushHeap(_ value: Element) {
         pushHeap(value) {a, b in a < b}
     }
      
@@ -66,14 +66,13 @@ extension Array where Element : Comparable {
 
 // Ported from https://llvm.org/svn/llvm-project/libcxx/trunk/include/algorithm
 // (Flipped the comparator though to make `heap` into a min-heap.)
-func siftDown<C : MutableCollectionType
-              where C.Index : RandomAccessIndexType>
-    (inout heap: C,
-     startIndex: C.Index,
-     endIndex: C.Index,
-     isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool,
-     len: C.Index.Distance,
-     rootIndex: C.Index)
+func siftDown<T>
+    (heap: inout Array<T>,
+     startIndex: Array<T>.Index,
+     endIndex: Array<T>.Index,
+     isOrderedBefore: (Array<T>.Iterator.Element, Array<T>.Iterator.Element) -> Bool,
+     len: Array<T>.IndexDistance,
+     rootIndex: Array<T>.Index)
 {
     // heap array representation:
     //                 0                             i
@@ -89,16 +88,16 @@ func siftDown<C : MutableCollectionType
     // left-child of `index` is at `2 * index + 1`
     // right-child of `index` is at `2 * index + 2`
     var rootIndex = rootIndex
-    var child = startIndex.distanceTo(rootIndex)
+    var child = startIndex.distance(to: rootIndex)
     if (len < 2 || (len - 2) / 2 < child) {
         return
     }
     
     assert((startIndex ..< endIndex).contains(rootIndex))
-    assert(rootIndex.advancedBy(len) <= endIndex)
+    assert(rootIndex.advanced(by: len) <= endIndex)
 
     child = 2 * child + 1;
-    var childIndex = startIndex.advancedBy(child)
+    var childIndex = startIndex.advanced(by: child)
 
     if child + 1 < len && isOrderedBefore(heap[childIndex + 1], heap[childIndex]) {
         // right-child exists and is less than left-child
@@ -124,7 +123,7 @@ func siftDown<C : MutableCollectionType
 
         // recompute the child based off of the updated parent
         child = 2 * child + 1
-        childIndex = startIndex.advancedBy(child)
+        childIndex = startIndex.advanced(by: child)
 
         if child + 1 < len && isOrderedBefore(heap[childIndex + 1], heap[childIndex]) {
             // right-child exists and is less than left-child
@@ -140,19 +139,18 @@ func siftDown<C : MutableCollectionType
 
 // Ported from https://llvm.org/svn/llvm-project/libcxx/trunk/include/algorithm
 // (Flipped the comparator though to make `heap` into a min-heap.)
-private func siftUp<C : MutableCollectionType
-                    where C.Index : RandomAccessIndexType>
-    (inout heap: C,
-     startIndex: C.Index,
-     endIndex: C.Index,
-     isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool,
-     len: C.Index.Distance)
+private func siftUp<T>
+    (heap: inout Array<T>,
+     startIndex: Array<T>.Index,
+     endIndex: Array<T>.Index,
+     isOrderedBefore: (Array<T>.Iterator.Element, Array<T>.Iterator.Element) -> Bool,
+     len: Array<T>.IndexDistance)
 {
     if len <= 1 {
         return
     }
     var len = (len - 2) / 2
-    var index = startIndex.advancedBy(len)
+    var index = startIndex.advanced(by: len)
     var lastIndex = endIndex - 1
     if isOrderedBefore(heap[lastIndex], heap[index]) {
         let t = heap[lastIndex]
@@ -163,7 +161,7 @@ private func siftUp<C : MutableCollectionType
                 break
             }
             len = (len - 1) / 2
-            index = startIndex.advancedBy(len)
+            index = startIndex.advanced(by: len)
         } while isOrderedBefore(t, heap[index])
         heap[lastIndex] = t
     }

@@ -9,45 +9,41 @@
 public enum Ordering : Int {
 
     /// The ordering where `left < right`.
-    case LT = -1
+    case less = -1
 
     /// The ordering where `left == right`.
-    case EQ = 0
+    case equal = 0
 
     /// The ordering where `left > right`.
-    case GT = 1
+    case greater = 1
     
     /// Construct an `Ordering` from any `rawValue`. Negative values coerce to
-    /// `.LT`, zero to `.EQ` and positive values to `.GT`.
+    /// `.less`, zero to `.equal` and positive values to `.greater`.
     public init(rawValue: Int) {
-        self.init(rawValue)
+        self = .init(rawValue)
     }
 
     public init(_ value: Int) {
-        self = value < 0 ? .LT : value == 0 ? .EQ : .GT
+        self = value < 0 ? .less : value == 0 ? .equal : .greater
     }
     
     /// Compute the `Ordering` between the `Comparable`\ s `left` and `right` by
     /// using the `<` operator and, if not less-than, the `==` operator.
-    @warn_unused_result
-    public static func compare<T : Comparable>(left: T, _ right: T) -> Ordering {
-        return left < right ? .LT : left == right ? .EQ : .GT
+    public static func compare<T : Comparable>(_ left: T, _ right: T) -> Ordering {
+        return left < right ? .less : left == right ? .equal : .greater
     }
 }
 
 extension Ordering : Comparable {}
 
-@warn_unused_result
 prefix func -(reversed: Ordering) -> Ordering {
     return Ordering(rawValue: -reversed.rawValue)
 }
 
-@warn_unused_result
 public func == (left: Ordering, right: Ordering) -> Bool {
     return left.rawValue == right.rawValue
 }
 
-@warn_unused_result
 public func < (left: Ordering, right: Ordering) -> Bool {
     return left.rawValue < right.rawValue
 }
@@ -55,9 +51,9 @@ public func < (left: Ordering, right: Ordering) -> Bool {
 extension Ordering : CustomStringConvertible {
     public var description: String {
         switch self {
-        case .LT: return "LT"
-        case .EQ: return "EQ"
-        case .GT: return "GT"
+        case .less: return "less"
+        case .equal: return "equal"
+        case .greater: return "greater"
         }
     }
 }
@@ -65,9 +61,9 @@ extension Ordering : CustomStringConvertible {
 extension Ordering : CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case .LT: return "Ordering.LT"
-        case .EQ: return "Ordering.EQ"
-        case .GT: return "Ordering.GT"
+        case .less: return "Ordering.less"
+        case .equal: return "Ordering.equal"
+        case .greater: return "Ordering.greater"
         }
     }
 }

@@ -7,17 +7,18 @@
 
 import XCTest
 import Allsorts
+import Foundation
 
 class BoundedTests : XCTestCase {
 
     func testBounded() {
-        XCTAssert(isComparableType(Bounded<String>))
-        XCTAssert(isComparableType(Bounded<Int>))
-        XCTAssert(isComparableType(Bounded<NSData>))
+        XCTAssert(isComparableType(Bounded<String>.self))
+        XCTAssert(isComparableType(Bounded<Int>.self))
+        XCTAssert(isComparableType(Bounded<Data>.self))
 
-        XCTAssert(isOrderableType(Bounded<Int>))
-        XCTAssert(isOrderableType(Bounded<String>))
-        XCTAssert(isOrderableType(Bounded<NSData>))
+        XCTAssert(isOrderableType(Bounded<Int>.self))
+        XCTAssert(isOrderableType(Bounded<String>.self))
+        XCTAssert(isOrderableType(Bounded<Data>.self))
     
         let start = Bounded<String>.min
         let empty = Bounded("")
@@ -42,11 +43,11 @@ class BoundedTests : XCTestCase {
     }
     
     func testPrintable() {
-        XCTAssertEqual(Bounded<String>.min.description, "Min")
-        XCTAssertEqual(Bounded("foo").description, "Med(foo)")
-        XCTAssertEqual(Bounded<String>.max.description, "Max")
+        XCTAssertEqual(Bounded<String>.min.description, "infimum")
+        XCTAssertEqual(Bounded("foo").description, "bounded(\"foo\")")
+        XCTAssertEqual(Bounded<String>.max.description, "supremum")
         
-        XCTAssertEqual((Bounded("bar") ... Bounded("foo")).description, "Med(bar)...Med(foo)")
+        XCTAssertEqual((Bounded("bar") ... Bounded("foo")).description, "bounded(\"bar\")...bounded(\"foo\")")
     }
 
 }

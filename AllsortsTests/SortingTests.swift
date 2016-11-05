@@ -12,41 +12,42 @@ class SortingTests : XCTestCase {
 
     func testSort() {
         let byRevName = Ordering.reverse(byLast <|> byFirst)
-        byRevName(("ZZ", "Top", 1969) as Musician,
-                  ("Led", "Zeppelin", 1968) as Musician)
+        XCTAssertEqual(
+            byRevName(("ZZ", "Top", 1969) as Musician,
+                      ("Led", "Zeppelin", 1968) as Musician), .greater)
         
         XCTAssertEqual(
-            musicians.sort {$0.first < $1.first}.map {$0.first},
+            musicians.sorted {$0.first < $1.first}.map {$0.first},
             ["Colin", "Ed", "Jonny", "Philip", "Thom"],
             "Swift.sorted(xs, isLessThan) should still work too")
         XCTAssertEqual(
-            musicians.sort(ordering: Ordering.by {$0.first}).map {$0.first},
+            musicians.sorted(ordering: Ordering.by {$0.first}).map {$0.first},
             ["Colin", "Ed", "Jonny", "Philip", "Thom"])
         XCTAssertEqual(
-            musicians.sort(ordering: byLast <|> byFirst).map {$0.first},
+            musicians.sorted(ordering: byLast <|> byFirst).map {$0.first},
             ["Colin", "Jonny", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            musicians.sort(ordering: byLast
-                                 <|> Ordering.reverse(byYear)).map {$0.first},
+            musicians.sorted(ordering: byLast
+                                   <|> Ordering.reverse(byYear)).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            musicians.sort(ordering: Ordering.by {$0.last.characters.count}
-                                 <|> Ordering.reverse(byYear)).map {$0.first},
+            musicians.sorted(ordering: Ordering.by {$0.last.characters.count}
+                                   <|> Ordering.reverse(byYear)).map {$0.first},
             ["Thom", "Philip", "Ed", "Jonny", "Colin"])
         XCTAssertEqual(
-            musicians.sort(ordering: Ordering.by {$0.year}).map {$0.first},
+            musicians.sorted(ordering: Ordering.by {$0.year}).map {$0.first},
             ["Philip", "Thom", "Ed", "Colin", "Jonny"])
         XCTAssertEqual(
-            musicians.sort(ordering: Ordering.by {$0.year}
-                                 <|> Ordering.by {$0.last}
-                                 <|> Ordering.by {$0.first}).map {$0.first},
+            musicians.sorted(ordering: Ordering.by {$0.year}
+                                   <|> Ordering.by {$0.last}
+                                   <|> Ordering.by {$0.first}).map {$0.first},
             ["Philip", "Ed", "Thom", "Colin", "Jonny"])
         XCTAssertEqual(
-            musicians.sort(ordering: Ordering.by({$0.last})).map {$0.first},
+            musicians.sorted(ordering: Ordering.by({$0.last})).map {$0.first},
             ["Jonny", "Colin", "Ed", "Philip", "Thom"])
         XCTAssertEqual(
-            musicians.sort(ordering: Ordering.by {$0.last}
-                                 <|> Ordering.by {$0.first}).map {$0.first},
+            musicians.sorted(ordering: Ordering.by {$0.last}
+                                   <|> Ordering.by {$0.first}).map {$0.first},
             ["Colin", "Jonny", "Ed", "Philip", "Thom"])
     }
 

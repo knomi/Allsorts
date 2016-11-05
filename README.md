@@ -9,9 +9,9 @@ Quick demo
 Sort people by surname (primarily), then given name, then ascending age (i.e. descending date of birth):
 
 ```swift
-let phoneBook = sorted(people, Ordering.by {$0.surname}
-                           <|> Ordering.by {$0.givenName}
-                           <|> Ordering.reverse(Ordering.by {$0.dob}))
+let phoneBook = people.sorted(ordering: Ordering.by {$0.surname}
+                                    <|> Ordering.by {$0.givenName}
+                                    <|> Ordering.reverse(Ordering.by {$0.dob}))
 ```
 
 Find all J. Smiths in logarithmic time:
@@ -31,9 +31,9 @@ For making comparisons fun and pattern-matchy, Allsorts defines comparison resul
 
 ```swift
 enum Ordering : Int {
-    case LT = -1
-    case EQ = 0
-    case GT = 1
+    case less = -1
+    case equal = 0
+    case greater = 1
 }
 ```
 
@@ -43,7 +43,7 @@ Three-way comparisons
 The binary operator `<=>` (read: *three-way-compare*) always returns an `Ordering`:
 
 ```swift
-infix operator <=> { associativity none precedence 131 }
+infix operator <=> : ComparisonPrecedence
 
 func <=> <T : Comparable>(left: T, right: T) -> Ordering
 ```
@@ -75,8 +75,8 @@ extension String : Orderable {}
 Sometimes, it's useful to compare a value to an interval. The expression `x <=> a ... b` simply tells, whether `x` falls within the interval, or which side of it if not:
 
 ```swift
-func <=> <T>(left: T, rightInterval: HalfOpenInterval<T>) -> Ordering
-func <=> <T>(left: T, rightInterval: ClosedInterval<T>) -> Ordering
+func <=> <T>(left: T, rightInterval: Range<T>) -> Ordering
+func <=> <T>(left: T, rightInterval: ClosedRange<T>) -> Ordering
 ```
 
 In addition to the above, Allsorts overloads the `<=>` operator for…
@@ -130,9 +130,9 @@ Named version of `{$0 <=> rightValue}`.
 
 ```swift
 let ord = Ordering.to(1999)
-ord(1998) //=> Ordering.LT
-ord(1999) //=> Ordering.EQ
-ord(2000) //=> Ordering.GT
+ord(1998) //=> Ordering.less
+ord(1999) //=> Ordering.equal
+ord(2000) //=> Ordering.greater
 ```
 
 ### `Ordering.within(interval)` — unary bounds comparator
@@ -141,11 +141,11 @@ Named version of `{$0 <=> inverval}`.
 
 ```swift
 let ord = Ordering.within(1987 ... 1994)
-ord(1986) //=> Ordering.LT
-ord(1987) //=> Ordering.EQ
-ord(1991) //=> Ordering.EQ
-ord(1994) //=> Ordering.EQ
-ord(1995) //=> Ordering.GT
+ord(1986) //=> Ordering.less
+ord(1987) //=> Ordering.equal
+ord(1991) //=> Ordering.equal
+ord(1994) //=> Ordering.equal
+ord(1995) //=> Ordering.greater
 ```
 
 ### `Ordering.reverse(comparator)` — reversed comparator
@@ -153,17 +153,17 @@ ord(1995) //=> Ordering.GT
 ```swift
 let byRevName = Ordering.reverse(byLast <|> byFirst)
 byRevName(("ZZ",  "Top",      1969) as Musician,
-          ("Led", "Zeppelin", 1968) as Musician) //=> Ordering.GT
+          ("Led", "Zeppelin", 1968) as Musician) //=> Ordering.greater
 
 let rev = Ordering.reverse(Ordering.to(1999))
-ord(1998) //=> Ordering.GT
-ord(1999) //=> Ordering.EQ
-ord(2000) //=> Ordering.LT
+ord(1998) //=> Ordering.greater
+ord(1999) //=> Ordering.equal
+ord(2000) //=> Ordering.less
 ```
 
 ### Lexicographical "OR" operator `||`
 
-The `||` operator can be used to simplify the definition of lexicographical comparisons. Similarly to `bool1 || bool2` or `expr1 ?? expr2`, it lazily evaluates the right-hand side comparison expression `right`, only returning its value if `left` is `.EQ`:
+The `||` operator can be used to simplify the definition of lexicographical comparisons. Similarly to `bool1 || bool2` or `expr1 ?? expr2`, it lazily evaluates the right-hand side comparison expression `right`, only returning its value if `left` is `.equal`:
 
 ```swift
 let ord = a.dateOfBirth <=> b.dateOfBirth
@@ -209,23 +209,23 @@ let j31: Int? = xs.binaryFind(31) //=> nil
 
 /// Find the lowest sort-preserving insertion index
 let l28: Int = xs.lowerBound {x in x <=> 28} //=> 3
-let l29: Int = xs.lowerBound(29) //=> 3
-let l30: Int = xs.lowerBound(30) //=> 3
-let l31: Int = xs.lowerBound(31) //=> 6
+let l29: Int = xs.lowerBound(of: 29) //=> 3
+let l30: Int = xs.lowerBound(of: 30) //=> 3
+let l31: Int = xs.lowerBound(of: 31) //=> 6
 
 /// Find the lowest sort-preserving insertion index
 let u28: Int = xs.upperBound {x in x <=> 28} //=> 3
-let u29: Int = xs.upperBound(29) //=> 3
-let u30: Int = xs.upperBound(30) //=> 6
-let u31: Int = xs.upperBound(31) //=> 6
+let u29: Int = xs.upperBound(of: 29) //=> 3
+let u30: Int = xs.upperBound(of: 30) //=> 6
+let u31: Int = xs.upperBound(of: 31) //=> 6
 
 /// Find the range of equal elements
 let r28: Range<Int> = xs.equalRange {x in x <=> 28} //=> 3 ..< 3
-let r29: Range<Int> = xs.equalRange(29) //=> 3 ..< 3
-let r30: Range<Int> = xs.equalRange(30) //=> 3 ..< 6
-let r31: Range<Int> = xs.equalRange(31) //=> 6 ..< 6
+let r29: Range<Int> = xs.equalRange(of: 29) //=> 3 ..< 3
+let r30: Range<Int> = xs.equalRange(of: 30) //=> 3 ..< 6
+let r31: Range<Int> = xs.equalRange(of: 31) //=> 6 ..< 6
 
-let r20 = xs.equalRange(Ordering.within(20 ... 30)) //=> 1 ..< 6
+let r20 = xs.equalRange(of: Ordering.within(20 ... 30)) //=> 1 ..< 6
 ```
 
 Note that because `Range<Int>` is a collection itself, you can also call these methods on the `indices` of an `Array`:
@@ -250,18 +250,18 @@ For capping an infinite type like `String` with a maximum bound, wrap it in `End
 
 ```swift
 enum Ended<T : Orderable> : Orderable {
-    case Value(T)
-    case End
+    case value(T)
+    case end
 }
 
-let a: Ended<String> = Ended("")    // .Value("")
-let b: Ended<String> = Ended("foo") // .Value("foo")
-let c: Ended<String> = Ended(nil)   // .End
-let d: Ended<String> = Ended()      // .End
+let a: Ended<String> = Ended("")    // .value("")
+let b: Ended<String> = Ended("foo") // .value("foo")
+let c: Ended<String> = Ended(nil)   // .end
+let d: Ended<String> = Ended()      // .end
 
-a <=> b // .LT
-b <=> c // .LT
-c <=> d // .EQ
+a <=> b // .less
+b <=> c // .less
+c <=> d // .equal
 ```
 
 ### `Bounded<T>`

@@ -56,9 +56,9 @@ class BinarySearchTests : XCTestCase {
         do {
             /// Find the lowest sort-preserving insertion index
             let l28: Int = xs.lowerBound {x in x <=> 28} //=> 3
-            let l29: Int = xs.lowerBound(29) //=> 3
-            let l30: Int = xs.lowerBound(30) //=> 3
-            let l31: Int = xs.lowerBound(31) //=> 6
+            let l29: Int = xs.lowerBound(of: 29) //=> 3
+            let l30: Int = xs.lowerBound(of: 30) //=> 3
+            let l31: Int = xs.lowerBound(of: 31) //=> 6
             XCTAssertEqual(l28, 3)
             XCTAssertEqual(l29, 3)
             XCTAssertEqual(l30, 3)
@@ -68,9 +68,9 @@ class BinarySearchTests : XCTestCase {
         do {
             /// Find the lowest sort-preserving insertion index
             let u28: Int = xs.upperBound {x in x <=> 28} //=> 3
-            let u29: Int = xs.upperBound(29) //=> 3
-            let u30: Int = xs.upperBound(30) //=> 6
-            let u31: Int = xs.upperBound(31) //=> 6
+            let u29: Int = xs.upperBound(of: 29) //=> 3
+            let u30: Int = xs.upperBound(of: 30) //=> 6
+            let u31: Int = xs.upperBound(of: 31) //=> 6
             XCTAssertEqual(u28, 3)
             XCTAssertEqual(u29, 3)
             XCTAssertEqual(u30, 6)
@@ -80,10 +80,10 @@ class BinarySearchTests : XCTestCase {
         do {
             /// Find the range of equal elements
             let r28: Range<Int> = xs.equalRange {x in x <=> 28} //=> 3 ..< 3
-            let r29: Range<Int> = xs.equalRange(29) //=> 3 ..< 3
-            let r30: Range<Int> = xs.equalRange(30) //=> 3 ..< 6
-            let r31: Range<Int> = xs.equalRange(31) //=> 6 ..< 6
-            let r20 = xs.equalRange(Ordering.within(20 ... 30)) //=> 1 ..< 6
+            let r29: Range<Int> = xs.equalRange(of: 29) //=> 3 ..< 3
+            let r30: Range<Int> = xs.equalRange(of: 30) //=> 3 ..< 6
+            let r31: Range<Int> = xs.equalRange(of: 31) //=> 6 ..< 6
+            let r20 = xs.equalRange(of: Ordering.within(20 ... 30)) //=> 1 ..< 6
             XCTAssertEqual(r28, 3 ..< 3)
             XCTAssertEqual(r29, 3 ..< 3)
             XCTAssertEqual(r30, 3 ..< 6)
@@ -110,15 +110,15 @@ class BinarySearchTests : XCTestCase {
     func testEqualRangePerformance() {
         var results: [Range<Int>] = []
         let value = 400
-        measureBlock {
+        measure {
             for input in perfInputs {
-                results.append(input.equalRange(value))
+                results.append(input.equalRange(of: value))
             }
         }
         for (input, result) in zip(perfInputs, results) {
-            XCTAssertTrue(!input[input.startIndex ..< result.startIndex].contains {x in x >= value})
+            XCTAssertTrue(!input[input.startIndex ..< result.lowerBound].contains {x in x >= value})
             XCTAssertTrue(!input[result].contains {x in x != value})
-            XCTAssertTrue(!input[result.endIndex ..< input.endIndex].contains {x in x <= value})
+            XCTAssertTrue(!input[result.upperBound ..< input.endIndex].contains {x in x <= value})
         }
     }
 
@@ -145,53 +145,53 @@ class BinarySearchTests : XCTestCase {
     }
 
     func testLowerBound() {
-        XCTAssertEqual(0, empty.lowerBound(0))
-        XCTAssertEqual(0, empty.lowerBound(33))
-        XCTAssertEqual(0, empty.lowerBound(100))
+        XCTAssertEqual(0, empty.lowerBound(of: 0))
+        XCTAssertEqual(0, empty.lowerBound(of: 33))
+        XCTAssertEqual(0, empty.lowerBound(of: 100))
 
         for i in 0 ... 10 {
-            XCTAssertEqual(i, tens.lowerBound(10 * i), "where i = \(i)")
-            XCTAssertEqual(i, tens.lowerBound(10 * i - 1), "where i = \(i)")
-            XCTAssertEqual(i, tens.lowerBound(10 * i - 9), "where i = \(i)")
+            XCTAssertEqual(i, tens.lowerBound(of: 10 * i), "where i = \(i)")
+            XCTAssertEqual(i, tens.lowerBound(of: 10 * i - 1), "where i = \(i)")
+            XCTAssertEqual(i, tens.lowerBound(of: 10 * i - 9), "where i = \(i)")
         }
 
-        XCTAssertEqual(0, dupes.lowerBound(0))
-        XCTAssertEqual(dupes.count, dupes.lowerBound(10 * dupes.count + 1))
+        XCTAssertEqual(0, dupes.lowerBound(of: 0))
+        XCTAssertEqual(dupes.count, dupes.lowerBound(of: 10 * dupes.count + 1))
         for i in 1 ... 5 {
             let a = i * (i - 1) / 2
-            XCTAssertEqual(a, dupes.lowerBound(10 * i), "where i = \(i)")
-            XCTAssertEqual(a, dupes.lowerBound(10 * i - 1), "where i = \(i)")
-            XCTAssertEqual(a, dupes.lowerBound(10 * i - 9), "where i = \(i)")
+            XCTAssertEqual(a, dupes.lowerBound(of: 10 * i), "where i = \(i)")
+            XCTAssertEqual(a, dupes.lowerBound(of: 10 * i - 1), "where i = \(i)")
+            XCTAssertEqual(a, dupes.lowerBound(of: 10 * i - 9), "where i = \(i)")
         }
     }
 
     func testUpperBound() {
-        XCTAssertEqual(0, empty.upperBound(0))
-        XCTAssertEqual(0, empty.upperBound(33))
-        XCTAssertEqual(0, empty.upperBound(100))
+        XCTAssertEqual(0, empty.upperBound(of: 0))
+        XCTAssertEqual(0, empty.upperBound(of: 33))
+        XCTAssertEqual(0, empty.upperBound(of: 100))
 
         for i in 0 ... 10 {
-            XCTAssertEqual(min(i+1, 10), tens.upperBound(10 * i), "where i = \(i)")
-            XCTAssertEqual(i, tens.upperBound(10 * i - 1), "where i = \(i)")
-            XCTAssertEqual(i, tens.upperBound(10 * i - 9), "where i = \(i)")
+            XCTAssertEqual(min(i+1, 10), tens.upperBound(of: 10 * i), "where i = \(i)")
+            XCTAssertEqual(i, tens.upperBound(of: 10 * i - 1), "where i = \(i)")
+            XCTAssertEqual(i, tens.upperBound(of: 10 * i - 9), "where i = \(i)")
         }
 
-        XCTAssertEqual(0, dupes.upperBound(0))
-        XCTAssertEqual(dupes.count, dupes.upperBound(10 * dupes.count + 1))
+        XCTAssertEqual(0, dupes.upperBound(of: 0))
+        XCTAssertEqual(dupes.count, dupes.upperBound(of: 10 * dupes.count + 1))
         for i in 1 ... 5 {
             let a = i * (i - 1) / 2
             let b = a + i
-            XCTAssertEqual(b, dupes.upperBound(10 * i), "where i = \(i)")
-            XCTAssertEqual(a, dupes.upperBound(10 * i - 1), "where i = \(i)")
-            XCTAssertEqual(a, dupes.upperBound(10 * i - 9), "where i = \(i)")
+            XCTAssertEqual(b, dupes.upperBound(of: 10 * i), "where i = \(i)")
+            XCTAssertEqual(a, dupes.upperBound(of: 10 * i - 1), "where i = \(i)")
+            XCTAssertEqual(a, dupes.upperBound(of: 10 * i - 9), "where i = \(i)")
         }
     }
 
     func testEqualRange() {
-        func check(array: [Int], _ element: Int, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
-            let result = array.equalRange(element)
-            XCTAssertEqual(result.startIndex, array.lowerBound(element), message, file: file, line: line)
-            XCTAssertEqual(result.endIndex, array.upperBound(element), message, file: file, line: line)
+        func check(_ array: [Int], _ element: Int, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
+            let result = array.equalRange(of: element)
+            XCTAssertEqual(result.lowerBound, array.lowerBound(of: element), message, file: file, line: line)
+            XCTAssertEqual(result.upperBound, array.upperBound(of: element), message, file: file, line: line)
         }
         check(empty, 0)
         check(empty, 33)
@@ -215,5 +215,5 @@ class BinarySearchTests : XCTestCase {
 }
 
 private let perfInputs = (1 ... 40).map {i in
-    randomArray(count: i * i * 200, value: 0 ... 1000).sort()
+    randomArray(count: i * i * 200, value: 0 ... 1000).sorted()
 }

@@ -9,17 +9,17 @@ import Foundation
 
 public extension Ordering {
 
-    /// Convert an `NSComparisonResult` into an `Ordering`.
-    public init(_ comparisonResult: NSComparisonResult) {
+    /// Convert an `ComparisonResult` into an `Ordering`.
+    public init(_ comparisonResult: ComparisonResult) {
         self.init(comparisonResult.rawValue)
     }
 
-    /// Convert an `Ordering` into an `NSComparisonResult`.
-    public var comparisonResult: NSComparisonResult {
+    /// Convert an `Ordering` into an `ComparisonResult`.
+    public var comparisonResult: ComparisonResult {
         switch self {
-        case .LT: return .OrderedAscending
-        case .EQ: return .OrderedSame
-        case .GT: return .OrderedDescending
+        case .less: return .orderedAscending
+        case .equal: return .orderedSame
+        case .greater: return .orderedDescending
         }
     }
     
