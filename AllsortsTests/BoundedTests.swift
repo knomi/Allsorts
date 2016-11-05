@@ -44,10 +44,10 @@ class BoundedTests : XCTestCase {
     
     func testPrintable() {
         XCTAssertEqual(Bounded<String>.min.description, "infimum")
-        XCTAssertEqual(Bounded("foo").description, "bounded(foo)")
+        XCTAssertEqual(Bounded("foo").description, "bounded(\"foo\")")
         XCTAssertEqual(Bounded<String>.max.description, "supremum")
         
-        XCTAssertEqual((Bounded("bar") ... Bounded("foo")).description, "bounded(bar)...bounded(foo)")
+        XCTAssertEqual((Bounded("bar") ... Bounded("foo")).description, "bounded(\"bar\")...bounded(\"foo\")")
     }
 
 }

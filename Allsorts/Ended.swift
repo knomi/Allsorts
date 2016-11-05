@@ -46,7 +46,7 @@ public enum Ended<T : Orderable> : Orderable, Comparable {
 extension Ended : CustomStringConvertible {
     public var description: String {
         switch self {
-        case let .value(x): return "value(\(x))"
+        case let .value(x): return "value(\(String(reflecting: x)))"
         case     .end:      return "end"
         }
     }

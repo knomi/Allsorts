@@ -36,7 +36,7 @@ extension Bounded : CustomStringConvertible {
     public var description: String {
         switch self {
         case     .infimum:    return "infimum"
-        case let .bounded(x): return "bounded(\(x))"
+        case let .bounded(x): return "bounded(\(String(reflecting: x)))"
         case     .supremum:   return "supremum"
         }
     }
