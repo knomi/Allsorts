@@ -5,17 +5,16 @@
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
 //
 
-extension SequenceType {
+extension Sequence {
     /// Make a sorted copy of `self` using a stable sort algorithm and the given
     /// 3-way comparator `ordering`.
-    @warn_unused_result
-    public func sort(
-        @noescape ordering ordering: (Generator.Element,
-                                      Generator.Element) -> Ordering)
-        -> [Generator.Element]
+    ///
+    /// - FIXME: We wouldn't really need `@escaping` here but there's no way to tell the compiler.
+    public func sorted(ordering: @escaping (Iterator.Element, Iterator.Element) -> Ordering)
+        -> [Iterator.Element]
     {
         var array = Array(self)
-        array.sortInPlace(ordering: ordering)
+        array.sort(ordering: ordering)
         return array
     }
 }
@@ -23,13 +22,13 @@ extension SequenceType {
 extension Array {
     /// Sort `self` in place using a stable sort algorithm and the given 3-way
     /// comparator `ordering`.
-    public mutating func sortInPlace(
-        @noescape ordering ordering: (Element, Element) -> Ordering)
-    {
-        var newIndices = indices.sort {a, b -> Bool in
-            return (ordering(self[a], self[b]) || a <=> b) == .LT
+    ///
+    /// - FIXME: We wouldn't really need `@escaping` here but there's no way to tell the compiler.
+    public mutating func sort(ordering: @escaping (Element, Element) -> Ordering) {
+        var newIndices = indices.sorted {a, b -> Bool in
+            return (ordering(self[a], self[b]) || (a <=> b)) == .less
         }
-        self.permuteInPlace(toIndices: &newIndices)
+        self.permute(toIndices: &newIndices)
     }
 
     /// Reorder `self` into the permutation defined by `indices`.
@@ -55,9 +54,9 @@ extension Array {
     ///   2. a permutation of every number in `-array.count ..< -1`,
     ///
     ///   and in either case it must hold that `array.count == indices.count`.
-    public mutating func permuteInPlace(inout toIndices indices: [Int]) {
+    public mutating func permute(toIndices indices: inout [Int]) {
         precondition(count == indices.count)
-        if let first = indices.first where first < 0 {
+        if let first = indices.first, first < 0 {
             for i in indices.indices where indices[i] < 0 {
                 var j = i
                 while ~indices[j] != i {

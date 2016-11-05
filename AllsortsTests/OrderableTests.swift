@@ -14,9 +14,9 @@ import Allsorts
 class OrderableTests : XCTestCase {
 
     func testOrderable() {
-        XCTAssertEqual(Record(1, "foo") <=> Record(2, "bar"), Ordering.LT)
-        XCTAssertEqual(Record(2, "foo") <=> Record(2, "bar"), Ordering.EQ)
-        XCTAssertEqual(Record(3, "foo") <=> Record(2, "bar"), Ordering.GT)
+        XCTAssertEqual(Record(1, "foo") <=> Record(2, "bar"), Ordering.less)
+        XCTAssertEqual(Record(2, "foo") <=> Record(2, "bar"), Ordering.equal)
+        XCTAssertEqual(Record(3, "foo") <=> Record(2, "bar"), Ordering.greater)
         
         XCTAssertEqual(QuicklyDifferent([]),
                        QuicklyDifferent([]))
@@ -70,46 +70,46 @@ class OrderableTests : XCTestCase {
         XCTAssert(isOrderableType(NSString))
         XCTAssert(isOrderableType(NSUUID))
     
-        XCTAssertEqual(NSData() <=> NSData(), Ordering.EQ)
+        XCTAssertEqual(NSData() <=> NSData(), Ordering.equal)
         XCTAssertEqual(NSData()
-                   <=> "".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.EQ)
+                   <=> "".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.equal)
         XCTAssertEqual(NSData()
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.LT)
+                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.less)
         XCTAssertEqual("!".dataUsingEncoding(NSUTF8StringEncoding)!
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.EQ)
+                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.equal)
         XCTAssertEqual("!!".dataUsingEncoding(NSUTF8StringEncoding)!
-                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.GT)
+                   <=> "!".dataUsingEncoding(NSUTF8StringEncoding)!, Ordering.greater)
 
         let distantPast = NSDate.distantPast()
         let distantFuture = NSDate.distantFuture()
         
-        XCTAssertEqual(distantPast <=> NSDate(), Ordering.LT)
-        XCTAssertEqual(distantFuture <=> NSDate(), Ordering.GT)
-        XCTAssertEqual(distantPast <=> distantPast, Ordering.EQ)
-        XCTAssertEqual(distantPast <=> distantFuture, Ordering.LT)
-        XCTAssertEqual(distantFuture <=> distantFuture, Ordering.EQ)
+        XCTAssertEqual(distantPast <=> NSDate(), Ordering.less)
+        XCTAssertEqual(distantFuture <=> NSDate(), Ordering.greater)
+        XCTAssertEqual(distantPast <=> distantPast, Ordering.equal)
+        XCTAssertEqual(distantPast <=> distantFuture, Ordering.less)
+        XCTAssertEqual(distantFuture <=> distantFuture, Ordering.equal)
         XCTAssertEqual(NSDate()
-                   <=> NSDate(timeIntervalSince1970: 0), Ordering.GT)
+                   <=> NSDate(timeIntervalSince1970: 0), Ordering.greater)
         
-        XCTAssertEqual(indexPath() <=> indexPath(), Ordering.EQ)
-        XCTAssertEqual(indexPath(1) <=> indexPath(), Ordering.GT)
+        XCTAssertEqual(indexPath() <=> indexPath(), Ordering.equal)
+        XCTAssertEqual(indexPath(1) <=> indexPath(), Ordering.greater)
         XCTAssertEqual(indexPath(1, 0, 2)
-                   <=> indexPath(1, 1), Ordering.LT)
+                   <=> indexPath(1, 1), Ordering.less)
         XCTAssertEqual(indexPath(1, 0, 2)
-                   <=> indexPath(1, 0, 0, 1), Ordering.GT)
+                   <=> indexPath(1, 0, 0, 1), Ordering.greater)
         XCTAssertEqual(indexPath(1, 2, 3, 0, 123)
-                   <=> indexPath(1, 2, 3, 0, 123), Ordering.EQ)
+                   <=> indexPath(1, 2, 3, 0, 123), Ordering.equal)
     }
 
     func testOrderableSwift() {
-        XCTAssertEqual("ba"  <=> "bar", Ordering.LT)
-        XCTAssertEqual("bar" <=> "bar", Ordering.EQ)
-        XCTAssertEqual("foo" <=> "bar", Ordering.GT)
+        XCTAssertEqual("ba"  <=> "bar", Ordering.less)
+        XCTAssertEqual("bar" <=> "bar", Ordering.equal)
+        XCTAssertEqual("foo" <=> "bar", Ordering.greater)
         
-        XCTAssertEqual(-Double.infinity <=>  Double.infinity, Ordering.LT)
-        XCTAssertEqual(-Double.infinity <=> -Double.infinity, Ordering.EQ)
-        XCTAssertEqual( Double.infinity <=> -Double.infinity, Ordering.GT)
-        XCTAssertEqual(1.2 <=> 1, Ordering.GT)
+        XCTAssertEqual(-Double.infinity <=>  Double.infinity, Ordering.less)
+        XCTAssertEqual(-Double.infinity <=> -Double.infinity, Ordering.equal)
+        XCTAssertEqual( Double.infinity <=> -Double.infinity, Ordering.greater)
+        XCTAssertEqual(1.2 <=> 1, Ordering.greater)
     }
     
 }
@@ -143,15 +143,15 @@ private enum HardlyComparable : Orderable, Comparable {
 
 private func <=> (a: HardlyComparable, b: HardlyComparable) -> Ordering {
     switch (a, b) {
-    case (.One, .One):                         return .EQ
-    case (.One, .Two):                         return .LT
-    case (.One, .Bad): XCTFail("one <=> bad"); return .LT
-    case (.Two, .One):                         return .GT
-    case (.Two, .Two):                         return .EQ
-    case (.Two, .Bad): XCTFail("two <=> bad"); return .LT
-    case (.Bad, .One): XCTFail("bad <=> one"); return .LT
-    case (.Bad, .Two): XCTFail("bad <=> two"); return .GT
-    case (.Bad, .Bad): XCTFail("bad <=> bad"); return .LT
+    case (.One, .One):                         return .equal
+    case (.One, .Two):                         return .less
+    case (.One, .Bad): XCTFail("one <=> bad"); return .less
+    case (.Two, .One):                         return .greater
+    case (.Two, .Two):                         return .equal
+    case (.Two, .Bad): XCTFail("two <=> bad"); return .less
+    case (.Bad, .One): XCTFail("bad <=> one"); return .less
+    case (.Bad, .Two): XCTFail("bad <=> two"); return .greater
+    case (.Bad, .Bad): XCTFail("bad <=> bad"); return .less
     }
 }
 
@@ -168,7 +168,7 @@ private struct QuicklyDifferent : Orderable, Comparable {
 
 private func == (a: QuicklyDifferent, b: QuicklyDifferent) -> Bool {
     return !(a.elements.count != b.elements.count)
-        && a.elements <=> b.elements == .EQ
+        && a.elements <=> b.elements == .equal
 }
 
 private func <=> (a: QuicklyDifferent, b: QuicklyDifferent) -> Ordering {

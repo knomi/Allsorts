@@ -12,7 +12,7 @@ import Allsorts
 // MARK: - Assertions
 
 
-func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterval<T>,
+func AssertContains<T : Comparable>(@autoclosure interval: () -> Range<T>,
                                     @autoclosure _ expression: () -> T,
                                     _ message: String = "",
                                     file: StaticString = #file,
@@ -25,7 +25,7 @@ func AssertContains<T : Comparable>(@autoclosure interval: () -> HalfOpenInterva
     XCTAssert(ivl.contains(expr), msg, file: file, line: line)
 }
 
-func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedInterval<T>,
+func AssertContains<T : Comparable>(@autoclosure interval: () -> ClosedRange<T>,
                                     @autoclosure _ expression: () -> T,
                                     _ message: String = "",
                                     file: StaticString = #file,
@@ -66,13 +66,13 @@ func randomMax<T : UnsignedIntegerType>(max: T) -> T {
     return buf
 }
 
-func random<T : UnsignedIntegerType>(interval: ClosedInterval<T>) -> T {
+func random<T : UnsignedIntegerType>(interval: ClosedRange<T>) -> T {
     let a = interval.start
     let b = interval.end
     return a + randomMax(b - a)
 }
 
-func random(interval: ClosedInterval<Int>) -> Int {
+func random(interval: ClosedRange<Int>) -> Int {
     let a = UInt(bitPattern: interval.start)
     let b = UInt(bitPattern: interval.end)
     let n = b - a
@@ -80,7 +80,7 @@ func random(interval: ClosedInterval<Int>) -> Int {
 }
 
 func randomArray(count count: Int,
-                         value: ClosedInterval<Int>) -> [Int]
+                         value: ClosedRange<Int>) -> [Int]
 {
     var ints = [Int]()
     for _ in 0 ..< count {

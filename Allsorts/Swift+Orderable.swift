@@ -39,7 +39,6 @@ extension UnicodeScalar : Orderable {}
 
 /// Case-sensitive, locale-insensitive three-way comparison between two
 /// `String`\ s. Currently uses `String.compare` as an implementation detail.
-@warn_unused_result
 public func <=> (left: String, right: String) -> Ordering {
     return Ordering(left.compare(right).rawValue)
 }

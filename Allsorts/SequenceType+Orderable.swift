@@ -1,5 +1,5 @@
 //
-//  SequenceType+Orderable.swift
+//  Sequence+Orderable.swift
 //  Allsorts
 //
 //  Copyright (c) 2015 Pyry Jahkola. All rights reserved.
@@ -13,24 +13,24 @@
 /// impossible to say:
 ///
 /// ```
-/// extension protocol<S : SequenceType
-///     where S.Generator.Element : Orderable
+/// extension protocol<S : Sequence
+///     where S.Iterator.Element : Orderable
 /// > : Orderable {}
 /// ```
 
-public func <=> <S : SequenceType where S.Generator.Element : Orderable>
-    (left: S, right: S) -> Ordering
+public func <=> <S : Sequence>
+    (left: S, right: S) -> Ordering where S.Iterator.Element : Orderable
 {
-    var gl = left.generate()
-    var gr = right.generate()
+    var gl = left.makeIterator()
+    var gr = right.makeIterator()
     while true {
         switch (gl.next(), gr.next()) {
-        case     (nil, _?):  return .LT
-        case     (nil, nil): return .EQ
-        case     (_?,  nil): return .GT
+        case     (nil, _?):  return .less
+        case     (nil, nil): return .equal
+        case     (_?,  nil): return .greater
         case let (l?,  r?):
             switch l <=> r {
-            case .EQ: break
+            case .equal: break
             case let ord: return ord
             }
         }
@@ -45,25 +45,25 @@ public func <=> <S : SequenceType where S.Generator.Element : Orderable>
 /// impossible to say:
 ///
 /// ```
-/// extension protocol<S : SequenceType
-///     where S.Generator.Element : Orderable
+/// extension protocol<S : Sequence
+///     where S.Iterator.Element : Orderable
 /// > : Orderable {}
-@warn_unused_result
-public func <=> <S : SequenceType where
-                 S.Generator.Element : SequenceType,
-                 S.Generator.Element.Generator.Element : Orderable>
+public func <=> <S : Sequence>
     (left: S, right: S) -> Ordering
+    where
+    S.Iterator.Element : Sequence,
+    S.Iterator.Element.Iterator.Element : Orderable
 {
-    var gl = left.generate()
-    var gr = right.generate()
+    var gl = left.makeIterator()
+    var gr = right.makeIterator()
     while true {
         switch (gl.next(), gr.next()) {
-        case     (nil, _?):  return .LT
-        case     (nil, nil): return .EQ
-        case     (_?,  nil): return .GT
+        case     (nil, _?):  return .less
+        case     (nil, nil): return .equal
+        case     (_?,  nil): return .greater
         case let (l?,  r?):
             switch l <=> r {
-            case .EQ: break
+            case .equal: break
             case let ord: return ord
             }
         }
@@ -78,26 +78,26 @@ public func <=> <S : SequenceType where
 /// impossible to say:
 ///
 /// ```
-/// extension protocol<S : SequenceType
-///     where S.Generator.Element : Orderable
+/// extension protocol<S : Sequence
+///     where S.Iterator.Element : Orderable
 /// > : Orderable {}
-@warn_unused_result
-public func <=> <S : SequenceType where
-                 S.Generator.Element : SequenceType,
-                 S.Generator.Element.Generator.Element : SequenceType,
-                 S.Generator.Element.Generator.Element.Generator.Element : Orderable>
+public func <=> <S : Sequence>
     (left: S, right: S) -> Ordering
+    where
+    S.Iterator.Element : Sequence,
+    S.Iterator.Element.Iterator.Element : Sequence,
+    S.Iterator.Element.Iterator.Element.Iterator.Element : Orderable
 {
-    var gl = left.generate()
-    var gr = right.generate()
+    var gl = left.makeIterator()
+    var gr = right.makeIterator()
     while true {
         switch (gl.next(), gr.next()) {
-        case     (nil, _?):  return .LT
-        case     (nil, nil): return .EQ
-        case     (_?,  nil): return .GT
+        case     (nil, _?):  return .less
+        case     (nil, nil): return .equal
+        case     (_?,  nil): return .greater
         case let (l?,  r?):
             switch l <=> r {
-            case .EQ: break
+            case .equal: break
             case let ord: return ord
             }
         }

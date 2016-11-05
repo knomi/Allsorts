@@ -11,23 +11,23 @@ public protocol BoundedType {
 }
 
 public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
-    case Min
-    case Med(T)
-    case Max
+    case infimum
+    case bounded(T)
+    case supremum
     
-    public init(_ value: T) { self = .Med(value) }
+    public init(_ value: T) { self = .bounded(value) }
     
-    public static var min: Bounded { return .Min }
-    public static var max: Bounded { return .Max }
+    public static var min: Bounded { return .infimum }
+    public static var max: Bounded { return .supremum }
     
-    public func analysis<R>(@noescape ifMin ifMin: () -> R,
-                            @noescape ifMed:       T  -> R,
-                            @noescape ifMax:       () -> R) -> R
+    public func analysis<R>(infimum: ()  -> R,
+                            bounded: (T) -> R,
+                            supremum: ()  -> R) -> R
     {
         switch self {
-        case     .Min:    return ifMin()
-        case let .Med(x): return ifMed(x)
-        case     .Max:    return ifMax()
+        case     .infimum:    return infimum()
+        case let .bounded(x): return bounded(x)
+        case     .supremum:   return supremum()
         }
     }
 }
@@ -35,9 +35,9 @@ public enum Bounded<T : Orderable> : Comparable, Orderable, BoundedType {
 extension Bounded : CustomStringConvertible {
     public var description: String {
         switch self {
-        case     .Min:    return "Min"
-        case let .Med(x): return "Med(\(x))"
-        case     .Max:    return "Max"
+        case     .infimum:    return "infimum"
+        case let .bounded(x): return "bounded(\(x))"
+        case     .supremum:   return "supremum"
         }
     }
 }
@@ -45,24 +45,23 @@ extension Bounded : CustomStringConvertible {
 extension Bounded : CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case     .Min:    return "Bounded.Min"
-        case let .Med(x): return "Bounded.Med(\(String(reflecting: x)))"
-        case     .Max:    return "Bounded.Max"
+        case     .infimum:    return "Bounded.infimum"
+        case let .bounded(x): return "Bounded.bounded(\(String(reflecting: x)))"
+        case     .supremum:    return "Bounded.supremum"
         }
     }
 }
 
-@warn_unused_result
 public func <=> <T>(a: Bounded<T>, b: Bounded<T>) -> Ordering {
     switch (a, b) {
-    case     (.Min,    .Min   ): return .EQ
-    case     (.Min,    _      ): return .LT
+    case     (.infimum,    .infimum   ): return .equal
+    case     (.infimum,    _          ): return .less
     
-    case     (.Med,    .Max   ): return .LT
-    case let (.Med(a), .Med(b)): return a <=> b
-    case     (.Med,    .Min   ): return .GT
+    case     (.bounded,    .supremum  ): return .less
+    case let (.bounded(a), .bounded(b)): return a <=> b
+    case     (.bounded,    .infimum   ): return .greater
     
-    case     (.Max,    .Max   ): return .EQ
-    case     (.Max,    _      ): return .GT
+    case     (.supremum,    .supremum ): return .equal
+    case     (.supremum,    _         ): return .greater
     }
 }
